@@ -10,14 +10,35 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MainPage.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\MainPageView.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\GetPrimeiroErroConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\MultiDicionario.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Dialog\IDialogService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Navegacao\INavegationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Validacoes\IValidationRule.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Validacoes\IValidity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Dialog\IT4ClubCarDialogService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Navegacao\IT4ClubCarNavigationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\MediadorMensagens.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Validacoes\ValidatableObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\BaseViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\BaseWrapperViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\ExtendedBindableObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\ViewModelLocator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\MainPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\MainPageView.xaml.cs">
+      <DependentUpon>MainPageView.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)IT4ClubCar\Helpers\" />
+    <Folder Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\" />
+    <Folder Include="$(MSBuildThisFileDirectory)IT4ClubCar\Styles\" />
+    <Folder Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Navegacao\" />
   </ItemGroup>
 </Project>

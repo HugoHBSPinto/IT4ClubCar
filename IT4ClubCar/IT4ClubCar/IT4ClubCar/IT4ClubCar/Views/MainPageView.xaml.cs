@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace IT4ClubCar
+namespace IT4ClubCar.IT4ClubCar.Views
 {
-	public partial class MainPage : ContentPage
+	public partial class MainPageView : ContentPage
 	{
-		public MainPage()
+		public MainPageView()
 		{
-			InitializeComponent();
+            InitializeComponent();
 		}
 	}
 }

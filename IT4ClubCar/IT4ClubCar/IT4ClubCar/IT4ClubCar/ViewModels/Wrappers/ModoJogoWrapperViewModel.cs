@@ -8,6 +8,17 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
     class ModoJogoWrapperViewModel
     {
         private ModoJogoModel _modoJogoModel;
+        
+        /// <summary>
+        /// Obtém o Id.
+        /// </summary>
+        public int Id
+        {
+            get
+            {
+                return _modoJogoModel.Id;
+            }
+        }
 
         /// <summary>
         /// Obtém o Nome.

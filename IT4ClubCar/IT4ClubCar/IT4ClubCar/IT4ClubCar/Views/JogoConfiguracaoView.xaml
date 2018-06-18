@@ -35,13 +35,13 @@
                 <!-- Stack Layout com os pickers. -->
                 <StackLayout Grid.Column="0" Grid.Row="0" StyleClass="ContainerPickers">
                     <!--  Mapas.  -->
-                    <custom:CustomPicker PlaceholderColor="#CCCCCC" Title="Maps"/>
+                    <custom:CustomPicker TextColor="#CCCCCC" Title="Maps" ItemsSource="{Binding CamposExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding CampoDefault}"/>
                     <Label StyleClass="pickerComoUnderline"/>
                     <!--  Modo jogo. -->
-                    <custom:CustomPicker PlaceholderColor="#CCCCCC" Title="Game Mode"/>
+                    <custom:CustomPicker TextColor="#CCCCCC" Title="Game Mode" ItemsSource="{Binding ModosJogoExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding ModoJogoDefault}"/>
                     <Label StyleClass="pickerComoUnderline"/>
                     <!-- Tipo Métrico. -->
-                    <custom:CustomPicker PlaceholderColor="#CCCCCC" Title="Metric Type"/>
+                    <custom:CustomPicker TextColor="#CCCCCC" Title="Metric Type" ItemsSource="{Binding MetricosExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding MetricoDefault}"/>
                     <Label StyleClass="pickerComoUnderline"/>
                 </StackLayout>
 

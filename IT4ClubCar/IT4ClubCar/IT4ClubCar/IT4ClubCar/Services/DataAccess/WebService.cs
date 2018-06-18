@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App2.Services.Data
+namespace IT4ClubCar.IT4ClubCar.Services.DataAccess
 {
     class WebService
     {
@@ -27,13 +27,11 @@ namespace App2.Services.Data
 
             string pedido = "http://192.168.9.94/it4clubcar/it4clubcarWebService.php?pedido="+dadosRequisitados;
 
-            HttpResponseMessage resposta = null;
-
             try
             {
                 using (HttpClient cliente = new HttpClient())
                 {
-                    using (resposta = await cliente.GetAsync(pedido))
+                    using (HttpResponseMessage resposta = await cliente.GetAsync(pedido))
                     {
                         if (resposta.IsSuccessStatusCode)
                         {

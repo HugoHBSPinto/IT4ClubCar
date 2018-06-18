@@ -7,6 +7,13 @@ using Unity;
 using Xamarin.Forms;
 using System.Reflection;
 using System.Diagnostics;
+using IT4ClubCar.IT4ClubCar.Services.Buracos;
+using IT4ClubCar.IT4ClubCar.Services.Campo;
+using IT4ClubCar.IT4ClubCar.Services.Genero;
+using IT4ClubCar.IT4ClubCar.Services.Metrico;
+using IT4ClubCar.IT4ClubCar.Services.ModoJogo;
+using IT4ClubCar.IT4ClubCar.Services.Tee;
+using IT4ClubCar.IT4ClubCar.Services.TeeDistancias;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
 {
@@ -57,6 +64,14 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
             //Registar services existentes. Se criar-se um novo adicionar o seu registo aqui.
             App.Container.RegisterType<INavigationService, IT4ClubCarNavigationService>();
             App.Container.RegisterType<IDialogService, IT4ClubCarDialogService>();
+            App.Container.RegisterType<IBuracosService, BuracosService>();
+            App.Container.RegisterType<ICampoService, CampoService>();
+            App.Container.RegisterType<IGeneroService, GeneroService>();
+            App.Container.RegisterType<IHandicapService, HandicapService>();
+            App.Container.RegisterType<IMetricoService, MetricoService>();
+            App.Container.RegisterType<IModoJogoService, ModoJogoService>();
+            App.Container.RegisterType<ITeeService, TeeService>();
+            App.Container.RegisterType<ITeeDistanciaService, TeeDistanciaService>();
         }
 
 

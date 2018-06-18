@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\PontuacaoModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\TeeBuracoDistanciaModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\TeeModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\DataAccess\WebService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\MultiDicionario.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Dialog\IDialogService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Navegacao\INavegationService.cs" />

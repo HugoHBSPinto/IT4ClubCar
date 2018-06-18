@@ -25,5 +25,13 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
         {
             await Application.Current.MainPage.Navigation.PushModalAsync(new MenuPrincipalView());
         }
+
+
+
+        public async Task IrParaJogoConfiguracao()
+        {
+            await Application.Current.MainPage.Navigation.PushModalAsync(new JogoConfiguracaoView());
+        }
+
     }
 }

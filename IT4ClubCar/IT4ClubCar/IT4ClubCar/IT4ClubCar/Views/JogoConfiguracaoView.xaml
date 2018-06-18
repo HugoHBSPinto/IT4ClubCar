@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IT4ClubCar.IT4ClubCar.Views.JogoConfiguracaoView"
+             xmlns:vml="clr-namespace:IT4ClubCar.IT4ClubCar.ViewModels.Base"
+             vml:ViewModelLocator.DefinirViewModelAutomaticamente="True"
+             xmlns:control="clr-namespace:IT4ClubCar.IT4ClubCar.Views.UserControls"
+             xmlns:custom="clr-namespace:IT4ClubCar.IT4ClubCar.CustomControls"
+             BackgroundImage="teste5">
+
+    <ContentPage.Resources>
+        <StyleSheet Source="../Views/Styles/JogoConfiguracaoStyle.css"/>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout>
+
+            <!-- Barra superior - Título da janela. -->
+            <Label Text="Game Configuration"/>
+
+            <!-- Menu do meio - Metade contém os pickers, a outra contém os jogadores. -->
+            <Grid>
+
+                <!--#region Definição de colunas e linhas. -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--#endregion -->
+
+                <!-- Stack Layout com os pickers. -->
+                <StackLayout Grid.Column="0" Grid.Row="0" StyleClass="ContainerPickers">
+                    <!--  Mapas.  -->
+                    <custom:CustomPicker PlaceholderColor="#CCCCCC" Title="Maps"/>
+                    <Label StyleClass="pickerComoUnderline"/>
+                    <!--  Modo jogo. -->
+                    <custom:CustomPicker PlaceholderColor="#CCCCCC" Title="Game Mode"/>
+                    <Label StyleClass="pickerComoUnderline"/>
+                    <!-- Tipo Métrico. -->
+                    <custom:CustomPicker PlaceholderColor="#CCCCCC" Title="Metric Type"/>
+                    <Label StyleClass="pickerComoUnderline"/>
+                </StackLayout>
+
+                <!-- Stack Layout com os jogadores. -->
+                <StackLayout Grid.Column="1" Grid.Row="0" Orientation="Horizontal" StyleClass="ContainerJogadores">
+
+                    <Grid ColumnSpacing="25" RowSpacing="25">
+
+                        <!--#region Definição de colunas e linhas.  -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!--#endregion -->
+
+                        <control:JogadorConfiguracaoUserControlView Grid.Column="0" Grid.Row="0"/>
+                        <control:JogadorConfiguracaoUserControlView Grid.Column="1" Grid.Row="0"/>
+                        <control:JogadorConfiguracaoUserControlView Grid.Column="0" Grid.Row="1"/>
+                        <control:JogadorConfiguracaoUserControlView Grid.Column="1" Grid.Row="1"/>
+                            
+                    </Grid>
+
+                </StackLayout>
+                    
+            </Grid>
+            <!-- Fim do menu do meio. -->
+
+            <!-- Menu de baixo. Contém os botões para começar o jogo ou cancelar. -->
+            <StackLayout Orientation="Horizontal" StyleClass="ContainerBotoes">
+                <!-- Botão Cancelar. -->
+                <Button HorizontalOptions="StartAndExpand" Text="Cancelar" StyleClass="BotaoCancelar" BorderWidth="2" BorderRadius="35"/>
+                <!-- Botão ComecarJogo. -->
+                <Button HorizontalOptions="EndAndExpand" Text="Começar" StyleClass="BotaoAvancar" BorderWidth="2" BorderRadius="35"/>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

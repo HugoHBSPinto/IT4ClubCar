@@ -24,7 +24,7 @@
         <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Margin="0,25,0,0">
             <!-- Botões "Começar Jogo" e "Voltar para o jogo". -->
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Button Text="Start Game" Command="{Binding IrParaPaginaComConfigurarJogo}"/>
+                <Button Text="Start Game" Command="{Binding IrParaJogoConfiguracao}"/>
                 <Button Text="Return to Game"/>
             </StackLayout>
             <!-- Botões "Avaliar Jogo" e "Placeholder". -->

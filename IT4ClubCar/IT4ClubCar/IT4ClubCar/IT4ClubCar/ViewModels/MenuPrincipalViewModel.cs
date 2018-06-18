@@ -16,5 +16,22 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         {
             
         }
+
+
+
+        #region Commands
+
+        private ICommand _irParaJogoConfiguracao;
+        public ICommand IrParaJogoConfiguracao
+        {
+            get
+            {
+                if (_irParaJogoConfiguracao == null)
+                    _irParaJogoConfiguracao = new Command(p => base.NavigationService.IrParaJogoConfiguracao(), p => { return true; });
+                return _irParaJogoConfiguracao;
+            }
+        }
+
+        #endregion
     }
 }

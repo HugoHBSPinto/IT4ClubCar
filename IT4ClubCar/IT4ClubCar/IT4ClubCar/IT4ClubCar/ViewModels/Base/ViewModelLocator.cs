@@ -60,6 +60,9 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
         {
             //Registar viewmodels existentes. Se criar-se um novo adicionar o seu registo aqui.
             App.Container.RegisterType<MenuPrincipalViewModel>();
+            App.Container.RegisterType<JogadorConfiguracaoViewModel>();
+            App.Container.RegisterType<JogoConfiguracaoViewModel>();
+
 
             //Registar services existentes. Se criar-se um novo adicionar o seu registo aqui.
             App.Container.RegisterType<INavigationService, IT4ClubCarNavigationService>();

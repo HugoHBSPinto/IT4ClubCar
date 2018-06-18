@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IT4ClubCar.IT4ClubCar.Views.UserControls.JogadorConfiguracaoUserControlView"
+             xmlns:vml="clr-namespace:IT4ClubCar.IT4ClubCar.ViewModels.Base"
+             vml:ViewModelLocator.DefinirViewModelAutomaticamente="True"
+             BackgroundColor="#30CCCCCC"
+             WidthRequest="250">
+    
+    <!-- Definição de Colunas. -->
+    <Grid.ColumnDefinitions>
+        <!-- Só existe uma coluna. -->
+        <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+    <!-- Definição de Linhas. -->
+    <Grid.RowDefinitions>
+        <!-- Primeira linha. 3* Triplo do tamanho da segunda linha. Contém a imagem. -->
+        <RowDefinition Height="3*"/>
+        <!-- Segunda linha. Contém o nome do jogador. -->
+        <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <StackLayout Grid.Column="0" Grid.Row="0" HeightRequest="150">
+        <Image Source="Player.png"/>
+    </StackLayout>
+    <StackLayout Grid.Column="0" Grid.Row="1"/>
+    
+</Grid>

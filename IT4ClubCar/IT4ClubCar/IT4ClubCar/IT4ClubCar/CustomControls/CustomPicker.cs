@@ -7,18 +7,18 @@ namespace IT4ClubCar.IT4ClubCar.CustomControls
 {
     class CustomPicker : Picker
     {
-        public static BindableProperty PlaceholderColorProperty =
-        BindableProperty.Create("PlaceholderColor", typeof(string), typeof(CustomPicker), "#000000", BindingMode.TwoWay);
+        public static BindableProperty TextColorProperty =
+        BindableProperty.Create("TextColor", typeof(string), typeof(CustomPicker), "#000000", BindingMode.TwoWay);
 
-        public string PlaceholderColor
+        public string TextColor
         {
             get
             {
-                return (string)GetValue(PlaceholderColorProperty);
+                return (string)GetValue(TextColorProperty);
             }
             set
             {
-                SetValue(PlaceholderColorProperty, value);
+                SetValue(TextColorProperty, value);
             }
         }
     }

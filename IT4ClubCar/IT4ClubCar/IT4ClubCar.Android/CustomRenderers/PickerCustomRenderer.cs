@@ -36,7 +36,8 @@ namespace IT4ClubCar.Droid.CustomRenderers
             if (e.OldElement != null || e.NewElement != null)
             {
                 CustomPicker customPicker = e.NewElement as CustomPicker;
-                Control.SetHintTextColor(Android.Graphics.Color.ParseColor(customPicker.PlaceholderColor));
+                Control.SetHintTextColor(Android.Graphics.Color.ParseColor(customPicker.TextColor));
+                Control.SetTextColor(Android.Graphics.Color.ParseColor(customPicker.TextColor));
 
                 GradientDrawable gd = new GradientDrawable();
                 gd.SetColor(global::Android.Graphics.Color.Transparent);

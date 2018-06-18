@@ -17,6 +17,17 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\GetPrimeiroErroConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\BuracoModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\CampoModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\GeneroModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\HandicapModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\JogadorModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\JogoModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\MetricoModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\ModoJogoModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\PontuacaoModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\TeeBuracoDistanciaModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\TeeModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\MultiDicionario.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Dialog\IDialogService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Navegacao\INavegationService.cs" />
@@ -31,13 +42,23 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\ExtendedBindableObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\ViewModelLocator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\MainPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\BuracoWrapperViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\CampoWrapperViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\GeneroWrapperViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\HandicapWrapperViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\JogadorWrapperViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\JogoWrapperViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\MetricoWrapperViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\ModoJogoWrapperViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\PontuacaoWrapperViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\TeeBuracoDistanciaWrapperViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\TeeWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\MainPageView.xaml.cs">
       <DependentUpon>MainPageView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)IT4ClubCar\Helpers\" />
-    <Folder Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\" />
     <Folder Include="$(MSBuildThisFileDirectory)IT4ClubCar\Styles\" />
     <Folder Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Navegacao\" />
   </ItemGroup>

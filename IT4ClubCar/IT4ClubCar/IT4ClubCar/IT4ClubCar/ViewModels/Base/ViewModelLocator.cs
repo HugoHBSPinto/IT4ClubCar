@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Text;
 using Unity;
 using Xamarin.Forms;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
 {
@@ -47,13 +49,25 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
 
 
 
+        static ViewModelLocator()
+        {
+            //Registar viewmodels existentes. Se criar-se um novo adicionar o seu registo aqui.
+            App.Container.RegisterType<MainPageViewModel>();
+
+            //Registar services existentes. Se criar-se um novo adicionar o seu registo aqui.
+            App.Container.RegisterType<INavigationService, IT4ClubCarNavigationService>();
+            App.Container.RegisterType<IDialogService, IT4ClubCarDialogService>();
+        }
+
+
+
         /// <summary>
         /// Encontra e define o viewmodel de uma determinada view.
         /// </summary>
-        /// <param name="bindable">View que está a pedir o viewmodel.</param>
+        /// <param name="view">View que está a pedir o viewmodel.</param>
         /// <param name="oldValue">Antigo valor da propriedade DefinirViewModelAutomaticamente. Não usado.</param>
         /// <param name="newValue">Novo valor da propriedade DefinirViewModelAutomaticamente. Não usado.</param>
-        private static void OnDefinirViewModelAutomaticamenteChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void OnDefinirViewModelAutomaticamenteChanged(BindableObject view, object oldValue, object newValue)
         {
             //Este método encontra o viewmodel correspondente a uma view utilizando os nomes.
             //Recorre-se a uma nomenclatura comum. Tanto a view como o viewmodel têm o mesmo nome,
@@ -67,7 +81,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
             //Primeiro obtém-se o nome completo da view. O nome completo inclui tanto o namespace como o nome
             //da view. Ex: se fosse a view EditarJogadorView a pedir o viewmodel, a variável fullName 
             //teria o valor : TestinEditable.Views.EditPersonView.
-            string fullName = bindable.GetType().FullName;
+            string fullName = view.GetType().FullName;
 
             //O segundo passo será obter o nome completo do viewmodel através do nome completo da view. Mais uma
             //vez, ao obtermos o nome completo queremos tanto o namespace como o nome do viewmodel.
@@ -85,21 +99,22 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
             //Agora temos o nome completo do viewmodel correspondente à view. Passou-se de 
             //TestinEditable.Views.EditPersonView para TestinEditable.ViewModels.EditPersonViewModel.
             //Agora basta criar o viewmodel. Primeiro obtém-se o Tipo do viewmodel e depos cria-se
-            //uma instância do mesmo. Para se obter o Tipo  utiliza-se um método existente que aceita o 
+            //uma instância do mesmo. Para se obter o Tipo utiliza-se um método existente que aceita o 
             //nome completo.
             Type viewModelType = Type.GetType(fullName);
 
-            //O ViewModel pode não ter sido criado. Verifica-se se o tipo obtido é null, se for sai-se do
+            //O ViewModel pode não existir (ex: não foi criado). Verifica-se se o tipo obtido é null, se for sai-se do
             //método não definindo-se o viewmodel.
             if (viewModelType == null)
                 return;
 
-            //Com o tipo, criamos uma instância. Novamente utiliza-se um método existente que aceita um Tipo.
-            var viewModel = Activator.CreateInstance(viewModelType, App.Container.Resolve(typeof(IT4ClubCarNavigationService)), App.Container.Resolve(typeof(IT4ClubCarDialogService)));
+            //Agora que temos o tipo, obtém-se uma instância do mesmo resolvendo o tipo no Container da App onde todos os viewmodels
+            //existentes estão registados.
+            var viewModel = App.Container.Resolve(viewModelType);
 
             //Agora já temos o viewmodel correspondente. Basta atribuir o viewmodel ao BindingContext
             //da view (ou bindable).
-            ((Element)bindable).BindingContext = viewModel;
+            ((Element)view).BindingContext = viewModel;
         }
 
     }

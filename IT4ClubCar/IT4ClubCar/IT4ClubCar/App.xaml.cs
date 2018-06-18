@@ -26,15 +26,6 @@ namespace IT4ClubCar
             //Inicializar a propriedade Container.
             Container = new UnityContainer();
 
-            //Registar os tipos para a dependency injection.
-
-            //Quando se pedir um INavigationService passa-se uma instância do IT4ClubCarNavigationService (passa-se sempre a 
-            //mesma instância).
-            Container.RegisterInstance<INavigationService>(new IT4ClubCarNavigationService());
-
-            //Quando se pedir um IDialogService passa-se uma instância do IT4ClubCarDialogService (passa-se sempre a mesma instância).
-            Container.RegisterInstance<IDialogService>(new IT4ClubCarDialogService());
-
             //Criar uma nova instância da view MainPage, sendo utilizada para definir a primeira página da Navegação e a primeira
             //página a aparecer.
             MainPageView mainPage = new MainPageView();

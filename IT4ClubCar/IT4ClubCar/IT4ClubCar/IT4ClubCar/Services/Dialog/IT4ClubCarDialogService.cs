@@ -14,6 +14,9 @@ namespace IT4ClubCar.IT4ClubCar.Services.Dialog
     /// </summary>
     class IT4ClubCarDialogService : IDialogService
     {
-        
+        public async Task MostrarMensagem(string mensagem)
+        {
+            await Application.Current.MainPage.DisplayAlert("Info", mensagem, "cancel");
+        }
     }
 }

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:IT4ClubCar"
+             x:Class="IT4ClubCar.IT4ClubCar.Views.MenuPrincipalView"
+             xmlns:vml="clr-namespace:IT4ClubCar.IT4ClubCar.ViewModels.Base"
+             BackgroundImage="BackgroundPaginaInicial"
+             vml:ViewModelLocator.DefinirViewModelAutomaticamente="True">
+
+    <ContentPage.Resources>
+        <StyleSheet Source="../Views/Styles/MenuPrincipalStyle.css"/>
+    </ContentPage.Resources>
+
+    <StackLayout>
+
+        <!-- Menu Superior com imagem e texto de introdução. -->
+        <StackLayout VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+            <Image HorizontalOptions="Center" Source="IconHotelLogo.png" StyleId="HotelLogoIcon"/>
+            <Label HorizontalOptions="Center" Text="Welcome" StyleId="TextoIntroducao"/>
+        </StackLayout>
+
+        <!-- Menu no meio do ecrã com todos os botões existentes. Para os botões ficarem lado a lado
+             de dois em dois, para cada dois botões cria-se um stacklayout com orientação horizontal. -->
+        <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Margin="0,25,0,0">
+            <!-- Botões "Começar Jogo" e "Voltar para o jogo". -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Text="Start Game" Command="{Binding IrParaPaginaComConfigurarJogo}"/>
+                <Button Text="Return to Game"/>
+            </StackLayout>
+            <!-- Botões "Avaliar Jogo" e "Placeholder". -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Text="Review a Game"/>
+                <Button Text="Placeholder"/>
+            </StackLayout>
+            <!-- Botões "Previsão de Tempo" e "Feedback". -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Text="Weather Forecast"/>
+                <Button Text="Feedback"/>
+            </StackLayout>
+        </StackLayout>
+
+    </StackLayout>
+
+</ContentPage>

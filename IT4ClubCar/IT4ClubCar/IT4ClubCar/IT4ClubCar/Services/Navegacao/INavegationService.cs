@@ -10,6 +10,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
     /// </summary>
     interface INavigationService
     {
-        
+        Task IrParaPaginaAnterior();
+        Task IrParaMenuPrincipal();
     }
 }

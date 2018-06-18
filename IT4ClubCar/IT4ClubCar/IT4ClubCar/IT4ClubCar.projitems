@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\MainPageView.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\MenuPrincipalView.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
@@ -58,7 +58,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\BaseWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\ExtendedBindableObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\ViewModelLocator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\MainPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\MenuPrincipalViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\BuracoWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\CampoWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\GeneroWrapperViewModel.cs" />
@@ -70,13 +70,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\PontuacaoWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\TeeBuracoDistanciaWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\TeeWrapperViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\MainPageView.xaml.cs">
-      <DependentUpon>MainPageView.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\MenuPrincipalView.xaml.cs">
+      <DependentUpon>MenuPrincipalView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)IT4ClubCar\Helpers\" />
     <Folder Include="$(MSBuildThisFileDirectory)IT4ClubCar\Styles\" />
     <Folder Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Navegacao\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Styles\MenuPrincipalStyle.css" />
   </ItemGroup>
 </Project>

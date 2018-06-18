@@ -6,12 +6,13 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using IT4ClubCar.IT4ClubCar.ViewModels.Base;
+using System.Diagnostics;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels
 {
-    class MainPageViewModel : BaseViewModel
+    class MenuPrincipalViewModel : BaseViewModel
     {
-        public MainPageViewModel(INavigationService navegationService, IDialogService dialogService) : base(navegationService,dialogService)
+        public MenuPrincipalViewModel(INavigationService navegationService, IDialogService dialogService) : base(navegationService,dialogService)
         {
             
         }

@@ -28,7 +28,7 @@ namespace IT4ClubCar
 
             //Criar uma nova instância da view MainPage, sendo utilizada para definir a primeira página da Navegação e a primeira
             //página a aparecer.
-            MainPageView mainPage = new MainPageView();
+            MenuPrincipalView mainPage = new MenuPrincipalView();
 
             //Definir como a página principal da navegação.
             Current.MainPage = mainPage;

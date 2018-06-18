@@ -59,7 +59,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
         static ViewModelLocator()
         {
             //Registar viewmodels existentes. Se criar-se um novo adicionar o seu registo aqui.
-            App.Container.RegisterType<MainPageViewModel>();
+            App.Container.RegisterType<MenuPrincipalViewModel>();
 
             //Registar services existentes. Se criar-se um novo adicionar o seu registo aqui.
             App.Container.RegisterType<INavigationService, IT4ClubCarNavigationService>();

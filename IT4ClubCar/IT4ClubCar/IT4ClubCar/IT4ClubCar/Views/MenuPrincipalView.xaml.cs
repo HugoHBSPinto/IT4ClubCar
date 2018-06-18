@@ -7,9 +7,9 @@ using Xamarin.Forms;
 
 namespace IT4ClubCar.IT4ClubCar.Views
 {
-	public partial class MainPageView : ContentPage
+	public partial class MenuPrincipalView : ContentPage
 	{
-		public MainPageView()
+		public MenuPrincipalView()
 		{
             InitializeComponent();
 		}

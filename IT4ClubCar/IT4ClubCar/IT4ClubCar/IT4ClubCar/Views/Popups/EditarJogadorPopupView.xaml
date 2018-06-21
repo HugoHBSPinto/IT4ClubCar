@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage  xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             xmlns:vml="clr-namespace:IT4ClubCar.IT4ClubCar.ViewModels.Base"
+             vml:ViewModelLocator.DefinirViewModelAutomaticamente="True"
+             x:Class="IT4ClubCar.IT4ClubCar.Views.Popups.EditarJogadorPopupView">
+    
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+
+    <StackLayout
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            HeightRequest="650"
+            WidthRequest="820"
+            BackgroundColor="#80000000">
+        
+        <!-- Menu de Cima. -->
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" HeightRequest="50">
+            <Label Text="Edit Player" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="35" TextColor="#CCCCCC"/>
+            <Button Text="Delete" BackgroundColor="Red" WidthRequest="200" FontSize="18" BorderWidth="0" VerticalOptions="End" Command="{Binding RemoverJogadorCommand}"/>
+        </StackLayout>
+        
+        <!-- Menu do Meio. -->
+        <Grid HeightRequest="550">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Foto. -->
+            <StackLayout Grid.Column="0" Grid.Row="0" Padding="80">
+                <Image HeightRequest="350" WidthRequest="60" BackgroundColor="#CCCCCC" Source="{Binding Foto}" Aspect="Fill"/>
+                <Button Text="Take Photo" HeightRequest="50" WidthRequest="60" Margin="0,5,0,0" Command="{Binding TirarFotoCommand}"/>
+            </StackLayout>
+
+            <!-- Formulário. -->
+            <StackLayout Grid.Column="1" Grid.Row="0" BackgroundColor="#CCCCCC">
+                <Entry Placeholder="Name" Text="{Binding Nome}"/>
+                <Entry Placeholder="Email" Text="{Binding Email}"/>
+                <Picker Title="Genero" ItemsSource="{Binding GenerosExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding Genero}"/>
+                <Picker Title="Tee" ItemsSource="{Binding TeesExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding Tee}"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Handicap : "/>
+                    <Label Text="{Binding Handicap.Valor}"/>
+                </StackLayout>
+                <Slider Minimum="{Binding HandicapMinimo.Valor}" Maximum="{Binding HandicapMaximo.Valor}" Value="{Binding Handicap.Valor}"/>
+            </StackLayout>
+        </Grid>
+
+        <!-- Barra Baixo -->
+        <StackLayout HorizontalOptions="Fill" HeightRequest="50" Orientation="Horizontal">
+            <Button HorizontalOptions="StartAndExpand" Text="Cancel" BackgroundColor="Red" HeightRequest="35" WidthRequest="180" BorderRadius="0" Command="{Binding CancelarEdicaoCommand}"/>
+            <Button HorizontalOptions="EndAndExpand" Text="Save" BackgroundColor="Green" HeightRequest="35" WidthRequest="180" BorderRadius="0" Command="{Binding GuardarDadosCommand}"/>
+        </StackLayout>
+
+    </StackLayout>
+
+</pages:PopupPage>

@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace IT4ClubCar.IT4ClubCar.Views.UserControls
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class JogadorConfiguracaoUserControlView : Grid
+	public partial class JogadorUserControlView : Grid
 	{
-		public JogadorConfiguracaoUserControlView()
+		public JogadorUserControlView()
 		{
 			InitializeComponent ();
 		}

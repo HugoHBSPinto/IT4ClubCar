@@ -14,6 +14,9 @@ using IT4ClubCar.IT4ClubCar.Services.Metrico;
 using IT4ClubCar.IT4ClubCar.Services.ModoJogo;
 using IT4ClubCar.IT4ClubCar.Services.Tee;
 using IT4ClubCar.IT4ClubCar.Services.TeeDistancias;
+using IT4ClubCar.IT4ClubCar.ViewModels.UserControls;
+using IT4ClubCar.IT4ClubCar.ViewModels.Popups;
+using IT4ClubCar.IT4ClubCar.Services.Camera;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
 {
@@ -60,7 +63,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
         {
             //Registar viewmodels existentes. Se criar-se um novo adicionar o seu registo aqui.
             App.Container.RegisterType<MenuPrincipalViewModel>();
-            App.Container.RegisterType<JogadorConfiguracaoViewModel>();
+            App.Container.RegisterType<JogadorUserControlViewModel>();
+            App.Container.RegisterType<EditarJogadorPopupViewModel>();
             App.Container.RegisterType<JogoConfiguracaoViewModel>();
 
 
@@ -75,6 +79,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
             App.Container.RegisterType<IModoJogoService, ModoJogoService>();
             App.Container.RegisterType<ITeeService, TeeService>();
             App.Container.RegisterType<ITeeDistanciaService, TeeDistanciaService>();
+            App.Container.RegisterType<ICameraService, CameraService>();
         }
 
 

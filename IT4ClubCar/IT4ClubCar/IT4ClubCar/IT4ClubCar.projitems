@@ -31,6 +31,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\TeeModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Buracos\BuracosService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Buracos\IBuracosService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Camera\BytesHandlerHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Camera\CameraService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Camera\ICameraService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Campo\CampoService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Campo\ICampoService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\DataAccess\WebService.cs" />
@@ -59,7 +62,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\BaseWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\ExtendedBindableObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\ViewModelLocator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\JogadorConfiguracaoViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Popups\EditarJogadorPopupViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\UserControls\JogadorUserControlViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\JogoConfiguracaoViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\MenuPrincipalViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\BuracoWrapperViewModel.cs" />
@@ -77,11 +81,19 @@
       <DependentUpon>JogoConfiguracaoView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\JogoView.xaml.cs">
+      <DependentUpon>JogoView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\MenuPrincipalView.xaml.cs">
       <DependentUpon>MenuPrincipalView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\UserControls\JogadorConfiguracaoUserControlView.xaml.cs">
-      <DependentUpon>JogadorConfiguracaoUserControlView.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Popups\EditarJogadorPopupView.xaml.cs">
+      <DependentUpon>EditarJogadorPopupView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\UserControls\JogadorUserControlView.xaml.cs">
+      <DependentUpon>JogadorUserControlView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -89,12 +101,13 @@
     <Folder Include="$(MSBuildThisFileDirectory)IT4ClubCar\Helpers\" />
     <Folder Include="$(MSBuildThisFileDirectory)IT4ClubCar\Styles\" />
     <Folder Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Navegacao\" />
+    <Folder Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\UserControls\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Styles\MenuPrincipalStyle.css" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\UserControls\JogadorConfiguracaoUserControlView.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\UserControls\JogadorUserControlView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
@@ -107,5 +120,17 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Styles\JogoConfiguracaoStyle.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Popups\EditarJogadorPopupView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\JogoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

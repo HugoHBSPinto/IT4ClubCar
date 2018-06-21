@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using IT4ClubCar.IT4ClubCar.Views;
+using Rg.Plugins.Popup.Services;
+using IT4ClubCar.IT4ClubCar.Views.Popups;
 
 namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
 {
@@ -33,5 +34,26 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
             await Application.Current.MainPage.Navigation.PushModalAsync(new JogoConfiguracaoView());
         }
 
+
+
+        public async Task IrParaEditarJogador()
+        {
+            await PopupNavigation.PushAsync(new EditarJogadorPopupView(),true);
+        }
+
+
+
+        public async Task SairDeEditarJogador()
+        {
+            await PopupNavigation.PopAsync();
+        }
+
+
+
+        public async Task IrParaJogo()
+        {
+            await Application.Current.MainPage.Navigation.PushModalAsync(new JogoView());
+        }
+        
     }
 }

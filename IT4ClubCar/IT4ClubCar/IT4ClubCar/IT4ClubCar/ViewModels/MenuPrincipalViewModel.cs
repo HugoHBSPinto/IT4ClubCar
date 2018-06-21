@@ -17,9 +17,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             
         }
 
-
-
-        #region Commands
+        #region Commmands
 
         private ICommand _irParaJogoConfiguracao;
         public ICommand IrParaJogoConfiguracao
@@ -27,7 +25,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             get
             {
                 if (_irParaJogoConfiguracao == null)
-                    _irParaJogoConfiguracao = new Command(p => base.NavigationService.IrParaJogoConfiguracao(), p => { return true; });
+                    _irParaJogoConfiguracao = new Command(async p => await base.NavigationService.IrParaJogoConfiguracao(), p => { return true; });
                 return _irParaJogoConfiguracao;
             }
         }

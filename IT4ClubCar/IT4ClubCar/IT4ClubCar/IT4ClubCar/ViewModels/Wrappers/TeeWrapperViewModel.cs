@@ -9,7 +9,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
 {
     class TeeWrapperViewModel
     {
-        public TeeModel _teeModel { get; set; }
+        private TeeModel _teeModel;
 
         /// <summary>
         /// Obtém o Id.
@@ -41,6 +41,11 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
         }
 
 
+
+        public TeeModel ObterModel()
+        {
+            return _teeModel;
+        }
 
     }
 }

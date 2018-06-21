@@ -9,7 +9,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
     sealed class MediadorMensagensService
     {
         //Adicionar novas mensagens neste enum.
-        public enum ViewModelMensagens {  };
+        public enum ViewModelMensagens { JogadorAEditar, JogadorAdicionado, JogadorRemovido };
 
         private static MediadorMensagensService _instancia = new MediadorMensagensService();
 

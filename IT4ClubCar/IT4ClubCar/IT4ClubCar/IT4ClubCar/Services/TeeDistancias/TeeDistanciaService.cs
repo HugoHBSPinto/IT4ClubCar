@@ -37,12 +37,10 @@ namespace IT4ClubCar.IT4ClubCar.Services.TeeDistancias
 
             int distancia = int.Parse(teeBuracoDistancia["Distancia"].ToString());
 
-            TeeBuracoDistanciaModel teeBuracoDistanciaModel = new TeeBuracoDistanciaModel(tee._teeModel,distancia);
+            TeeBuracoDistanciaModel teeBuracoDistanciaModel = new TeeBuracoDistanciaModel(tee.ObterModel(),distancia);
 
             return new TeeBuracoDistanciaWrapperViewModel(teeBuracoDistanciaModel);
         }
-
-
 
     }
 }

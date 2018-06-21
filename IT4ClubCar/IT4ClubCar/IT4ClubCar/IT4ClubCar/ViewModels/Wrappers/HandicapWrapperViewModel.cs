@@ -1,11 +1,12 @@
 ﻿using IT4ClubCar.IT4ClubCar.Models;
+using IT4ClubCar.IT4ClubCar.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
 {
-    class HandicapWrapperViewModel
+    class HandicapWrapperViewModel : ExtendedBindableObject
     {
         private HandicapModel _handicapModel;
 
@@ -21,6 +22,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
             set
             {
                 _handicapModel.Valor = value;
+                OnPropertyChanged("Valor");
             }
         }
 
@@ -32,6 +34,11 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
         }
 
 
+
+        public HandicapModel ObterModel()
+        {
+            return _handicapModel;
+        }
 
     }
 }

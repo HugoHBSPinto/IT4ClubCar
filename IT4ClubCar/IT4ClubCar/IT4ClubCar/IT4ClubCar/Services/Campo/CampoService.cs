@@ -56,11 +56,14 @@ namespace IT4ClubCar.IT4ClubCar.Services.Campo
 
             for (int i = 0; i < campos.Count; i++)
             {
+                //Obter Propriedades.
                 int id = int.Parse(campos[i]["Id"].ToString());
                 string nome = campos[i]["Nome"].ToString();
                 int par = int.Parse(campos[i]["Par"].ToString());
                 int slopeRating = int.Parse(campos[i]["SlopeRating"].ToString());
                 int numeroBuracos = int.Parse(campos[i]["NumeroBuracos"].ToString());
+
+                //Adicionar o novo campo.
                 camposModel.Add(new CampoModel(id, nome,par,slopeRating,numeroBuracos));
             }
 

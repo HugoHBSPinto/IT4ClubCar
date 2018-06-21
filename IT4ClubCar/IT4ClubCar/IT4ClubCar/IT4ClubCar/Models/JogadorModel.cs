@@ -18,6 +18,11 @@ namespace IT4ClubCar.IT4ClubCar.Models
         public string Nome { get; set; }
 
         /// <summary>
+        /// Obtém e define o email.
+        /// </summary>
+        public string Email { get; set; }
+
+        /// <summary>
         /// Obtém e define o Genero.
         /// </summary>
         public GeneroModel Genero { get; set; }
@@ -51,7 +56,7 @@ namespace IT4ClubCar.IT4ClubCar.Models
         
         
         
-        public JogadorModel(string nome, GeneroModel genero, string fotoBase64, HandicapModel handicap, TeeModel tee)
+        public JogadorModel(string nome, string email, GeneroModel genero, string fotoBase64, HandicapModel handicap, TeeModel tee)
         {
             Nome = nome;
             Genero = genero;

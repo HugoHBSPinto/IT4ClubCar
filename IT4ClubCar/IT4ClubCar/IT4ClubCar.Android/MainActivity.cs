@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Xamarin.Forms;
+using Plugin.CurrentActivity;
 
 namespace IT4ClubCar.Droid
 {
@@ -20,8 +21,19 @@ namespace IT4ClubCar.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
             LoadApplication(new App());
+
+            CrossCurrentActivity.Current.Init(this, bundle);
         }
+
+
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
+        {
+            Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+        
     }
 }
 

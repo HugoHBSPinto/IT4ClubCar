@@ -35,13 +35,13 @@
                 <!-- Stack Layout com os pickers. -->
                 <StackLayout Grid.Column="0" Grid.Row="0" StyleClass="ContainerPickers">
                     <!--  Mapas.  -->
-                    <custom:CustomPicker TextColor="#CCCCCC" Title="Maps" ItemsSource="{Binding CamposExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding CampoDefault}"/>
+                    <custom:CustomPicker TextColor="#CCCCCC" Title="Maps" ItemsSource="{Binding CamposExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding CampoSelecionado}"/>
                     <Label StyleClass="pickerComoUnderline"/>
                     <!--  Modo jogo. -->
-                    <custom:CustomPicker TextColor="#CCCCCC" Title="Game Mode" ItemsSource="{Binding ModosJogoExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding ModoJogoDefault}"/>
+                    <custom:CustomPicker TextColor="#CCCCCC" Title="Game Mode" ItemsSource="{Binding ModosJogoExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding ModoJogoSelecionado}"/>
                     <Label StyleClass="pickerComoUnderline"/>
                     <!-- Tipo Métrico. -->
-                    <custom:CustomPicker TextColor="#CCCCCC" Title="Metric Type" ItemsSource="{Binding MetricosExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding MetricoDefault}"/>
+                    <custom:CustomPicker TextColor="#CCCCCC" Title="Metric Type" ItemsSource="{Binding MetricosExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding MetricoSelecionado}"/>
                     <Label StyleClass="pickerComoUnderline"/>
                 </StackLayout>
 
@@ -62,10 +62,10 @@
                         </Grid.RowDefinitions>
                         <!--#endregion -->
 
-                        <control:JogadorConfiguracaoUserControlView Grid.Column="0" Grid.Row="0"/>
-                        <control:JogadorConfiguracaoUserControlView Grid.Column="1" Grid.Row="0"/>
-                        <control:JogadorConfiguracaoUserControlView Grid.Column="0" Grid.Row="1"/>
-                        <control:JogadorConfiguracaoUserControlView Grid.Column="1" Grid.Row="1"/>
+                        <control:JogadorUserControlView Grid.Column="0" Grid.Row="0"/>
+                        <control:JogadorUserControlView Grid.Column="1" Grid.Row="0"/>
+                        <control:JogadorUserControlView Grid.Column="0" Grid.Row="1"/>
+                        <control:JogadorUserControlView Grid.Column="1" Grid.Row="1"/>
                             
                     </Grid>
 
@@ -79,7 +79,7 @@
                 <!-- Botão Cancelar. -->
                 <Button HorizontalOptions="StartAndExpand" Text="Cancelar" StyleClass="BotaoCancelar" BorderWidth="2" BorderRadius="35"/>
                 <!-- Botão ComecarJogo. -->
-                <Button HorizontalOptions="EndAndExpand" Text="Começar" StyleClass="BotaoAvancar" BorderWidth="2" BorderRadius="35"/>
+                <Button HorizontalOptions="EndAndExpand" Text="Começar" StyleClass="BotaoAvancar" BorderWidth="2" BorderRadius="35" Command="{Binding ComecarJogoCommand}"/>
             </StackLayout>
 
         </StackLayout>

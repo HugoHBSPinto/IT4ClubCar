@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IT4ClubCar.IT4ClubCar.Views.JogoView">
+    <ContentPage.Content>
+        <StackLayout>
+            <!-- Barra de Cima -->
+            <StackLayout HeightRequest="85" HorizontalOptions="FillAndExpand" BackgroundColor="#99000000">
+                <Label Text="Nome do Campo" HorizontalTextAlignment="Center" FontSize="40" TextColor="#CCCCCC" Margin="0,18,0,0"/>
+            </StackLayout>
+
+            <Grid HeightRequest="150">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Frame Grid.Column="0" Grid.Row="0" HeightRequest="80">
+                    <StackLayout>
+                        <Label HorizontalTextAlignment="Center" FontSize="25">Input Stroke</Label>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Column="1" Grid.Row="0" HeightRequest="80">
+                    <StackLayout>
+                        <Label HorizontalTextAlignment="Center" FontSize="25">Pro Tip</Label>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Column="2" Grid.Row="0" HeightRequest="80">
+                    <StackLayout>
+                        <Label HorizontalTextAlignment="Center" FontSize="25">Scorecard</Label>
+                    </StackLayout>
+                </Frame>
+
+            </Grid>
+
+            <!-- Mapa -->
+            <StackLayout HeightRequest="350" BackgroundColor="Red">
+                
+            </StackLayout>
+            
+            
+            <!-- Barra de baixo -->
+            <Grid HorizontalOptions="Fill" HeightRequest="150" BackgroundColor="Purple">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                
+                
+            </Grid>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

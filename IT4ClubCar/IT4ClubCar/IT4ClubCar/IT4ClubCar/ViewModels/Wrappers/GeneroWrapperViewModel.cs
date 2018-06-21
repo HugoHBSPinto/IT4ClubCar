@@ -40,5 +40,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
 
 
 
+        public GeneroModel ObterModel()
+        {
+            return _generoModel;
+        }
+        
     }
 }

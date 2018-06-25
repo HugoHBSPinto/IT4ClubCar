@@ -28,9 +28,9 @@ namespace IT4ClubCar.IT4ClubCar.Models
         public GeneroModel Genero { get; set; }
 
         /// <summary>
-        /// Obtém e defnie a FotoBase64.
+        /// Obtém e define a Foto.
         /// </summary>
-        public string Foto64Base { get; set; }
+        public ImageSource Foto { get; set; }
 
         /// <summary>
         /// Obtém e define o Handicap.
@@ -56,11 +56,11 @@ namespace IT4ClubCar.IT4ClubCar.Models
         
         
         
-        public JogadorModel(string nome, string email, GeneroModel genero, string fotoBase64, HandicapModel handicap, TeeModel tee)
+        public JogadorModel(string nome, string email, GeneroModel genero, ImageSource foto, HandicapModel handicap, TeeModel tee)
         {
             Nome = nome;
             Genero = genero;
-            Foto64Base = fotoBase64;
+            Foto = foto;
             Handicap = handicap;
             Tee = tee;
             Pontuacoes = new List<PontuacaoModel>();

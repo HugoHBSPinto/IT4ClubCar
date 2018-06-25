@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IT4ClubCar.IT4ClubCar.Views.UserControls.JogadorPontuacaoUserControlView"
+             xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             xmlns:vml="clr-namespace:IT4ClubCar.IT4ClubCar.ViewModels.Base"
+             vml:ViewModelLocator.DefinirViewModelAutomaticamente="True"
+             xmlns:customConverters="clr-namespace:IT4ClubCar.IT4ClubCar.Converters">
+
+    <Grid.Resources>
+        <StyleSheet Source="../../Views/Styles/JogadorPontuacaoUserControlStyle.css"/>
+        <customConverters:NumeroParaCorConverter x:Key="NumeroParaCor"/>
+    </Grid.Resources>
+
+    <!--region Column and Row Definitions -->
+
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    
+    <!--endregion -->
+
+    <flv:FlowListView Grid.Column="0" Grid.Row="0" FlowColumnCount="10" SeparatorVisibility="Default" FlowItemsSource="{Binding Jogador.Pontuacoes}">
+        <flv:FlowListView.FlowColumnTemplate>
+            <DataTemplate>
+                <Label BackgroundColor="{Binding Source={x:Reference PontosLabel},Path=Text, Converter={StaticResource NumeroParaCor}}" VerticalTextAlignment="Center" Text="{Binding Pontos}" x:Name="PontosLabel"/>
+            </DataTemplate>
+        </flv:FlowListView.FlowColumnTemplate>
+    </flv:FlowListView>
+
+
+</Grid>

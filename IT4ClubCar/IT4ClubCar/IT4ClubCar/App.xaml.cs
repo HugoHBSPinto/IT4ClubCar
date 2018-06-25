@@ -5,6 +5,7 @@ using System;
 using Unity;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using DLToolkit.Forms.Controls;
 
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace IT4ClubCar
@@ -35,6 +36,8 @@ namespace IT4ClubCar
 
             //Definir como a primeira página a aparecer.
             MainPage = mainPage;
+
+            FlowListView.Init();
 		}
 
 		protected override void OnStart ()

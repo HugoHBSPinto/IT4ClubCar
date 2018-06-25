@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Rg.Plugins.Popup.Services;
 using IT4ClubCar.IT4ClubCar.Views.Popups;
+using System.Diagnostics;
 
 namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
 {
@@ -54,6 +55,48 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
         {
             await Application.Current.MainPage.Navigation.PushModalAsync(new JogoView());
         }
-        
+
+
+
+        public async Task IrParaProTip()
+        {
+            await PopupNavigation.PushAsync(new ProTipPopupView(), true);
+        }
+
+
+
+        public async Task SairDeProTip()
+        {
+            await PopupNavigation.PopAsync();
+        }
+
+
+
+        public async Task IrParaPontuacoes()
+        {
+            await PopupNavigation.PushAsync(new  PontuacoesPopupView(), true);
+        }
+
+
+
+        public async Task SairDePontuacoes()
+        {
+            await PopupNavigation.PopAsync();
+        }
+
+
+
+        public async Task IrParaScorecard()
+        {
+            await PopupNavigation.PushAsync(new ScorecardPopupView(), true);
+        }
+
+
+
+        public async Task SairDeScorecard()
+        {
+            await PopupNavigation.PopAsync();
+        }
+
     }
 }

@@ -22,11 +22,13 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
 {
     class JogoConfiguracaoViewModel : BaseViewModel
     {
+        #region Serviços
         private ICampoService _campoService;
         private IModoJogoService _modoJogoService;
         private IMetricoService _metricoService;
         private IBuracosService _buracoService;
         private ITeeDistanciaService _teeDistanciaService;
+        #endregion
 
         #region Propriedades
 
@@ -137,6 +139,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         /// </summary>
         public ObservableCollection<JogadorWrapperViewModel> Jogadores { get; set; }
 
+        private JogoWrapperViewModel Jogo { get; set; }
+
         #endregion
 
         #region Commands
@@ -173,7 +177,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             _teeDistanciaService = teeDistanciaService;
 
             //Preencher Pickers.
-            Task.Run(async () => await InicializarDados()).ContinueWith(p => InicializarComunicacaoMediadorMensagens());
+            Task.Run(async () => await InicializarDados())
+                .ContinueWith(p => InicializarComunicacaoMediadorMensagens());
         }
 
 
@@ -212,10 +217,15 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
 
 
 
+        /// <summary>
+        /// Executado quando o utilizador clica no botão "Start" após ter configurado o jogo.
+        /// </summary>
+        /// <returns></returns>
         private async Task ComecarJogo()
         {
             await ConfigurarJogo();
             await base.NavigationService.IrParaJogo();
+            MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.NovoJogo, Jogo);
         }
 
 
@@ -223,15 +233,39 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         private async Task ConfigurarJogo()
         {
             //Obter os buracos do campo selecionado.
-            ObservableCollection<BuracoWrapperViewModel> buracos = await _buracoService.ObterBuracosDeCampo(CampoSelecionado);
+            await DefinirBuracosCampo();
 
-            //Obter distâncias de cada buraco para cada tee.
+            //Definir as distâncias de cada buraco para cada tee.
+            await DefinirDistancias();
+
+            //Definir as pontuações iniciais de cada jogador.
+            DefinirPontuacoes();
+
+            //Criar novo jogo.
+            CriarNovoJogo();
+        }
+
+        /// <summary>
+        /// Obtém os buracos do campo selecionado.
+        /// </summary>
+        private async Task DefinirBuracosCampo()
+        {
+            ObservableCollection<BuracoWrapperViewModel> buracos = await _buracoService.ObterBuracosDeCampo(CampoSelecionado);
+            buracos.ToList().ForEach(p => CampoSelecionado.AdicionarBuraco(p));
+        }
+
+        /// <summary>
+        /// Define em cada buraco a distância do mesmo para os tees escolhidos pelo utilizador.
+        /// </summary>
+        private async Task DefinirDistancias()
+        {
             //Obter tees utilizados pelos jogadores.
             ObservableCollection<TeeWrapperViewModel> tees = new ObservableCollection<TeeWrapperViewModel>();
             foreach (JogadorWrapperViewModel jogador in Jogadores)
                 tees.Add(jogador.Tee);
+
             //Obter distância de cada buraco para cada tee.
-            foreach(BuracoWrapperViewModel buraco in buracos)
+            foreach (BuracoWrapperViewModel buraco in CampoSelecionado.Buracos)
             {
                 ObservableCollection<TeeBuracoDistanciaWrapperViewModel> distancias = new ObservableCollection<TeeBuracoDistanciaWrapperViewModel>();
                 foreach (TeeWrapperViewModel tee in tees)
@@ -240,31 +274,38 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                 }
                 distancias.ToList().ForEach(p => buraco.AdicionarDistancia(p));
             }
+        }
 
-            buracos.ToList().ForEach(p => CampoSelecionado.AdicionarBuraco(p));
-
+        /// <summary>
+        /// Define as pontuações iniciais de cada jogador.
+        /// </summary>
+        private void DefinirPontuacoes()
+        {
             //Inicializar pontuacoes dos jogadores a zero.
-            foreach(JogadorWrapperViewModel jogador in Jogadores)
+            foreach (JogadorWrapperViewModel jogador in Jogadores)
             {
                 ObservableCollection<PontuacaoWrapperViewModel> pontuacoes = new ObservableCollection<PontuacaoWrapperViewModel>();
-                foreach(BuracoWrapperViewModel buraco in buracos)
+                foreach (BuracoWrapperViewModel buraco in CampoSelecionado.Buracos)
                 {
-                    pontuacoes.Add(new PontuacaoWrapperViewModel(new Models.PontuacaoModel(buraco.ObterModelo(), 250)));
+                    pontuacoes.Add(new PontuacaoWrapperViewModel(new PontuacaoModel(buraco.ObterModelo(), 0)));
                 }
                 pontuacoes.ToList().ForEach(p => jogador.AdicionarPontuacao(p));
             }
+        }
 
+        /// <summary>
+        /// Cria um novo JogoWrapperViewModel que tem todas as configurações definidas pelo utilizador.
+        /// </summary>
+        private void CriarNovoJogo()
+        {
             List<JogadorModel> jogadores = new List<JogadorModel>();
 
             foreach (JogadorWrapperViewModel jogador in Jogadores)
                 jogadores.Add(jogador.ObterModel());
 
-            JogoModel jogoModel = new JogoModel(CampoSelecionado.ObterModel(),ModoJogoSelecionado.ObterModel(),MetricoSelecionado.ObterModel(),jogadores);
+            JogoModel jogoModel = new JogoModel(CampoSelecionado.ObterModel(), ModoJogoSelecionado.ObterModel(), MetricoSelecionado.ObterModel(), jogadores);
 
-            JogoWrapperViewModel jogo = new JogoWrapperViewModel(jogoModel);
-
-            for (int i = 0; i < 255; i++)
-                Debug.Print("Pontuacao do Jogador 1 : {0}",jogo.Jogadores[0].Pontuacoes.Where(p => p.Buraco.Numero.Equals(1)).FirstOrDefault().Pontos);
+            Jogo = new JogoWrapperViewModel(jogoModel);
         }
 
     }

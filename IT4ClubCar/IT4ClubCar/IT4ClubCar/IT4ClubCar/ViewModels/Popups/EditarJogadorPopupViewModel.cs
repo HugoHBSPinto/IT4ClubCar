@@ -24,10 +24,12 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 {
     class EditarJogadorPopupViewModel : BaseViewModel
     {
+        #region Serviços
         private ITeeService _teeService;
         private IHandicapService _handicapService;
         private IGeneroService _generoService;
         private ICameraService _cameraService;
+        #endregion
 
         #region Dados Disponiveis
 
@@ -131,20 +133,6 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             {
                 _email = value;
                 OnPropertyChanged("Email");
-            }
-        }
-
-        private string _fotoBase64;
-        public string FotoBase64
-        {
-            get
-            {
-                return _fotoBase64;
-            }
-            set
-            {
-                _fotoBase64 = value;
-                Foto = BytesHandlerHelper.ConverterBase64EmImageSource(_fotoBase64);
             }
         }
 
@@ -269,9 +257,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             _generoService = generoService;
             _cameraService = cameraService;
 
-            Task.Run(async () => await InicializarDados());
-
-            InicializarComunicacaoMediador();
+            Task.Run(async () => await InicializarDados())
+                .ContinueWith(p => InicializarComunicacaoMediador());
         }
         
         
@@ -308,15 +295,14 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         {
             _jogador = jogadorAEditar;
 
-            //Verifica-se se o jogador está bloqueado. Se estar, quer dizer que o utilizador acabou de desbloqueá-lo.
+            //Verifica-se se o jogador está bloqueado. Se está, quer dizer que o utilizador acabou de desbloqueá-lo.
             if(jogadorAEditar.Bloqueado)
             {
                 //O utilizador acabou de desbloquear este jogador. Todas as informações serão as default.
                 Nome = "Player";
 
                 Email = "Placeholder";
-
-                //FotoBase64 = BytesHandlerHelper.ConverterByteArrayEmBase64(File.ReadAllBytes("Player.png"));
+                
                 Foto = ImageSource.FromFile("Player.Png");
 
                 int idGeneroDefault = await _generoService.ObterGeneroDefault();
@@ -335,7 +321,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
                 Email = _jogador.Email;
 
-                //FotoBase64 = _jogador.FotoBase64;
+                Foto = _jogador.Foto;
 
                 Genero = GenerosExistentes.Where(p => p.Id.Equals(_jogador.Genero.Id)).FirstOrDefault();
 
@@ -350,7 +336,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         private async Task TirarFoto()
         {
             MediaFile ficheiroImagem = await _cameraService.TirarFoto();
-            FotoBase64 = BytesHandlerHelper.ConverterMediaFileEmBase64(ficheiroImagem);
+            string fotoBase64 = BytesHandlerHelper.ConverterMediaFileEmBase64(ficheiroImagem);
+            Foto = BytesHandlerHelper.ConverterBase64EmImageSource(fotoBase64);
         }
 
 
@@ -360,10 +347,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             //Se o jogador antes estava bloqueado, é necessário criar um model para o mesmo.
             if(_jogador.Bloqueado)
             {
-                JogadorModel jogadorModel = new JogadorModel(Nome,Email,Genero.ObterModel(),FotoBase64,Handicap.ObterModel(),Tee.ObterModel());
+                JogadorModel jogadorModel = new JogadorModel(Nome,Email,Genero.ObterModel(),Foto,Handicap.ObterModel(),Tee.ObterModel());
                 _jogador.DefinirModel(jogadorModel);
-                //Temporário.
-                _jogador.Foto = Foto;
 
                 //Avisar que utilizador foi criado.
                 MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.JogadorAdicionado, _jogador);
@@ -373,7 +358,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                 //O modelo já está criado. Basta atualizar os valores do mesmo.
                 _jogador.Nome = Nome;
                 _jogador.Email = Email;
-                _jogador.FotoBase64 = FotoBase64;
+                _jogador.Foto = Foto;
                 _jogador.Foto = Foto;
                 _jogador.Genero = Genero;
                 _jogador.Tee = Tee;
@@ -401,7 +386,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
         private async Task CancelarEdicao()
         {
-            //Fechar PopUp
+            //Fechar PopUp.
             await base.NavigationService.SairDeEditarJogador();
         }
 

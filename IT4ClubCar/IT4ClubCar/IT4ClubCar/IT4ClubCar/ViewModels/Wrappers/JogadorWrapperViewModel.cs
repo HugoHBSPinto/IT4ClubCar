@@ -55,23 +55,6 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
         public GeneroWrapperViewModel Genero { get; set; }
 
         /// <summary>
-        /// Obtém e define a string base 64 da foto.
-        /// </summary>
-        public string FotoBase64
-        {
-            get
-            {
-                return _jogadorModel.Foto64Base;
-            }
-            set
-            {
-                _jogadorModel.Foto64Base = value;
-                
-                Foto = BytesHandlerHelper.ConverterBase64EmImageSource(_jogadorModel.Foto64Base);
-            }
-        }
-
-        /// <summary>
         /// Obtém a foto.
         /// </summary>
         private ImageSource _foto;
@@ -117,6 +100,21 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
             }
         }
 
+        /// <summary>
+        /// Obtém e define AEditarPontuacao.
+        /// </summary>
+        public bool EmUso { get; set; }
+
+        /// <summary>
+        /// Obtém e define PontuacaoEmUso.
+        /// </summary>
+        public bool PontuacaoEmUso { get; set; }
+
+        /// <summary>
+        /// Obtém e define NomeEmUso.
+        /// </summary>
+        public bool NomeEmUso { get; set; }
+
 
 
         public JogadorWrapperViewModel()
@@ -142,7 +140,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
             _jogadorModel = jogadorModel;
             Nome = jogadorModel.Nome;
             Email = jogadorModel.Email;
-            FotoBase64 = jogadorModel.Foto64Base;
+            Foto = jogadorModel.Foto;
             Genero = new GeneroWrapperViewModel(_jogadorModel.Genero);
             Tee = new TeeWrapperViewModel(_jogadorModel.Tee);
             Handicap = new HandicapWrapperViewModel(_jogadorModel.Handicap);
@@ -157,7 +155,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
             {
                 Nome = String.Empty;
                 Email = String.Empty;
-                FotoBase64 = String.Empty;
+                Foto = null;
                 Genero = null;
                 Tee = null;
                 Handicap = null;

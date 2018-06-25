@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage  xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             xmlns:vml="clr-namespace:IT4ClubCar.IT4ClubCar.ViewModels.Base"
+             vml:ViewModelLocator.DefinirViewModelAutomaticamente="True"
+             x:Class="IT4ClubCar.IT4ClubCar.Views.Popups.ScorecardPopupView"
+             xmlns:control="clr-namespace:IT4ClubCar.IT4ClubCar.Views.UserControls">
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+
+    <Grid
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            BackgroundColor="#CCCCCC"
+            HeightRequest="700"
+            WidthRequest="1200">
+
+        <!--region Column and Row Definitions -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+        <!--endregion -->
+        
+        <!-- Nomes dos jogadores -->
+        <Grid Grid.Column="0" Grid.Row="0" RowSpacing="0">
+
+            <!--region Column and Row Definitions -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--endregion -->
+
+            <control:JogadorNomeUserControlView Grid.Column="0" Grid.Row="1"/>
+            <control:JogadorNomeUserControlView Grid.Column="0" Grid.Row="2"/>
+            <control:JogadorNomeUserControlView Grid.Column="0" Grid.Row="3"/>
+            <control:JogadorNomeUserControlView Grid.Column="0" Grid.Row="4"/>
+            
+        </Grid>
+        
+        <!-- Pontuacoes -->
+        <Grid Grid.Column="1" Grid.Row="0">
+            <!--region Column and Row Definitions -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--endregion -->
+            
+            <!--region Lista com os números dos buracos -->
+
+            <Label Text="0" Grid.Column="1" Grid.Row="0"/>
+            <Label Text="0" Grid.Column="2" Grid.Row="0"/>
+            <Label Text="0" Grid.Column="3" Grid.Row="0"/>
+            <Label Text="0" Grid.Column="4" Grid.Row="0"/>
+            <Label Text="0" Grid.Column="5" Grid.Row="0"/>
+            <Label Text="0" Grid.Column="6" Grid.Row="0"/>
+            <Label Text="0" Grid.Column="7" Grid.Row="0"/>
+            <Label Text="0" Grid.Column="8" Grid.Row="0"/>
+            <Label Text="0" Grid.Column="9" Grid.Row="0"/>
+            <Label Text="0" Grid.Column="10" Grid.Row="0"/>
+            <Label Text="0" Grid.Column="11" Grid.Row="0"/>
+            <Label Text="0" Grid.Column="12" Grid.Row="0"/>
+            <Label Text="0" Grid.Column="13" Grid.Row="0"/>
+            <Label Text="0" Grid.Column="14" Grid.Row="0"/>
+            <Label Text="0" Grid.Column="15" Grid.Row="0"/>
+            <Label Text="0" Grid.Column="16" Grid.Row="0"/>
+            <Label Text="0" Grid.Column="17" Grid.Row="0"/>
+            <Label Text="0" Grid.Column="18" Grid.Row="0"/>
+
+            <!--endregion -->
+
+            <control:JogadorPontuacaoUserControlView Grid.Column="0" Grid.ColumnSpan="17" Grid.Row="1"/>
+            <control:JogadorPontuacaoUserControlView Grid.Column="0" Grid.ColumnSpan="17" Grid.Row="2"/>
+            <control:JogadorPontuacaoUserControlView Grid.Column="0" Grid.ColumnSpan="17" Grid.Row="3"/>
+            <control:JogadorPontuacaoUserControlView Grid.Column="0" Grid.ColumnSpan="17" Grid.Row="4"/>
+
+        </Grid>
+
+        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Text="Fechar Popup" Command="{Binding FecharPopupCommand}"/>
+        
+    </Grid>
+
+</pages:PopupPage>

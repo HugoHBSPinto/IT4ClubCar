@@ -66,6 +66,14 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
             App.Container.RegisterType<JogadorUserControlViewModel>();
             App.Container.RegisterType<EditarJogadorPopupViewModel>();
             App.Container.RegisterType<JogoConfiguracaoViewModel>();
+            App.Container.RegisterType<JogoViewModel>();
+            App.Container.RegisterType<ProTipPopupViewModel>();
+            App.Container.RegisterType<PontuacoesPopupViewModel>();
+            App.Container.RegisterType<DefinicaoPontuacaoUserControlViewModel>();
+            App.Container.RegisterType<ScorecardPopupViewModel>();
+            App.Container.RegisterType<JogadorPontuacaoUserControlViewModel>();
+            App.Container.RegisterType<JogadorNomeUserControlViewModel>();
+
 
 
             //Registar services existentes. Se criar-se um novo adicionar o seu registo aqui.

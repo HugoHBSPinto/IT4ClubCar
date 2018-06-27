@@ -4,41 +4,63 @@
              xmlns:local="clr-namespace:IT4ClubCar"
              x:Class="IT4ClubCar.IT4ClubCar.Views.MenuPrincipalView"
              xmlns:vml="clr-namespace:IT4ClubCar.IT4ClubCar.ViewModels.Base"
-             BackgroundImage="BackgroundPaginaInicial"
              vml:ViewModelLocator.DefinirViewModelAutomaticamente="True">
 
     <ContentPage.Resources>
         <StyleSheet Source="../Views/Styles/MenuPrincipalStyle.css"/>
     </ContentPage.Resources>
 
-    <StackLayout>
+    <ContentPage.Content>
 
-        <!-- Menu Superior com imagem e texto de introdução. -->
-        <StackLayout VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
-            <Image HorizontalOptions="Center" Source="IconHotelLogo.png" StyleId="HotelLogoIcon"/>
-            <Label HorizontalOptions="Center" Text="Welcome" StyleId="TextoIntroducao"/>
-        </StackLayout>
+        <Grid ColumnSpacing="0" RowSpacing="0">
+            
+            <!--region Column and Row Definitions -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <!-- Menu no meio do ecrã com todos os botões existentes. Para os botões ficarem lado a lado
-             de dois em dois, para cada dois botões cria-se um stacklayout com orientação horizontal. -->
-        <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Margin="0,25,0,0">
-            <!-- Botões "Começar Jogo" e "Voltar para o jogo". -->
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Button Text="Start Game" Command="{Binding IrParaJogoConfiguracao}"/>
-                <Button Text="Return to Game"/>
-            </StackLayout>
-            <!-- Botões "Avaliar Jogo" e "Placeholder". -->
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Button Text="Review a Game"/>
-                <Button Text="Placeholder"/>
-            </StackLayout>
-            <!-- Botões "Previsão de Tempo" e "Feedback". -->
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Button Text="Weather Forecast"/>
-                <Button Text="Feedback"/>
-            </StackLayout>
-        </StackLayout>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--endregion -->
+    
+             <!-- Imagem de fundo - Ocupa todas as colunas e linhas -->
+            <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Source="BackgroundPaginaInicial" Aspect="Fill"/>
 
-    </StackLayout>
+            <!-- Icon -->
+            <Image Grid.Column="0" Grid.Row="0" Source="IconHotelLogo.png" StyleId="HotelLogoIcon"/>
+
+            <!-- Titulo -->
+            <Label Grid.Column="0" Grid.Row="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="Welcome" StyleId="TextoIntroducao"/>
+    
+            <!-- Botões -->
+            <Grid Grid.Column="0" Grid.Row="2">
+                <!--region Column and Row Definitions -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--endregion -->
+                <Button Grid.Column="0" Grid.Row="0" Text="Start Game" Command="{Binding IrParaJogoConfiguracao}"/>
+                <Button Grid.Column="1" Grid.Row="0" Text="Return to Game" Command="{Binding VoltarParaJogoCommand}"/>
+
+                <Button Grid.Column="0" Grid.Row="1" Text="Review a Game"/>
+                <Button Grid.Column="1" Grid.Row="1" Text="Course Info"/>
+
+                <Button Grid.Column="0" Grid.Row="2" Text="Weather Forecast"/>
+                <Button Grid.Column="1" Grid.Row="2" Text="Feedback"/>
+            </Grid>
+            
+        </Grid>
+
+    </ContentPage.Content>
 
 </ContentPage>

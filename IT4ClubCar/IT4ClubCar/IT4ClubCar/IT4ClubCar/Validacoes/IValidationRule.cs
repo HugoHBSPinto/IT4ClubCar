@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace IT4ClubCar.IT4ClubCar.Interfaces
+namespace IT4ClubCar.IT4ClubCar.Validacoes
 {
     /// <summary>
     /// Interface que, quando implementada, permite criar uma regra de validação para ser utilizada com um objecto

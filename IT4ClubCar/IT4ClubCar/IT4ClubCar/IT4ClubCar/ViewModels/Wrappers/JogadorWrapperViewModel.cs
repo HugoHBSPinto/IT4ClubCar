@@ -46,6 +46,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
             set
             {
                 _jogadorModel.Email = value;
+                OnPropertyChanged("Email");
             }
         }
 

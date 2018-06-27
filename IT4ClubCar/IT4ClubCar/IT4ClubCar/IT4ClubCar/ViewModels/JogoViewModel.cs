@@ -4,12 +4,14 @@ using IT4ClubCar.IT4ClubCar.ViewModels.Base;
 using IT4ClubCar.IT4ClubCar.ViewModels.Wrappers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels
 {
@@ -43,6 +45,34 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             }
         }
 
+        private ObservableCollection<TeeWrapperViewModel> _teesUsados;
+        public ObservableCollection<TeeWrapperViewModel> TeesUsados
+        {
+            get
+            {
+                return _teesUsados;
+            }
+            set
+            {
+                _teesUsados = value;
+                OnPropertyChanged("TeesUsados");
+            }
+        }
+
+        private Map _mapa;
+        public Map Mapa
+        {
+            get
+            {
+                return _mapa;
+            }
+            set
+            {
+                _mapa = value;
+                OnPropertyChanged("Mapa");
+            }
+        }
+
         private ICommand _irParaBuracoAnteriorCommand;
         public ICommand IrBuracoAnteriorCommand
         {
@@ -71,7 +101,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             get
             {
                 if (_verProTipCommand == null)
-                    _verProTipCommand = new Command(p => VerProTip(), p => { return true; });
+                    _verProTipCommand = new Command(async p => await VerProTip(), p => { return true; });
                 return _verProTipCommand;
             }
         }
@@ -82,7 +112,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             get
             {
                 if (_definirPontuacoesCommand == null)
-                    _definirPontuacoesCommand = new Command(p => DefinirPontuacoes(), p => { return true; });
+                    _definirPontuacoesCommand = new Command(async p => await DefinirPontuacoes(), p => { return true; });
                 return _definirPontuacoesCommand;
             }
         }
@@ -98,11 +128,47 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             }
         }
 
+        private ICommand _pedirBuggyBarCommand;
+        public ICommand PedirBuggyBarCommand
+        {
+            get
+            {
+                if (_pedirBuggyBarCommand == null)
+                    _pedirBuggyBarCommand = new Command(async p => await PedirBuggyBar(), p => { return true; });
+                return _pedirBuggyBarCommand;
+            }
+        }
+
+        private ICommand _abrirMenuCommand;
+        public ICommand AbrirMenuCommand
+        {
+            get
+            {
+                if (_abrirMenuCommand == null)
+                    _abrirMenuCommand = new Command(async p => await AbrirMenu(), p => { return true; });
+                return _abrirMenuCommand;
+            }
+        }
+
 
 
         public JogoViewModel(INavigationService navigationService, IDialogService dialogService) : base(navigationService,dialogService)
         {
             InicializarComunicacaoMediadorMensagens();
+            InicializarPropriedadeMapa();
+        }
+
+
+
+        /// <summary>
+        /// Inicializa a propriedade Mapa.
+        /// </summary>
+        private void InicializarPropriedadeMapa()
+        {   
+            Mapa = new Map();
+            Mapa.IsShowingUser = false;
+            Mapa.MapType = MapType.Satellite;
+            Mapa.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(37.145206, -8.359953), new Distance(550)));
         }
 
 
@@ -125,6 +191,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         {
             Jogo = jogo;
             BuracoAtual = Jogo.Campo.Buracos[0];
+            TeesUsados = new ObservableCollection<TeeWrapperViewModel>();
+            Jogo.Jogadores.ToList().ForEach(p => TeesUsados.Add(p.Tee));
         }
 
 
@@ -159,7 +227,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         /// <summary>
         /// Mostra um popup com a pro tip do BuracoAtual.
         /// </summary>
-        private async void VerProTip()
+        private async Task VerProTip()
         {
             await base.NavigationService.IrParaProTip();
             MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.ProTipConteudo, BuracoAtual.Dica);
@@ -170,7 +238,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         /// <summary>
         /// Mostra um popup onde os utilizadores podem definir os pontos.
         /// </summary>
-        private async void DefinirPontuacoes()
+        private async Task DefinirPontuacoes()
         {
             await base.NavigationService.IrParaPontuacoes();
 
@@ -196,6 +264,28 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                 MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.PontuacaoAMostrar, jogador);
                 MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.NomeAMostrar, jogador);
             }
+        }
+
+
+
+        /// <summary>
+        /// Mostra um popup onde o jogador pode pedir o buggybar para um determinado buraco.
+        /// </summary>
+        /// <returns></returns>
+        private async Task PedirBuggyBar()
+        {
+            await base.NavigationService.IrParaPedirBuggyBar();
+
+            MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.CampoAtual, Jogo.Campo);
+            MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.BuracoAtual, BuracoAtual);
+        }
+
+
+
+        private async Task AbrirMenu()
+        {
+            await base.NavigationService.IrParaMenuJogo();
+            MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.JogoAtual, Jogo);
         }
 
     }

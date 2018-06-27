@@ -59,6 +59,7 @@ namespace IT4ClubCar.IT4ClubCar.Models
         public JogadorModel(string nome, string email, GeneroModel genero, ImageSource foto, HandicapModel handicap, TeeModel tee)
         {
             Nome = nome;
+            Email = email;
             Genero = genero;
             Foto = foto;
             Handicap = handicap;

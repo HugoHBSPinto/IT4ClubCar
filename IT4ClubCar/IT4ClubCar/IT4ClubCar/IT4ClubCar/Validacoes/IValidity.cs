@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace IT4ClubCar.IT4ClubCar.Interfaces
+namespace IT4ClubCar.IT4ClubCar.Validacoes
 {
     /// <summary>
     /// Interface que, quando implementada, permite adicionar um factor de validade a um objecto. O mesmo passa a puder ser

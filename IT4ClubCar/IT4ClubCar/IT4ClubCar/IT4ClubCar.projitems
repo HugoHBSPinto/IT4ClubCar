@@ -17,6 +17,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\GetPrimeiroErroConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\JogadorParaVisibilidadeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\NumeroParaCorConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\CustomControls\CustomPicker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\BuracoModel.cs" />
@@ -28,8 +29,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\MetricoModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\ModoJogoModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\PontuacaoModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\PublicidadeModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\TeeBuracoDistanciaModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\TeeModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\BuggyBar\BuggyBarService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\BuggyBar\IBuggyBarService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Buracos\BuracosService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Buracos\IBuracosService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Camera\BytesHandlerHelper.cs" />
@@ -42,14 +46,21 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Genero\IGeneroService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Handicap\HandicapService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Handicap\IHandicapService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\TelemovelService\ITelemovelService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\TelemovelService\TelemovelService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Metrico\IMetricoService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Metrico\MetricoService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\ModoJogo\IModoJogoService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\ModoJogo\ModoJogoService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Publicidade\IPublicidadeService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Publicidade\PublicidadeService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\TeeDistancias\ITeeDistanciaService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\TeeDistancias\TeeDistanciaService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Tee\ITeeService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Tee\TeeService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\EmailService\IEmailService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\EmailService\EmailService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Validacoes\EmailValidationRule.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\MultiDicionario.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Dialog\IDialogService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Navegacao\INavegationService.cs" />
@@ -65,12 +76,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\ViewModelLocator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\JogoViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Popups\EditarJogadorPopupViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Popups\MenuJogoPopupViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Popups\PedirBuggyBarPopupViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Popups\PontuacoesPopupViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Popups\ProTipPopupViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Popups\ScorecardPopupViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Popups\TerminarJogoPopupViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Popups\VerPublicidadePopupViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\UserControls\DefinicaoPontuacaoUserControlViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\UserControls\JogadorNomeUserControlViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\UserControls\JogadorPontuacaoUserControlViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\UserControls\JogadorTerminarJogoUserControlViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\UserControls\JogadorUserControlViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\JogoConfiguracaoViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\MenuPrincipalViewModel.cs" />
@@ -83,6 +99,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\MetricoWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\ModoJogoWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\PontuacaoWrapperViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\PublicidadeWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\TeeBuracoDistanciaWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\TeeWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\JogoConfiguracaoView.xaml.cs">
@@ -100,6 +117,14 @@
       <DependentUpon>EditarJogadorPopupView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Popups\MenuJogoPopupView.xaml.cs">
+      <DependentUpon>MenuJogoPopupView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Popups\PedirBuggyBarPopupView.xaml.cs">
+      <DependentUpon>PedirBuggyBarPopupView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Popups\PontuacoesPopupView.xaml.cs">
       <DependentUpon>PontuacoesPopupView.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -112,6 +137,14 @@
       <DependentUpon>ScorecardPopupView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Popups\TerminarJogoPopupView.xaml.cs">
+      <DependentUpon>TerminarJogoPopupView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Popups\VerPublicidadePopupView.xaml.cs">
+      <DependentUpon>VerPublicidadePopupView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\UserControls\DefinicaoPontuacaoUserControlView.xaml.cs">
       <DependentUpon>DefinicaoPontuacaoUserControlView.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -122,6 +155,10 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\UserControls\JogadorPontuacaoUserControlView.xaml.cs">
       <DependentUpon>JogadorPontuacaoUserControlView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\UserControls\JogadorTerminarJogoUserControlView.xaml.cs">
+      <DependentUpon>JogadorTerminarJogoUserControlView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\UserControls\JogadorUserControlView.xaml.cs">
@@ -204,5 +241,35 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Styles\JogadorPontuacaoUserControlStyle.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Popups\VerPublicidadePopupView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Popups\PedirBuggyBarPopupView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Popups\MenuJogoPopupView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Popups\TerminarJogoPopupView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\UserControls\JogadorTerminarJogoUserControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

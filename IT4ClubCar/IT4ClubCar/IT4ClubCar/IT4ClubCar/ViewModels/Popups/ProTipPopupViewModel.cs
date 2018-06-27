@@ -11,6 +11,9 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 {
     class ProTipPopupViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Obtém e define a Dica.
+        /// </summary>
         private string _dica;
         public string Dica
         {
@@ -22,6 +25,40 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             {
                 _dica = value;
                 OnPropertyChanged("Dica");
+            }
+        }
+
+        /// <summary>
+        /// Obtém e define o IsActivityIndicatorVisivel.
+        /// </summary>
+        private bool _isActivityIndicatorVisivel;
+        public bool IsActivityIndicatorVisivel
+        {
+            get
+            {
+                return _isActivityIndicatorVisivel;
+            }
+            set
+            {
+                _isActivityIndicatorVisivel = value;
+                OnPropertyChanged("IsActivityIndicatorVisivel");
+            }
+        }
+
+        /// <summary>
+        /// Obtém e define o IsActivityIndicatorACorrer.
+        /// </summary>
+        private bool _isActivityIndicatorACorrer;
+        public bool IsActivityIndicatorACorrer
+        {
+            get
+            {
+                return _isActivityIndicatorACorrer;
+            }
+            set
+            {
+                _isActivityIndicatorACorrer = value;
+                OnPropertyChanged("IsActivityIndicatorACorrer");
             }
         }
 
@@ -40,6 +77,9 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
         public ProTipPopupViewModel(INavigationService navigationService, IDialogService dialogService) : base(navigationService,dialogService)
         {
+            IsActivityIndicatorACorrer = true;
+            IsActivityIndicatorVisivel = true;
+
             InicializarComunicacaoComMediadorMensagens();
         }
 
@@ -50,7 +90,25 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         /// </summary>
         private void InicializarComunicacaoComMediadorMensagens()
         {
-            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.ProTipConteudo, p => { Dica = (string)p; });
+            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.ProTipConteudo, p => DefinirDica(p as string));
+        }
+
+
+
+        /// <summary>
+        /// Define a propriedade Dica, escondendo a ActivityIndicator.
+        /// </summary>
+        /// <param name="dica"></param>
+        private void DefinirDica(string dica)
+        {
+            Dica = dica;
+
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+             {
+                 IsActivityIndicatorACorrer = false;
+                 IsActivityIndicatorVisivel = false;
+                 return true;
+             });
         }
 
     }

@@ -296,7 +296,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             _jogador = jogadorAEditar;
 
             //Verifica-se se o jogador está bloqueado. Se está, quer dizer que o utilizador acabou de desbloqueá-lo.
-            if(jogadorAEditar.Bloqueado)
+            if(_jogador.Bloqueado)
             {
                 //O utilizador acabou de desbloquear este jogador. Todas as informações serão as default.
                 Nome = "Player";

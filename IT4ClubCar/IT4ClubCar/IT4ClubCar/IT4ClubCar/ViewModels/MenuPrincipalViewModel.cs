@@ -12,13 +12,6 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
 {
     class MenuPrincipalViewModel : BaseViewModel
     {
-        public MenuPrincipalViewModel(INavigationService navegationService, IDialogService dialogService) : base(navegationService,dialogService)
-        {
-            
-        }
-
-        #region Commmands
-
         private ICommand _irParaJogoConfiguracao;
         public ICommand IrParaJogoConfiguracao
         {
@@ -30,6 +23,23 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             }
         }
 
-        #endregion
+        private ICommand _voltarParaJogoCommand;
+        public ICommand VoltarParaJogoCommand
+        {
+            get
+            {
+                if (_voltarParaJogoCommand == null)
+                    _voltarParaJogoCommand = new Command(async p => await base.NavigationService.IrParaPaginaAnterior(), p => { return true; });
+                return _voltarParaJogoCommand;
+            }
+        }
+
+
+
+        public MenuPrincipalViewModel(INavigationService navegationService, IDialogService dialogService) : base(navegationService,dialogService)
+        {
+            
+        }
+
     }
 }

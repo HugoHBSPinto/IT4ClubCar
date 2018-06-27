@@ -7,19 +7,6 @@
              vml:ViewModelLocator.DefinirViewModelAutomaticamente="True"
              x:Class="IT4ClubCar.IT4ClubCar.Views.Popups.ProTipPopupView">
 
-    <pages:PopupPage.Animation>
-        <animations:ScaleAnimation 
-            PositionIn="Center"
-            PositionOut="Center"
-            ScaleIn="1.2"
-            ScaleOut="0.8"
-            DurationIn="400"
-            DurationOut="300"
-            EasingIn="SinOut"
-            EasingOut="SinIn"
-            HasBackgroundAnimation="True"/>
-    </pages:PopupPage.Animation>
-
     <Grid
             VerticalOptions="Center" 
             HorizontalOptions="Center" 
@@ -34,18 +21,48 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="6*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
         
         <!--endregion -->
 
-        <StackLayout Grid.Column="0" Grid.Row="0" Padding="20">
+        <!-- Barra de Cima. Titulo e Botão para fechar. -->
+        <Grid Grid.Column="0" Grid.Row="0" ColumnSpacing="0">
+            <!--region Column and Row Definitions -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--endregion -->
+            <Label Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="45" Text="{Binding Publicidade.Titulo}"/>
+            <Image Grid.Column="1" Grid.Row="0" Source="IconFecharPopup">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding FecharPopupCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+        </Grid>
+
+        <StackLayout Grid.Column="0" Grid.Row="1" Padding="20">
             <Label Text="{Binding Dica}" FontSize="25" TextColor="#CCCCCC" HorizontalTextAlignment="Center"/>
         </StackLayout>
 
-        <Button Grid.Column="0" Grid.Row="1" Text="Fechar" HorizontalOptions="Center" BackgroundColor="#CCCCCC" TextColor="Black" Command="{Binding FecharPopupCommand}"/>
-        
+        <!-- ActivityIndicator escondido -->
+        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" IsVisible="{Binding IsActivityIndicatorVisivel}">
+            <!--#region Definição de colunas e linhas. -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--#endregion -->
+            <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding IsActivityIndicatorACorrer}" Color="Green" VerticalOptions="Center" HorizontalOptions="Center"/>
+        </Grid>
+
     </Grid>
 
 </pages:PopupPage>

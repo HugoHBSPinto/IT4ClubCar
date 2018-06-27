@@ -1,5 +1,4 @@
-﻿using IT4ClubCar.IT4ClubCar.Interfaces;
-using IT4ClubCar.IT4ClubCar.Views;
+﻿using IT4ClubCar.IT4ClubCar.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,7 +31,8 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
 
         public async Task IrParaJogoConfiguracao()
         {
-            await Application.Current.MainPage.Navigation.PushModalAsync(new JogoConfiguracaoView());
+            Application.Current.MainPage = new JogoConfiguracaoView();
+            //await Application.Current.MainPage.Navigation.PushModalAsync(new JogoConfiguracaoView());
         }
 
 
@@ -53,14 +53,15 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
 
         public async Task IrParaJogo()
         {
-            await Application.Current.MainPage.Navigation.PushModalAsync(new JogoView());
+            Application.Current.MainPage = new JogoView();
+            //await Application.Current.MainPage.Navigation.PushModalAsync(new JogoView());
         }
 
 
 
         public async Task IrParaProTip()
         {
-            await PopupNavigation.PushAsync(new ProTipPopupView(), true);
+            await PopupNavigation.PushAsync(new ProTipPopupView(), animate: false);
         }
 
 
@@ -74,7 +75,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
 
         public async Task IrParaPontuacoes()
         {
-            await PopupNavigation.PushAsync(new  PontuacoesPopupView(), true);
+            await PopupNavigation.PushAsync(new  PontuacoesPopupView(), animate: false);
         }
 
 
@@ -88,7 +89,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
 
         public async Task IrParaScorecard()
         {
-            await PopupNavigation.PushAsync(new ScorecardPopupView(), true);
+            await PopupNavigation.PushAsync(new ScorecardPopupView(), animate: false);
         }
 
 
@@ -98,5 +99,61 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
             await PopupNavigation.PopAsync();
         }
 
+
+
+        public async Task IrParaPublicidadeDoDia()
+        {
+            await PopupNavigation.PushAsync(new VerPublicidadePopupView(), animate: false);
+        }
+
+
+
+        public async Task SairDePublicidadeDoDia()
+        {
+            await PopupNavigation.PopAsync();
+        }
+
+
+
+        public async Task IrParaPedirBuggyBar()
+        {
+            await PopupNavigation.PushAsync(new PedirBuggyBarPopupView(), animate: false);
+        }
+
+
+
+        public async Task SairDePedirBuggyBar()
+        {
+            await PopupNavigation.PopAsync();
+        }
+
+
+
+        public async Task IrParaMenuJogo()
+        {
+            await PopupNavigation.PushAsync(new MenuJogoPopupView(), animate: false);
+        }
+
+
+
+        public async Task SairDeMenuJogo()
+        {
+            await PopupNavigation.PopAsync();
+        }
+
+
+
+        public async Task IrParaTerminarJogo()
+        {
+            await PopupNavigation.PushAsync(new TerminarJogoPopupView(), animate: false);
+        }
+
+
+
+        public async Task SairDeTerminarJogo()
+        {
+            await PopupNavigation.PopAsync();
+        }
+        
     }
 }

@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IT4ClubCar.IT4ClubCar.Views.JogoView"
+             xmlns:custom="clr-namespace:IT4ClubCar.IT4ClubCar.CustomControls"
              xmlns:vml="clr-namespace:IT4ClubCar.IT4ClubCar.ViewModels.Base"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              vml:ViewModelLocator.DefinirViewModelAutomaticamente="True">
     <ContentPage.Content>
         <Grid RowSpacing="0" ColumnSpacing="0">
@@ -24,7 +26,7 @@
             <StackLayout Grid.Column="0" Grid.Row="0" BackgroundColor="Black">
                 <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text="{Binding Jogo.Campo.Nome}" FontSize="40" TextColor="#CCCCCC"/>
             </StackLayout>
-            
+
             <!-- Tabs -->
             <Grid Grid.Column="0" Grid.Row="1" ColumnSpacing="0.5" BackgroundColor="Black">
                 <!--region Column and Row Definition -->
@@ -56,7 +58,39 @@
             </Grid>
 
             <!-- Mapa -->
-            <Grid Grid.Column="0" Grid.Row="2"/>
+            <Grid Grid.Column="0" Grid.Row="2">
+                <!--region Column and Row Definitions -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--endregion -->
+                <ContentView Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Content="{Binding Mapa}"/>
+                <Grid Grid.Column="1" Grid.Row="0">
+                    <!--region Column and Row Definitions -->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--endregion -->
+                    <Button Grid.Column="0" Grid.Row="0" BackgroundColor="#95000000" Text="My Location" TextColor="White"/>
+                    <custom:CustomPicker Grid.Column="0" Grid.Row="1" BackgroundColor="#95000000" Title="Tee Positions" TextColor="White" ItemsSource="{Binding TeesUsados}" ItemDisplayBinding="{Binding Nome}"/>
+                    <Button Grid.Column="0" Grid.Row="2" BackgroundColor="#95000000" Text="Manual" TextColor="White"/>
+                    <Button Grid.Column="0" Grid.Row="3" BackgroundColor="#95000000" Text="3D" TextColor="White"/>
+                    <Button Grid.Column="0" Grid.Row="4" BackgroundColor="#95000000" Text="Reset" TextColor="White"/>
+                    <Label Grid.Column="0" Grid.Row="5" BackgroundColor="#95000000" Text="765" TextColor="White"/>
+                </Grid>
+            </Grid>
 
             <!-- Barra Inferior -->
             <Grid Grid.Column="0" Grid.Row="3">
@@ -73,9 +107,13 @@
                 <!--endregion -->
                 <!-- Icon BuggyCar -->
                 <StackLayout Grid.Column="0" Grid.Row="0" BackgroundColor="Black">
-                    <Image HorizontalOptions="StartAndExpand" Source="IconBuggyBar.png"/>
+                    <Image HorizontalOptions="StartAndExpand" Source="IconBuggyBar.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PedirBuggyBarCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
                 </StackLayout>
-                
+
                 <!-- Informações Buraco -->
                 <Grid Grid.Column="1" Grid.Row="0" ColumnSpacing="0" BackgroundColor="White">
                     <!--region Column and Row Definitions -->
@@ -105,13 +143,17 @@
                         </Image.GestureRecognizers>
                     </Image>
                 </Grid>
-                
+
                 <!-- Icon Menu -->
                 <StackLayout Grid.Column="2" Grid.Row="0" BackgroundColor="Black">
-                    <Image HorizontalOptions="EndAndExpand" Source="IconMenu.png"/>
+                    <Image HorizontalOptions="EndAndExpand" Source="IconMenu.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AbrirMenuCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
                 </StackLayout>
             </Grid>
-
+            
         </Grid>
     </ContentPage.Content>
 </ContentPage>

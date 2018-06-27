@@ -22,5 +22,13 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
         Task SairDePontuacoes();
         Task IrParaScorecard();
         Task SairDeScorecard();
+        Task IrParaPublicidadeDoDia();
+        Task SairDePublicidadeDoDia();
+        Task IrParaPedirBuggyBar();
+        Task SairDePedirBuggyBar();
+        Task IrParaMenuJogo();
+        Task SairDeMenuJogo();
+        Task IrParaTerminarJogo();
+        Task SairDeTerminarJogo();
     }
 }

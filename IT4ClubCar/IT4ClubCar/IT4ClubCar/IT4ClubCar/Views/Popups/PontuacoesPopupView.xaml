@@ -8,19 +8,6 @@
              xmlns:control="clr-namespace:IT4ClubCar.IT4ClubCar.Views.UserControls"
              x:Class="IT4ClubCar.IT4ClubCar.Views.Popups.PontuacoesPopupView">
 
-    <pages:PopupPage.Animation>
-        <animations:ScaleAnimation 
-            PositionIn="Center"
-            PositionOut="Center"
-            ScaleIn="1.2"
-            ScaleOut="0.8"
-            DurationIn="400"
-            DurationOut="300"
-            EasingIn="SinOut"
-            EasingOut="SinIn"
-            HasBackgroundAnimation="True"/>
-    </pages:PopupPage.Animation>
-
     <Grid
             VerticalOptions="Center" 
             HorizontalOptions="Center" 
@@ -35,18 +22,38 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!--endregion -->
-        <control:DefinicaoPontuacaoUserControlView Grid.Column="0" Grid.Row="0" />
+        
+        <!-- Barra de Cima. Titulo e Botão para fechar. -->
+        <Grid Grid.Column="0" Grid.Row="0" ColumnSpacing="0">
+            <!--region Column and Row Definitions -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--endregion -->
+            <Label Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="45" Text="{Binding Publicidade.Titulo}"/>
+            <Image Grid.Column="1" Grid.Row="0" Source="IconFecharPopup">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding FecharPopupCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+        </Grid>
+        
         <control:DefinicaoPontuacaoUserControlView Grid.Column="0" Grid.Row="1" />
         <control:DefinicaoPontuacaoUserControlView Grid.Column="0" Grid.Row="2" />
         <control:DefinicaoPontuacaoUserControlView Grid.Column="0" Grid.Row="3" />
-        <Button Grid.Column="0" Grid.Row="4" Text="Save" BackgroundColor="#CCCCCC" TextColor="Black" Command="{Binding FecharPopupCommand}"/>
+        <control:DefinicaoPontuacaoUserControlView Grid.Column="0" Grid.Row="4" />
+        
     </Grid>
 
 </pages:PopupPage>

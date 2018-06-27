@@ -25,6 +25,8 @@ namespace IT4ClubCar.Droid
             LoadApplication(new App());
 
             CrossCurrentActivity.Current.Init(this, bundle);
+
+            Xamarin.FormsMaps.Init(this, bundle);
         }
 
 

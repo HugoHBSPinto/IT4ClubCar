@@ -17,6 +17,10 @@ using IT4ClubCar.IT4ClubCar.Services.TeeDistancias;
 using IT4ClubCar.IT4ClubCar.ViewModels.UserControls;
 using IT4ClubCar.IT4ClubCar.ViewModels.Popups;
 using IT4ClubCar.IT4ClubCar.Services.Camera;
+using IT4ClubCar.IT4ClubCar.Services.Publicidade;
+using IT4ClubCar.IT4ClubCar.Services.BuggyBar;
+using IT4ClubCar.IT4ClubCar.Services.TelemovelService;
+using IT4ClubCar.IT4ClubCar.Services.EmailService;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
 {
@@ -73,6 +77,11 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
             App.Container.RegisterType<ScorecardPopupViewModel>();
             App.Container.RegisterType<JogadorPontuacaoUserControlViewModel>();
             App.Container.RegisterType<JogadorNomeUserControlViewModel>();
+            App.Container.RegisterType<VerPublicidadePopupViewModel>();
+            App.Container.RegisterType<PedirBuggyBarPopupViewModel>();
+            App.Container.RegisterType<MenuJogoPopupViewModel>();
+            App.Container.RegisterType<TerminarJogoPopupViewModel>();
+            App.Container.RegisterType<JogadorTerminarJogoUserControlViewModel>();
 
 
 
@@ -88,6 +97,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
             App.Container.RegisterType<ITeeService, TeeService>();
             App.Container.RegisterType<ITeeDistanciaService, TeeDistanciaService>();
             App.Container.RegisterType<ICameraService, CameraService>();
+            App.Container.RegisterType<IPublicidadeService, PublicidadeService>();
+            App.Container.RegisterType<IBuggyBarService, BuggyBarService>();
+            App.Container.RegisterType<ITelemovelService, TelemovelService>();
+            App.Container.RegisterType<IEmailService, EmailService>();
         }
 
 

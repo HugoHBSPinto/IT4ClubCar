@@ -139,7 +139,61 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         /// </summary>
         public ObservableCollection<JogadorWrapperViewModel> Jogadores { get; set; }
 
+        /// <summary>
+        /// Obtém e define o Jogo.
+        /// </summary>
         private JogoWrapperViewModel Jogo { get; set; }
+
+        /// <summary>
+        /// Obtém e define o IsActivityIndicatorVisivel.
+        /// </summary>
+        private bool _isActivityIndicatorVisivel;
+        public bool IsActivityIndicatorVisivel
+        {
+            get
+            {
+                return _isActivityIndicatorVisivel;
+            }
+            set
+            {
+                _isActivityIndicatorVisivel = value;
+                OnPropertyChanged("IsActivityIndicatorVisivel");
+            }
+        }
+
+        /// <summary>
+        /// Obtém e define o IsActivityIndicatorACorrer.
+        /// </summary>
+        private bool _isActivityIndicatorACorrer;
+        public bool IsActivityIndicatorACorrer
+        {
+            get
+            {
+                return _isActivityIndicatorACorrer;
+            }
+            set
+            {
+                _isActivityIndicatorACorrer = value;
+                OnPropertyChanged("IsActivityIndicatorACorrer");
+            }
+        }
+
+        /// <summary>
+        /// Obtém e define a CorDeFundo.
+        /// </summary>
+        private string _corDeFundo;
+        public string CorDeFundo
+        {
+            get
+            {
+                return _corDeFundo;
+            }
+            set
+            {
+                _corDeFundo = value;
+                OnPropertyChanged("CorDeFundo");
+            }
+        }
 
         #endregion
 
@@ -153,6 +207,17 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                 if (_comecarJogoCommand == null)
                     _comecarJogoCommand = new Command(async p => await ComecarJogo(), p => { return true; });
                 return _comecarJogoCommand;
+            }
+        }
+
+        private ICommand _cancelarJogoCommand;
+        public ICommand CancelarJogoCommand
+        {
+            get
+            {
+                if (_cancelarJogoCommand == null)
+                    _cancelarJogoCommand = new Command(async p => await base.NavigationService.IrParaPaginaAnterior(), p => { return true; });
+                return _cancelarJogoCommand;
             }
         }
 
@@ -175,6 +240,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             _metricoService = metricoService;
             _buracoService = buracoService;
             _teeDistanciaService = teeDistanciaService;
+
+            CorDeFundo = "#00000000";
 
             //Preencher Pickers.
             Task.Run(async () => await InicializarDados())
@@ -223,9 +290,17 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         /// <returns></returns>
         private async Task ComecarJogo()
         {
+            IsActivityIndicatorACorrer = true;
+            IsActivityIndicatorVisivel = true;
+            CorDeFundo = "#CC000000";
+
             await ConfigurarJogo();
             await base.NavigationService.IrParaJogo();
             MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.NovoJogo, Jogo);
+
+            IsActivityIndicatorACorrer = false;
+            IsActivityIndicatorVisivel = false;
+            CorDeFundo = "#00000000";
         }
 
 
@@ -286,9 +361,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             {
                 ObservableCollection<PontuacaoWrapperViewModel> pontuacoes = new ObservableCollection<PontuacaoWrapperViewModel>();
                 foreach (BuracoWrapperViewModel buraco in CampoSelecionado.Buracos)
-                {
                     pontuacoes.Add(new PontuacaoWrapperViewModel(new PontuacaoModel(buraco.ObterModelo(), 0)));
-                }
                 pontuacoes.ToList().ForEach(p => jogador.AdicionarPontuacao(p));
             }
         }

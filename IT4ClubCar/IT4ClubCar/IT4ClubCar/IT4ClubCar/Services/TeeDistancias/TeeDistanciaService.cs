@@ -33,6 +33,9 @@ namespace IT4ClubCar.IT4ClubCar.Services.TeeDistancias
         {
             string dataJson = await _webService.GetStringJson("GetTeeBuracoDistancia&IdBuraco="+buraco.Id+"&IdTee="+tee.Id);
 
+            if (dataJson.Equals("[]"))
+                return null;
+
             JObject teeBuracoDistancia = JObject.Parse(dataJson);
 
             int distancia = int.Parse(teeBuracoDistancia["Distancia"].ToString());

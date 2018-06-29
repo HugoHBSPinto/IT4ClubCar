@@ -336,6 +336,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         {
             //Obter tees utilizados pelos jogadores.
             ObservableCollection<TeeWrapperViewModel> tees = new ObservableCollection<TeeWrapperViewModel>();
+
             foreach (JogadorWrapperViewModel jogador in Jogadores)
                 tees.Add(jogador.Tee);
 
@@ -343,10 +344,17 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             foreach (BuracoWrapperViewModel buraco in CampoSelecionado.Buracos)
             {
                 ObservableCollection<TeeBuracoDistanciaWrapperViewModel> distancias = new ObservableCollection<TeeBuracoDistanciaWrapperViewModel>();
+
                 foreach (TeeWrapperViewModel tee in tees)
                 {
-                    distancias.Add(await _teeDistanciaService.ObterDistancias(buraco, tee));
+                    TeeBuracoDistanciaWrapperViewModel distancia = await _teeDistanciaService.ObterDistancias(buraco, tee);
+
+                    if (distancia == null)
+                        continue;
+
+                    distancias.Add(distancia);
                 }
+
                 distancias.ToList().ForEach(p => buraco.AdicionarDistancia(p));
             }
         }
@@ -362,6 +370,13 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                 ObservableCollection<PontuacaoWrapperViewModel> pontuacoes = new ObservableCollection<PontuacaoWrapperViewModel>();
                 foreach (BuracoWrapperViewModel buraco in CampoSelecionado.Buracos)
                     pontuacoes.Add(new PontuacaoWrapperViewModel(new PontuacaoModel(buraco.ObterModelo(), 0)));
+
+                //O campo pode não ter 18 buracos, mas é necessário ter pontuações para os dezoito buracos.
+                while(!pontuacoes.Count.Equals(18))
+                {
+                    pontuacoes.Add(new PontuacaoWrapperViewModel(new PontuacaoModel(BuracoModel.BuracoVazio,0)));
+                }
+
                 pontuacoes.ToList().ForEach(p => jogador.AdicionarPontuacao(p));
             }
         }

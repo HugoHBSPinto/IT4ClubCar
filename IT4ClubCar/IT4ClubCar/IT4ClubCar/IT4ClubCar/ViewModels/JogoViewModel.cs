@@ -264,6 +264,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                 MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.PontuacaoAMostrar, jogador);
                 MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.NomeAMostrar, jogador);
             }
+
+            MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.JogoAtual,Jogo);
         }
 
 

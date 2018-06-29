@@ -19,6 +19,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\GetPrimeiroErroConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\JogadorParaVisibilidadeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\NumeroParaCorConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\ObterSegundaMetadeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\ObterPrimeiraMetadeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\CustomControls\CustomPicker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\BuracoModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\CampoModel.cs" />

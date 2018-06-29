@@ -15,10 +15,17 @@ namespace IT4ClubCar.IT4ClubCar.Converters
             if (value != null)
                 pontos = int.Parse((string)value);
 
-            if (pontos.Equals(6))
-                return "#CCCCCC";
-            else
-                return "#ffffff";
+            string corHexadecimal = "#000000";
+
+            switch(pontos)
+            {
+                case 0: corHexadecimal = "#CCCCCC";
+                        break;
+                default: corHexadecimal = "#FFFFFF";
+                         break;
+            }
+
+            return corHexadecimal;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

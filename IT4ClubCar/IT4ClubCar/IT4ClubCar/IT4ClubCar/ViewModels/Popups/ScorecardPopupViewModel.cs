@@ -1,9 +1,12 @@
 ﻿using IT4ClubCar.IT4ClubCar.Services.Dialog;
 using IT4ClubCar.IT4ClubCar.Services.Navegacao;
 using IT4ClubCar.IT4ClubCar.ViewModels.Base;
+using IT4ClubCar.IT4ClubCar.ViewModels.Wrappers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -13,6 +16,40 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 {
     class ScorecardPopupViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Obtém e define o Jogo.
+        /// </summary>
+        private JogoWrapperViewModel _jogo;
+        public JogoWrapperViewModel Jogo
+        {
+            get
+            {
+                return _jogo;
+            }
+            set
+            {
+                _jogo = value;
+                OnPropertyChanged("Jogo");
+            }
+        }
+
+        /// <summary>
+        /// Obtém e define os Tees.
+        /// </summary>
+        private ObservableCollection<TeeWrapperViewModel> _teesUsados;
+        public ObservableCollection<TeeWrapperViewModel> TeesUsados
+        {
+            get
+            {
+                return _teesUsados;
+            }
+            set
+            {
+                _teesUsados = value;
+                OnPropertyChanged("Tees");
+            }
+        }
+
         private ICommand _fecharPopupCommand;
         public ICommand FecharPopupCommand
         {
@@ -28,7 +65,30 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
         public ScorecardPopupViewModel(INavigationService navigationService, IDialogService dialogService) : base(navigationService,dialogService)
         {
-            
+            TeesUsados = new ObservableCollection<TeeWrapperViewModel>();
+            InicializarComunicacaoMediadorMensagens();
+        }
+
+
+
+        /// <summary>
+        /// Regista o viewmodel às mensagens necessárias do MediadorMensagens.
+        /// </summary>
+        private void InicializarComunicacaoMediadorMensagens()
+        {
+            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.JogoAtual, p => InicializarPropriedadeJogo(p as JogoWrapperViewModel));
+        }
+
+
+
+        /// <summary>
+        /// Inicializa a propriedade Jogo.
+        /// </summary>
+        /// <param name="jogo">Parâmetro cujo valor vai ser utilizado para inicializar a propriedade Jogo.</param>
+        private void InicializarPropriedadeJogo(JogoWrapperViewModel jogo)
+        {
+            Jogo = jogo;
+            Jogo.Jogadores.ToList().ForEach(p => TeesUsados.Add(p.Tee));
         }
 
 

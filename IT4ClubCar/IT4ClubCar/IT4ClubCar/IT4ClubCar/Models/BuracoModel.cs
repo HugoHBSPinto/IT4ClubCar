@@ -6,6 +6,9 @@ namespace IT4ClubCar.IT4ClubCar.Models
 {
     class BuracoModel
     {
+        public static BuracoModel BuracoVazio = new BuracoModel(-1, 0, 0, 0, String.Empty);
+
+
         /// <summary>
         /// Obtém e define o Id.
         /// </summary>

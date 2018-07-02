@@ -13,8 +13,30 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
         /// <summary>
         /// Obtém o Tee.
         /// </summary>
-        public TeeWrapperViewModel Tee { get; private set; }
+        public BuracoWrapperViewModel Buraco { get; private set; }
+        
+        /// <summary>
+        /// Obtém e define a Latitude.
+        /// </summary>
+        public float Latitude
+        {
+            get
+            {
+                return _teeBuracoDistanciaModel.Latitude;
+            }
+        }
 
+        /// <summary>
+        /// Obtém e define a Longitude.
+        /// </summary>
+        public float Longitude
+        {
+            get
+            {
+                return _teeBuracoDistanciaModel.Longitude;
+            }
+        }
+        
         /// <summary>
         /// Obtém a Distancia.
         /// </summary>
@@ -31,7 +53,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
         public TeeBuracoDistanciaWrapperViewModel(TeeBuracoDistanciaModel teeBuracoDistanciaModel)
         {
             _teeBuracoDistanciaModel = teeBuracoDistanciaModel;
-            Tee = new TeeWrapperViewModel(_teeBuracoDistanciaModel.Tee);
+            Buraco = new BuracoWrapperViewModel(_teeBuracoDistanciaModel.Buraco);
         }
         
         

@@ -78,7 +78,7 @@
                 <control:JogadorTerminarJogoUserControlView Grid.Column="0" Grid.Row="3"/>
             </Grid>
             <!-- Botão para terminar jogo -->
-            <Button Grid.Column="0" Grid.Row="2" BackgroundColor="White" Text="End!"/>
+            <Button Grid.Column="0" Grid.Row="1" BackgroundColor="White" Text="End!"/>
         </Grid>
 
     </Grid>

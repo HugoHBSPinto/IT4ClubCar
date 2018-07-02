@@ -21,6 +21,8 @@ using IT4ClubCar.IT4ClubCar.Services.Publicidade;
 using IT4ClubCar.IT4ClubCar.Services.BuggyBar;
 using IT4ClubCar.IT4ClubCar.Services.TelemovelService;
 using IT4ClubCar.IT4ClubCar.Services.EmailService;
+using IT4ClubCar.IT4ClubCar.Services.ScreenshotService;
+using IT4ClubCar.Droid.InterfacesImplementadas;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
 {
@@ -101,6 +103,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
             App.Container.RegisterType<IBuggyBarService, BuggyBarService>();
             App.Container.RegisterType<ITelemovelService, TelemovelService>();
             App.Container.RegisterType<IEmailService, EmailService>();
+            App.Container.RegisterType<IScreenshotService, ScreenshotService>();
         }
 
 

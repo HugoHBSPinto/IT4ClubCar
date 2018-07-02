@@ -1,12 +1,16 @@
 ﻿using IT4ClubCar.IT4ClubCar.Services.Dialog;
+using IT4ClubCar.IT4ClubCar.Services.EmailService;
 using IT4ClubCar.IT4ClubCar.Services.Navegacao;
+using IT4ClubCar.IT4ClubCar.Services.ScreenshotService;
 using IT4ClubCar.IT4ClubCar.ViewModels.Base;
 using IT4ClubCar.IT4ClubCar.ViewModels.Wrappers;
+using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -16,6 +20,9 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 {
     class ScorecardPopupViewModel : BaseViewModel
     {
+        private IScreenshotService _screenshotService;
+        private IEmailService _emailService;
+
         /// <summary>
         /// Obtém e define o Jogo.
         /// </summary>
@@ -46,7 +53,32 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             set
             {
                 _teesUsados = value;
-                OnPropertyChanged("Tees");
+                OnPropertyChanged("TeesUsados");
+            }
+        }
+
+        private JogadorWrapperViewModel _jogadorAEnviarPrint;
+        public JogadorWrapperViewModel JogadorAEnviarPrint
+        {
+            get
+            {
+                return _jogadorAEnviarPrint;
+            }
+            set
+            {
+                _jogadorAEnviarPrint = value;
+                OnPropertyChanged("JogadorAEnviarPrint");
+            }
+        }
+
+        private ICommand _tirarPrintCommand;
+        public ICommand TirarPrintCommand
+        {
+            get
+            {
+                if (_tirarPrintCommand == null)
+                    _tirarPrintCommand = new Command(async p => await TirarPrint(), p => { return true; });
+                return _tirarPrintCommand;
             }
         }
 
@@ -63,8 +95,15 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
 
 
-        public ScorecardPopupViewModel(INavigationService navigationService, IDialogService dialogService) : base(navigationService,dialogService)
+        public ScorecardPopupViewModel( INavigationService navigationService, 
+                                        IDialogService dialogService,
+                                        IScreenshotService screenshotService,
+                                        IEmailService emailService) 
+                                        : base(navigationService,dialogService)
         {
+            _screenshotService = screenshotService;
+            _emailService = emailService;
+
             TeesUsados = new ObservableCollection<TeeWrapperViewModel>();
             InicializarComunicacaoMediadorMensagens();
         }
@@ -76,7 +115,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         /// </summary>
         private void InicializarComunicacaoMediadorMensagens()
         {
+            //Jogo a mostrar no scorecard.
             MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.JogoAtual, p => InicializarPropriedadeJogo(p as JogoWrapperViewModel));
+            //Jogador a enviar uma print do scorecard.
+            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.JogadorAEnviarScorecard, p => { JogadorAEnviarPrint = p as JogadorWrapperViewModel; });
         }
 
 
@@ -88,7 +130,33 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         private void InicializarPropriedadeJogo(JogoWrapperViewModel jogo)
         {
             Jogo = jogo;
-            Jogo.Jogadores.ToList().ForEach(p => TeesUsados.Add(p.Tee));
+
+            //Jogo.Jogadores.ToList().ForEach(p => {
+            //    if (!TeesUsados.Select(s => s.Nome.Equals(p.Tee.Nome)).Any())
+            //        TeesUsados.Add(p.Tee);
+            //});
+
+            Jogo.Jogadores.ToList().ForEach(p =>
+            {
+                TeesUsados.Add(p.Tee);
+            });
+        }
+
+
+
+        private async Task TirarPrint()
+        {
+            //Tirar screenshot.
+            byte[] screenshot = await _screenshotService.TirarScreenshotAsync();
+
+            //Guardar screenshot como anexo do email.
+            MimeKit.AttachmentCollection attachments = new MimeKit.AttachmentCollection();
+            attachments.Add("ScorecardPNG,", screenshot, ContentType.Parse("image/png"));
+
+            //Enviar Email.
+            await _emailService.EnviarEmail(emailDestino: JogadorAEnviarPrint.Email, assunto: "IT4ClubCar Game Results",mensagemConteudo: "Like you asked :)",attachments: attachments);
+
+            await base.NavigationService.SairDeScorecard();
         }
 
 
@@ -96,10 +164,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         private async Task FecharPopup()
         {
             MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.AFecharPopup, null);
-
-            MediadorMensagensService.Instancia.ResetMensagens(MediadorMensagensService.ViewModelMensagens.NomeAMostrar);
-            MediadorMensagensService.Instancia.ResetMensagens(MediadorMensagensService.ViewModelMensagens.PontuacaoAMostrar);
-
+            
             await base.NavigationService.SairDeScorecard();
         }
 

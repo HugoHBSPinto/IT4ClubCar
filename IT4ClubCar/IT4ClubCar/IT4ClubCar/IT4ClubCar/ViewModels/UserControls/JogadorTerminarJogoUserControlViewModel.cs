@@ -127,20 +127,17 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.UserControls
 
 
         /// <summary>
-        /// Envia para o email do jogador os seus scores no jogo decorrido.
+        /// Abre um popup com o scorecard e um botão para enviar uma foto do mesmp.
         /// </summary>
         private async Task EnviarScores()
         {
-            string nome = Jogador.Nome;
-
-            string pontos = String.Empty;
-
-            foreach (PontuacaoWrapperViewModel pontuacao in Jogador.Pontuacoes)
-                pontos += pontuacao.Pontos + ";";
-
-            string mensagemAEnviar = String.Format("Jogador : {0} / Pontos : {1}",nome,pontos);
-
-            await _emailService.EnviarEmail(Jogador.Email, mensagemAEnviar);
+            await base.NavigationService.IrParaScorecard();
+            //Enviar jogador a enviar scorecard.
+            JogoWrapperViewModel Jogo = null;
+            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.JogoAtual, p => { Jogo = p as JogoWrapperViewModel; });
+            MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.PedirPorJogo,null);
+            MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.JogoAtual, Jogo);
+            MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.JogadorAEnviarScorecard, Jogador);
         }
 
 

@@ -19,6 +19,8 @@ using Plugin.Media;
 using Plugin.Media.Abstractions;
 using IT4ClubCar.IT4ClubCar.Services.Camera;
 using System.IO;
+using IT4ClubCar.IT4ClubCar.Services.ScreenshotService;
+using IT4ClubCar.IT4ClubCar.Validacoes;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 {
@@ -122,8 +124,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             }
         }
 
-        private string _email;
-        public string Email
+        private ValidatableObject<string> _email;
+        public ValidatableObject<string> Email
         {
             get
             {
@@ -259,6 +261,9 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
             Task.Run(async () => await InicializarDados())
                 .ContinueWith(p => InicializarComunicacaoMediador());
+
+            Email = new ValidatableObject<string>();
+            Email.RegrasValidacao.Add(new EmailValidationRule<string>());
         }
         
         
@@ -301,7 +306,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                 //O utilizador acabou de desbloquear este jogador. Todas as informações serão as default.
                 Nome = "Player";
 
-                Email = "Placeholder";
+                Email.Valor = "Placeholder";
                 
                 Foto = ImageSource.FromFile("Player.Png");
 
@@ -319,7 +324,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                 //poder alterá-las.
                 Nome = _jogador.Nome;
 
-                Email = _jogador.Email;
+                Email.Valor = _jogador.Email;
 
                 Foto = _jogador.Foto;
 
@@ -342,12 +347,23 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
 
 
+        private bool ValidarDados()
+        {
+            return Email.Validate();
+        }
+
+
+
         private async Task GuardarDados()
         {
+            //Validar dados atuais.
+            if (!ValidarDados())
+                return;
+
             //Se o jogador antes estava bloqueado, é necessário criar um model para o mesmo.
             if(_jogador.Bloqueado)
             {
-                JogadorModel jogadorModel = new JogadorModel(Nome,Email,Genero.ObterModel(),Foto,Handicap.ObterModel(),Tee.ObterModel());
+                JogadorModel jogadorModel = new JogadorModel(Nome,Email.Valor,Genero.ObterModel(),Foto,Handicap.ObterModel(),Tee.ObterModel());
                 _jogador.DefinirModel(jogadorModel);
 
                 //Avisar que utilizador foi criado.
@@ -357,7 +373,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             {
                 //O modelo já está criado. Basta atualizar os valores do mesmo.
                 _jogador.Nome = Nome;
-                _jogador.Email = Email;
+                _jogador.Email = Email.Valor;
                 _jogador.Foto = Foto;
                 _jogador.Foto = Foto;
                 _jogador.Genero = Genero;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MimeKit;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.EmailService
         /// </summary>
         /// <param name="emailDestino">Email para o qual enviar a mensagem.</param>
         /// <param name="mensagem">Mensagem a ser enviada.</param>
-        Task EnviarEmail(string emailDestino,string mensagemConteudo);
+        Task EnviarEmail(string emailDestino,string assunto,string mensagemConteudo,AttachmentCollection attachments);
 
         /// <summary>
         /// Obtém o email do qual se vai enviar todas as mensagens.

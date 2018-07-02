@@ -39,8 +39,10 @@ namespace IT4ClubCar.IT4ClubCar.Services.TeeDistancias
             JObject teeBuracoDistancia = JObject.Parse(dataJson);
 
             int distancia = int.Parse(teeBuracoDistancia["Distancia"].ToString());
+            float latitude = float.Parse(teeBuracoDistancia["Latitude"].ToString());
+            float longitude = float.Parse(teeBuracoDistancia["Longitude"].ToString());
 
-            TeeBuracoDistanciaModel teeBuracoDistanciaModel = new TeeBuracoDistanciaModel(tee.ObterModel(),distancia);
+            TeeBuracoDistanciaModel teeBuracoDistanciaModel = new TeeBuracoDistanciaModel(buraco.ObterModelo(),latitude,longitude,distancia);
 
             return new TeeBuracoDistanciaWrapperViewModel(teeBuracoDistanciaModel);
         }

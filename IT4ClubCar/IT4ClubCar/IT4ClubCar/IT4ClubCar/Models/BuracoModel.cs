@@ -6,7 +6,7 @@ namespace IT4ClubCar.IT4ClubCar.Models
 {
     class BuracoModel
     {
-        public static BuracoModel BuracoVazio = new BuracoModel(-1, 0, 0, 0, String.Empty);
+        public static BuracoModel BuracoVazio = new BuracoModel(-1, 0, 0, 0, String.Empty,0,0);
 
 
         /// <summary>
@@ -35,9 +35,14 @@ namespace IT4ClubCar.IT4ClubCar.Models
         public string Dica { get; set; }
 
         /// <summary>
-        /// Obtém e define as Distancias.
+        /// Obtém e define a Latitude.
         /// </summary>
-        public List<TeeBuracoDistanciaModel> Distancias { get; set; }
+        public float Latitude { get; set; }
+
+        /// <summary>
+        /// Obtém e define a Longitude.
+        /// </summary>
+        public float Longitude { get; set; }
 
 
 
@@ -48,14 +53,15 @@ namespace IT4ClubCar.IT4ClubCar.Models
 
 
 
-        public BuracoModel(int id, int numero, int par, int strokeIndex, string dica)
+        public BuracoModel(int id, int numero, int par, int strokeIndex, string dica, float latitude,float longitude)
         {
             Id = id;
             Numero = numero;
             Par = par;
             StrokeIndex = strokeIndex;
             Dica = dica;
-            Distancias = new List<TeeBuracoDistanciaModel>();
+            Latitude = latitude;
+            Longitude = longitude;
         }
 
 

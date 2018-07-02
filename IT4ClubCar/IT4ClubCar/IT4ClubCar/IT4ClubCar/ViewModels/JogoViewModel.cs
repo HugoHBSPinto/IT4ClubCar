@@ -1,4 +1,5 @@
-﻿using IT4ClubCar.IT4ClubCar.Services.Dialog;
+﻿using Android.Gms.Maps.Model;
+using IT4ClubCar.IT4ClubCar.Services.Dialog;
 using IT4ClubCar.IT4ClubCar.Services.Navegacao;
 using IT4ClubCar.IT4ClubCar.ViewModels.Base;
 using IT4ClubCar.IT4ClubCar.ViewModels.Wrappers;
@@ -17,6 +18,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
 {
     class JogoViewModel : BaseViewModel
     {
+        #region Propriedades
         private JogoWrapperViewModel _jogo;
         public JogoWrapperViewModel Jogo
         {
@@ -73,6 +75,12 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             }
         }
 
+        private Pin _buracoPin;
+        private Pin _teePin;
+        private Pin _meioPin;
+        #endregion
+
+        #region Commands
         private ICommand _irParaBuracoAnteriorCommand;
         public ICommand IrBuracoAnteriorCommand
         {
@@ -149,6 +157,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                 return _abrirMenuCommand;
             }
         }
+        #endregion
 
 
 
@@ -168,7 +177,27 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             Mapa = new Map();
             Mapa.IsShowingUser = false;
             Mapa.MapType = MapType.Satellite;
-            Mapa.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(37.145206, -8.359953), new Distance(550)));
+
+            //Inicializar Pins.
+            _buracoPin = new Pin()
+            {
+                Label = "Buraco"
+            };
+
+            _teePin = new Pin()
+            {
+                Label = "Tee"
+            };
+
+            _meioPin = new Pin()
+            {
+                Label = "Metade"
+            };
+
+            //Adicionar Pins ao Mapa.
+            Mapa.Pins.Add(_buracoPin);
+            Mapa.Pins.Add(_teePin);
+            Mapa.Pins.Add(_meioPin);
         }
 
 
@@ -180,6 +209,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         {
             //Jogo enviado.
             MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.NovoJogo, p => InicializarJogo((JogoWrapperViewModel)p));
+            //Ouvir por pedidos do Jogo.
+            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.PedirPorJogo, p => MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.JogoAtual, Jogo));
         }
 
 
@@ -190,9 +221,27 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         private void InicializarJogo(JogoWrapperViewModel jogo)
         {
             Jogo = jogo;
+
+            //Obter buraco atual. Neste caso o primeiro buraco do campo.
             BuracoAtual = Jogo.Campo.Buracos[0];
+
+            //Guardar numa lista todos os tees usados pelos jogadores para mostrar no picker.
             TeesUsados = new ObservableCollection<TeeWrapperViewModel>();
             Jogo.Jogadores.ToList().ForEach(p => TeesUsados.Add(p.Tee));
+
+            //Atualizar posição dos pins.
+            TeeBuracoDistanciaWrapperViewModel teeDistanciaInicial = TeesUsados[0].TeeBuracosDistancia.Where(p => p.Buraco.Numero.Equals(1)).FirstOrDefault();
+
+            _buracoPin.Position = new Position(BuracoAtual.Latitude,BuracoAtual.Longitude);
+            _teePin.Position = new Position(teeDistanciaInicial.Latitude,teeDistanciaInicial.Longitude);
+
+            LatLngBounds centro = new LatLngBounds(new LatLng(_buracoPin.Position.Latitude, _buracoPin.Position.Longitude), new LatLng(_teePin.Position.Latitude, _teePin.Position.Longitude));
+            LatLng posicaoMeio = centro.Center;
+
+            _meioPin.Position = new Position(posicaoMeio.Latitude,posicaoMeio.Longitude);
+
+            //Atualizar as coordenadas do mapa para estarem voltadas para as coordenadas do primeiro buraco.
+            Mapa.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(_meioPin.Position.Latitude,_meioPin.Position.Longitude), Distance.FromMeters(80)));
         }
 
 
@@ -204,8 +253,13 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         {
             //Verifica-se se o número do buraco atual é diferente de 1, ou seja, o buraco atual não é o primeiro.
             //Se não for pode-se ver o buraco anterior.
-            if (!BuracoAtual.Numero.Equals(1))
-                BuracoAtual = Jogo.Campo.Buracos.Where(p => p.Numero.Equals((BuracoAtual.Numero-1))).FirstOrDefault();
+            if (BuracoAtual.Numero.Equals(1))
+                return;
+
+            BuracoAtual = Jogo.Campo.Buracos.Where(p => p.Numero.Equals((BuracoAtual.Numero-1))).FirstOrDefault();
+
+            //Atualizar coordenadas do mapa.
+            Mapa.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(BuracoAtual.Latitude, BuracoAtual.Longitude), new Distance(550)));
         }
         
 
@@ -218,8 +272,14 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             //Verifica-se se o numero do BuracoAtual é diferente do número de buracos do campo, ou seja, se não é o último buraco.
             //Se não for pode-se ver o buraco seguinte.
             int numeroBuracos = Jogo.Campo.NumeroBuracos;
-            if(!BuracoAtual.Numero.Equals(numeroBuracos))
-                BuracoAtual = Jogo.Campo.Buracos.Where(p => p.Numero.Equals((BuracoAtual.Numero+1))).FirstOrDefault();
+
+            if (BuracoAtual.Numero.Equals(numeroBuracos))
+                return;
+
+            BuracoAtual = Jogo.Campo.Buracos.Where(p => p.Numero.Equals((BuracoAtual.Numero+1))).FirstOrDefault();
+
+            //Atualizar coordenadas do mapa.
+            Mapa.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(BuracoAtual.Latitude, BuracoAtual.Longitude), new Distance(550)));
         }
 
 

@@ -41,7 +41,13 @@
             <!-- Formulário. -->
             <StackLayout Grid.Column="1" Grid.Row="0" BackgroundColor="#CCCCCC">
                 <Entry Placeholder="Name" Text="{Binding Nome}" BackgroundColor="#CCCCCC"/>
-                <Entry Placeholder="Email" Text="{Binding Email}" BackgroundColor="#CCCCCC"/>
+                <Entry Placeholder="Email" Text="{Binding Email.Valor}" BackgroundColor="#CCCCCC">
+                    <Entry.Triggers>
+                        <DataTrigger TargetType="Entry" Binding="{Binding Email.IsValido}" Value="False">
+                            <Setter Property="BackgroundColor" Value="Red"/>
+                        </DataTrigger>
+                    </Entry.Triggers>
+                </Entry>
                 <Picker Title="Genero" ItemsSource="{Binding GenerosExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding Genero}" BackgroundColor="#CCCCCC"/>
                 <Picker Title="Tee" ItemsSource="{Binding TeesExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding Tee}" BackgroundColor="#CCCCCC"/>
                 <StackLayout Orientation="Horizontal">

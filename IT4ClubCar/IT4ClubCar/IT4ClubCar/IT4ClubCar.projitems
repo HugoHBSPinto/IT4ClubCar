@@ -21,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\NumeroParaCorConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\ObterSegundaMetadeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\ObterPrimeiraMetadeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\SomarListaConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\CustomControls\CustomPicker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\BuracoModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\CampoModel.cs" />
@@ -48,6 +49,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Genero\IGeneroService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Handicap\HandicapService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Handicap\IHandicapService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\ScreenshotService\IScreenshotService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\TelemovelService\ITelemovelService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\TelemovelService\TelemovelService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Metrico\IMetricoService.cs" />
@@ -273,5 +275,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\ScreenshotService\Info.txt" />
   </ItemGroup>
 </Project>

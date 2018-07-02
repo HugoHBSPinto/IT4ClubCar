@@ -33,11 +33,24 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
             }
         }
 
+        /// <summary>
+        /// Obtém os TeeBuracosDistancia.
+        /// </summary>
+        public ObservableCollection<TeeBuracoDistanciaWrapperViewModel> TeeBuracosDistancia { get; private set; }
+
 
 
         public TeeWrapperViewModel(TeeModel tee)
         {
             _teeModel = tee;
+            TeeBuracosDistancia = new ObservableCollection<TeeBuracoDistanciaWrapperViewModel>(_teeModel.Distancias.Select(p => new TeeBuracoDistanciaWrapperViewModel(p)));
+        }
+
+
+        public void AdicionarDistancia(TeeBuracoDistanciaWrapperViewModel distancia)
+        {
+            _teeModel.Distancias.Add(distancia.ObterModel());
+            TeeBuracosDistancia.Add(distancia);
         }
 
 

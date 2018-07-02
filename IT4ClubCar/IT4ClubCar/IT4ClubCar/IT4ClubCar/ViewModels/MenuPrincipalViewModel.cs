@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using IT4ClubCar.IT4ClubCar.ViewModels.Base;
 using System.Diagnostics;
+using IT4ClubCar.IT4ClubCar.Services.ScreenshotService;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels
 {

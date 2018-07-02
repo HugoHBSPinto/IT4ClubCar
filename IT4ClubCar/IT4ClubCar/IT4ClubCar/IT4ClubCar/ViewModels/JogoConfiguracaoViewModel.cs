@@ -17,6 +17,8 @@ using Xamarin.Forms;
 using IT4ClubCar.IT4ClubCar.Services.Buracos;
 using IT4ClubCar.IT4ClubCar.Services.TeeDistancias;
 using IT4ClubCar.IT4ClubCar.Models;
+using IT4ClubCar.IT4ClubCar.Services.ScreenshotService;
+using IT4ClubCar.IT4ClubCar.Services.EmailService;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels
 {
@@ -341,11 +343,11 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                 tees.Add(jogador.Tee);
 
             //Obter distância de cada buraco para cada tee.
-            foreach (BuracoWrapperViewModel buraco in CampoSelecionado.Buracos)
+            foreach (TeeWrapperViewModel tee in tees)
             {
                 ObservableCollection<TeeBuracoDistanciaWrapperViewModel> distancias = new ObservableCollection<TeeBuracoDistanciaWrapperViewModel>();
 
-                foreach (TeeWrapperViewModel tee in tees)
+                foreach (BuracoWrapperViewModel buraco in CampoSelecionado.Buracos)
                 {
                     TeeBuracoDistanciaWrapperViewModel distancia = await _teeDistanciaService.ObterDistancias(buraco, tee);
 
@@ -355,7 +357,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                     distancias.Add(distancia);
                 }
 
-                distancias.ToList().ForEach(p => buraco.AdicionarDistancia(p));
+                distancias.ToList().ForEach(p => tee.AdicionarDistancia(p));
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using IT4ClubCar.IT4ClubCar.Models;
+using IT4ClubCar.IT4ClubCar.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
 {
-    class BuracoWrapperViewModel
+    class BuracoWrapperViewModel : BaseWrapperViewModel
     {
         private BuracoModel _buracoModel;
 
@@ -67,28 +68,44 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
         }
 
         /// <summary>
-        /// Obtém os TeeBuracosDistancia.
+        /// Obtém e define a Latitude.
         /// </summary>
-        public ObservableCollection<TeeBuracoDistanciaWrapperViewModel> TeeBuracosDistancia { get; private set; }
+        public float Latitude
+        {
+            get
+            {
+                return _buracoModel.Latitude;
+            }
+            set
+            {
+                _buracoModel.Latitude = value;
+            }
+        }
+
+        /// <summary>
+        /// Obtém e define a Longitude.
+        /// </summary>
+        public float Longitude
+        {
+            get
+            {
+                return _buracoModel.Longitude;
+            }
+            set
+            {
+                _buracoModel.Longitude = value;
+            }
+        }
 
 
 
         public BuracoWrapperViewModel(BuracoModel buracoModel)
         {
             _buracoModel = buracoModel;
-            TeeBuracosDistancia = new ObservableCollection<TeeBuracoDistanciaWrapperViewModel>(_buracoModel.Distancias.Select(p => new TeeBuracoDistanciaWrapperViewModel(p)));
         }
         
         
         
-        public void AdicionarDistancia(TeeBuracoDistanciaWrapperViewModel distancia)
-        {
-            _buracoModel.Distancias.Add(distancia.ObterModel());
-            TeeBuracosDistancia.Add(distancia);
-        }
-
-
-
         public BuracoModel ObterModelo()
         {
             return _buracoModel;

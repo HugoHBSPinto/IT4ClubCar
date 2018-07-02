@@ -45,8 +45,10 @@ namespace IT4ClubCar.IT4ClubCar.Services.Buracos
                 int par = int.Parse(buracos[i]["Par"].ToString());
                 int strokeIndex = int.Parse(buracos[i]["StrokeIndex"].ToString());
                 string dica = buracos[i]["Dica"].ToString();
+                float latitude = float.Parse(buracos[i]["Latitude"].ToString());
+                float longitude = float.Parse(buracos[i]["Longitude"].ToString());
 
-                buracosModel.Add(new BuracoModel(id,numero, par, strokeIndex, dica));
+                buracosModel.Add(new BuracoModel(id,numero, par, strokeIndex, dica,latitude,longitude));
             }
 
             return new ObservableCollection<BuracoWrapperViewModel>(buracosModel.Select(p => new BuracoWrapperViewModel(p)));

@@ -16,6 +16,11 @@ namespace IT4ClubCar.IT4ClubCar.Models
         /// </summary>
         public string Nome { get; set; }
 
+        /// <summary>
+        /// Obtém e define as Distancias.
+        /// </summary>
+        public List<TeeBuracoDistanciaModel> Distancias { get; set; }
+
 
 
         public TeeModel()
@@ -29,6 +34,7 @@ namespace IT4ClubCar.IT4ClubCar.Models
         {
             Id = id;
             Nome = nome;
+            Distancias = new List<TeeBuracoDistanciaModel>();
         }
 
 

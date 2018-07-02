@@ -8,6 +8,9 @@ using MailKit.Net.Smtp;
 using MailKit;
 using MimeKit;
 using Xamarin.Forms;
+using IT4ClubCar.IT4ClubCar.Services.ScreenshotService;
+using System.IO;
+using Xamarin.Forms.Internals;
 
 namespace IT4ClubCar.IT4ClubCar.Services.EmailService
 {
@@ -28,7 +31,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.EmailService
         /// </summary>
         /// <param name="emailDestino">Email para o qual enviar a mensagem.</param>
         /// <param name="mensagemConteudo">Mensagem a ser enviada.</param>
-        public async Task EnviarEmail(string emailDestino, string mensagemConteudo)
+        public async Task EnviarEmail(string emailDestino, string assunto, string mensagemConteudo, AttachmentCollection attachments)
         {
             //Dados Acesso.
             string emailEnvio = await ObterEmailEnvio();
@@ -38,12 +41,18 @@ namespace IT4ClubCar.IT4ClubCar.Services.EmailService
             MimeMessage mensagem = new MimeMessage();
             mensagem.From.Add(new MailboxAddress("",emailEnvio));
             mensagem.To.Add(new MailboxAddress("", emailDestino));
-            mensagem.Subject = "IT4ClubCar Game Results";
+            mensagem.Subject = assunto;
 
-            mensagem.Body = new TextPart("plain")
+            byte[] imagemBytes = await DependencyService.Get<IScreenshotService>().TirarScreenshotAsync();
+
+            BodyBuilder bodyBuilder = new BodyBuilder()
             {
-                Text = mensagemConteudo
+                TextBody = mensagemConteudo
             };
+
+            attachments.ForEach(p => bodyBuilder.Attachments.Add(p));
+
+            mensagem.Body = bodyBuilder.ToMessageBody();
 
             using (var client = new SmtpClient())
             {

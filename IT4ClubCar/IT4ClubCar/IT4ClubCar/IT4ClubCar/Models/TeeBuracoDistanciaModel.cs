@@ -12,10 +12,20 @@ namespace IT4ClubCar.IT4ClubCar.Models
         public int Id { get; set; }
 
         /// <summary>
-        /// Obtém e define o Tee.
+        /// Obtém e define o Buraco.
         /// </summary>
-        public TeeModel Tee { get; set; }
-
+        public BuracoModel Buraco { get; set; }
+        
+        /// <summary>
+        /// Obtém e define a Latitude.
+        /// </summary>
+        public float Latitude { get; set; }
+        
+        /// <summary>
+        /// Obtém e define a Longitude.
+        /// </summary>
+        public float Longitude { get; set; }
+        
         /// <summary>
         /// Obtém e define a Distancia.
         /// </summary>
@@ -30,9 +40,11 @@ namespace IT4ClubCar.IT4ClubCar.Models
 
 
 
-        public TeeBuracoDistanciaModel(TeeModel tee, int distancia)
+        public TeeBuracoDistanciaModel(BuracoModel buraco, float latitude,float longitude, int distancia)
         {
-            Tee = tee;
+            Buraco = buraco;
+            Latitude = latitude;
+            Longitude = longitude;
             Distancia = distancia;
         }
 

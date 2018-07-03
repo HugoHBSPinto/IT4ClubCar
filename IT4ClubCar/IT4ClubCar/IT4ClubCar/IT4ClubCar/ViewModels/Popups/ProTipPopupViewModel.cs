@@ -28,40 +28,6 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             }
         }
 
-        /// <summary>
-        /// Obtém e define o IsActivityIndicatorVisivel.
-        /// </summary>
-        private bool _isActivityIndicatorVisivel;
-        public bool IsActivityIndicatorVisivel
-        {
-            get
-            {
-                return _isActivityIndicatorVisivel;
-            }
-            set
-            {
-                _isActivityIndicatorVisivel = value;
-                OnPropertyChanged("IsActivityIndicatorVisivel");
-            }
-        }
-
-        /// <summary>
-        /// Obtém e define o IsActivityIndicatorACorrer.
-        /// </summary>
-        private bool _isActivityIndicatorACorrer;
-        public bool IsActivityIndicatorACorrer
-        {
-            get
-            {
-                return _isActivityIndicatorACorrer;
-            }
-            set
-            {
-                _isActivityIndicatorACorrer = value;
-                OnPropertyChanged("IsActivityIndicatorACorrer");
-            }
-        }
-
         private ICommand _fecharPopupCommand;
         public ICommand FecharPopupCommand
         {
@@ -77,9 +43,6 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
         public ProTipPopupViewModel(INavigationService navigationService, IDialogService dialogService) : base(navigationService,dialogService)
         {
-            IsActivityIndicatorACorrer = true;
-            IsActivityIndicatorVisivel = true;
-
             InicializarComunicacaoComMediadorMensagens();
         }
 
@@ -96,19 +59,12 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
 
         /// <summary>
-        /// Define a propriedade Dica, escondendo a ActivityIndicator.
+        /// Define a propriedade Dica.
         /// </summary>
-        /// <param name="dica"></param>
+        /// <param name="dica">Texto a ser mostrado como a dica.</param>
         private void DefinirDica(string dica)
         {
             Dica = dica;
-
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
-             {
-                 IsActivityIndicatorACorrer = false;
-                 IsActivityIndicatorVisivel = false;
-                 return true;
-             });
         }
 
     }

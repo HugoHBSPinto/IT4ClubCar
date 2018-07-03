@@ -49,7 +49,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <!--endregion -->
-                <Button Grid.Column="0" Grid.Row="0" Text="Start Game" Command="{Binding IrParaJogoConfiguracao}"/>
+                <Button Grid.Column="0" Grid.Row="0" Text="Start Game" Command="{Binding IrParaJogoConfiguracaoCommand}"/>
                 <Button Grid.Column="1" Grid.Row="0" Text="Return to Game" Command="{Binding VoltarParaJogoCommand}"/>
 
                 <Button Grid.Column="0" Grid.Row="1" Text="Review a Game"/>

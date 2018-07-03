@@ -14,7 +14,7 @@
             HorizontalOptions="Center" 
             HeightRequest="650"
             WidthRequest="650"
-            BackgroundColor="#80000000">
+            BackgroundColor="#95000000">
 
         <!--region Column and row definitions -->
 

@@ -57,7 +57,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.EmailService
             using (var client = new SmtpClient())
             {
                 client.ServerCertificateValidationCallback = (s, c, h, e) => true;
-                client.Connect("smtp.gmail.com", 587);
+                client.Connect("smtp.gmail.com", 25);
                 await client.AuthenticateAsync(emailEnvio,senha);
                 await client.SendAsync(mensagem);
                 client.Disconnect(true);

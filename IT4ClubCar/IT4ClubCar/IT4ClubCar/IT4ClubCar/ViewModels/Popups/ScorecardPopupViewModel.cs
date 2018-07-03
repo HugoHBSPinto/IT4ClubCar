@@ -57,6 +57,9 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             }
         }
 
+        /// <summary>
+        /// Obtém e define o JogadorAEnviarPrint.
+        /// </summary>
         private JogadorWrapperViewModel _jogadorAEnviarPrint;
         public JogadorWrapperViewModel JogadorAEnviarPrint
         {
@@ -68,6 +71,57 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             {
                 _jogadorAEnviarPrint = value;
                 OnPropertyChanged("JogadorAEnviarPrint");
+            }
+        }
+
+        /// <summary>
+        /// Obtém e define o IsActivityIndicatorVisivel.
+        /// </summary>
+        private bool _isActivityIndicatorVisivel;
+        public bool IsActivityIndicatorVisivel
+        {
+            get
+            {
+                return _isActivityIndicatorVisivel;
+            }
+            set
+            {
+                _isActivityIndicatorVisivel = value;
+                OnPropertyChanged("IsActivityIndicatorVisivel");
+            }
+        }
+
+        /// <summary>
+        /// Obtém e define o IsActivityIndicatorACorrer.
+        /// </summary>
+        private bool _isActivityIndicatorACorrer;
+        public bool IsActivityIndicatorACorrer
+        {
+            get
+            {
+                return _isActivityIndicatorACorrer;
+            }
+            set
+            {
+                _isActivityIndicatorACorrer = value;
+                OnPropertyChanged("IsActivityIndicatorACorrer");
+            }
+        }
+
+        /// <summary>
+        /// Obtém e define a CorDeFundo.
+        /// </summary>
+        private string _corDeFundo;
+        public string CorDeFundo
+        {
+            get
+            {
+                return _corDeFundo;
+            }
+            set
+            {
+                _corDeFundo = value;
+                OnPropertyChanged("CorDeFundo");
             }
         }
 
@@ -103,6 +157,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         {
             _screenshotService = screenshotService;
             _emailService = emailService;
+
+            CorDeFundo = "#80000000";
 
             TeesUsados = new ObservableCollection<TeeWrapperViewModel>();
             InicializarComunicacaoMediadorMensagens();
@@ -146,6 +202,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
         private async Task TirarPrint()
         {
+            IsActivityIndicatorACorrer = true;
+            IsActivityIndicatorVisivel = true;
+            CorDeFundo = "#CC000000";
+
             //Tirar screenshot.
             byte[] screenshot = await _screenshotService.TirarScreenshotAsync();
 
@@ -157,6 +217,9 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             await _emailService.EnviarEmail(emailDestino: JogadorAEnviarPrint.Email, assunto: "IT4ClubCar Game Results",mensagemConteudo: "Like you asked :)",attachments: attachments);
 
             await base.NavigationService.SairDeScorecard();
+
+            IsActivityIndicatorACorrer = false;
+            IsActivityIndicatorVisivel = false;
         }
 
 

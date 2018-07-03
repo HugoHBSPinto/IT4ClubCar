@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
+using IT4ClubCar.IT4ClubCar.CustomControls;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels
 {
@@ -61,23 +62,95 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             }
         }
 
-        private Map _mapa;
-        public Map Mapa
+        private MapSpan _centroMapa;
+        public MapSpan CentroMapa
         {
             get
             {
-                return _mapa;
+                if (_centroMapa == null)
+                    _centroMapa = MapSpan.FromCenterAndRadius(new Position(1.0, -1.0), Distance.FromMeters(80));
+                return _centroMapa;
             }
             set
             {
-                _mapa = value;
-                OnPropertyChanged("Mapa");
+                _centroMapa = value;
+                OnPropertyChanged("CentroMapa");
             }
         }
 
-        private Pin _buracoPin;
-        private Pin _teePin;
-        private Pin _meioPin;
+        private Position _buracoPinPosicao;
+        public Position BuracoPinPosicao
+        {
+            get
+            {
+                return _buracoPinPosicao;
+            }
+            set
+            {
+                _buracoPinPosicao = value;
+                OnPropertyChanged("BuracoPinPosicao");
+                CalcularNovaDistancia();
+            }
+        }
+
+        private Position _teePinPosicao;
+        public Position TeePinPosicao
+        {
+            get
+            {
+                return _teePinPosicao;
+            }
+            set
+            {
+                _teePinPosicao = value;
+                OnPropertyChanged("TeePinPosicao");
+                CalcularNovaDistancia();
+            }
+        }
+
+        private Position _meioPinPosicao;
+        public Position MeioPinPosicao
+        {
+            get
+            {
+                return _meioPinPosicao;
+            }
+            set
+            {
+                _meioPinPosicao = value;
+                OnPropertyChanged("MeioPinPosicao");
+                CalcularNovaDistancia();
+            }
+        }
+
+        private double _distanciaBuracoMeio;
+        public double DistanciaBuracoMeio
+        {
+            get
+            {
+                return Math.Round(_distanciaBuracoMeio, 2);
+            }
+            set
+            {
+                _distanciaBuracoMeio = value;
+                OnPropertyChanged("DistanciaBuracoMeio");
+            }
+        }
+
+        private double _distanciaTeeMeio;
+        public double DistanciaTeeMeio
+        {
+            get
+            {
+                return Math.Round(_distanciaTeeMeio, 2);
+            }
+            set
+            {
+                _distanciaTeeMeio = value;
+                OnPropertyChanged("DistanciaTeeMeio");
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -161,43 +234,11 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
 
 
 
-        public JogoViewModel(INavigationService navigationService, IDialogService dialogService) : base(navigationService,dialogService)
+        public JogoViewModel(   INavigationService navigationService, 
+                                IDialogService dialogService) 
+                                : base(navigationService,dialogService)
         {
             InicializarComunicacaoMediadorMensagens();
-            InicializarPropriedadeMapa();
-        }
-
-
-
-        /// <summary>
-        /// Inicializa a propriedade Mapa.
-        /// </summary>
-        private void InicializarPropriedadeMapa()
-        {   
-            Mapa = new Map();
-            Mapa.IsShowingUser = false;
-            Mapa.MapType = MapType.Satellite;
-
-            //Inicializar Pins.
-            _buracoPin = new Pin()
-            {
-                Label = "Buraco"
-            };
-
-            _teePin = new Pin()
-            {
-                Label = "Tee"
-            };
-
-            _meioPin = new Pin()
-            {
-                Label = "Metade"
-            };
-
-            //Adicionar Pins ao Mapa.
-            Mapa.Pins.Add(_buracoPin);
-            Mapa.Pins.Add(_teePin);
-            Mapa.Pins.Add(_meioPin);
         }
 
 
@@ -232,16 +273,16 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             //Atualizar posição dos pins.
             TeeBuracoDistanciaWrapperViewModel teeDistanciaInicial = TeesUsados[0].TeeBuracosDistancia.Where(p => p.Buraco.Numero.Equals(1)).FirstOrDefault();
 
-            _buracoPin.Position = new Position(BuracoAtual.Latitude,BuracoAtual.Longitude);
-            _teePin.Position = new Position(teeDistanciaInicial.Latitude,teeDistanciaInicial.Longitude);
+            BuracoPinPosicao = new Position(BuracoAtual.Latitude,BuracoAtual.Longitude);
+            TeePinPosicao = new Position(teeDistanciaInicial.Latitude,teeDistanciaInicial.Longitude);
 
-            LatLngBounds centro = new LatLngBounds(new LatLng(_buracoPin.Position.Latitude, _buracoPin.Position.Longitude), new LatLng(_teePin.Position.Latitude, _teePin.Position.Longitude));
+            LatLngBounds centro = new LatLngBounds(new LatLng(BuracoPinPosicao.Latitude, BuracoPinPosicao.Longitude), new LatLng(TeePinPosicao.Latitude, TeePinPosicao.Longitude));
             LatLng posicaoMeio = centro.Center;
 
-            _meioPin.Position = new Position(posicaoMeio.Latitude,posicaoMeio.Longitude);
+            MeioPinPosicao = new Position(posicaoMeio.Latitude, posicaoMeio.Longitude);
 
             //Atualizar as coordenadas do mapa para estarem voltadas para as coordenadas do primeiro buraco.
-            Mapa.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(_meioPin.Position.Latitude,_meioPin.Position.Longitude), Distance.FromMeters(80)));
+            CentroMapa = MapSpan.FromCenterAndRadius(new Position(MeioPinPosicao.Latitude, MeioPinPosicao.Longitude), Distance.FromMeters(80));
         }
 
 
@@ -259,7 +300,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             BuracoAtual = Jogo.Campo.Buracos.Where(p => p.Numero.Equals((BuracoAtual.Numero-1))).FirstOrDefault();
 
             //Atualizar coordenadas do mapa.
-            Mapa.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(BuracoAtual.Latitude, BuracoAtual.Longitude), new Distance(550)));
+            CentroMapa = MapSpan.FromCenterAndRadius(new Position(BuracoAtual.Latitude, BuracoAtual.Longitude), new Distance(80));
         }
         
 
@@ -269,6 +310,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         /// </summary>
         private void IrParaBuracoSeguinte()
         {
+            MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.Teste, null);
+
             //Verifica-se se o numero do BuracoAtual é diferente do número de buracos do campo, ou seja, se não é o último buraco.
             //Se não for pode-se ver o buraco seguinte.
             int numeroBuracos = Jogo.Campo.NumeroBuracos;
@@ -279,7 +322,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             BuracoAtual = Jogo.Campo.Buracos.Where(p => p.Numero.Equals((BuracoAtual.Numero+1))).FirstOrDefault();
 
             //Atualizar coordenadas do mapa.
-            Mapa.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(BuracoAtual.Latitude, BuracoAtual.Longitude), new Distance(550)));
+            CentroMapa = MapSpan.FromCenterAndRadius(new Position(BuracoAtual.Latitude, BuracoAtual.Longitude), new Distance(80));
         }
 
 
@@ -348,6 +391,31 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         {
             await base.NavigationService.IrParaMenuJogo();
             MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.JogoAtual, Jogo);
+        }
+        
+        
+        
+        /// <summary>
+        /// Atualiza as propriedades DistanciaBuracoMeio e DistanciaTeeMeio.
+        /// </summary>
+        private void CalcularNovaDistancia()
+        {
+            DistanciaBuracoMeio = CalcularDistancia(BuracoPinPosicao, MeioPinPosicao);
+            DistanciaTeeMeio = CalcularDistancia(TeePinPosicao, MeioPinPosicao);
+        }
+
+
+
+        private double CalcularDistancia(Position posicaoOrigem,Position posicaoDestino)
+        {
+            const double raio = 6371;
+
+            var sdlat = Math.Sin((posicaoDestino.Latitude - posicaoOrigem.Latitude) / 2);
+            var sdlon = Math.Sin((posicaoDestino.Longitude - posicaoOrigem.Longitude) / 2);
+            var q = sdlat * sdlat + Math.Cos(posicaoOrigem.Latitude) * Math.Cos(posicaoDestino.Latitude) * sdlon * sdlon;
+            var d = 2 * raio * Math.Asin(Math.Sqrt(q));
+
+            return d;
         }
 
     }

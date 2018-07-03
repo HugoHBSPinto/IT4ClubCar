@@ -15,10 +15,18 @@
             BackgroundColor="#80000000">
         
         <!-- Menu de Cima. -->
-        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" HeightRequest="50">
-            <Label Text="Edit Player" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="35" TextColor="#CCCCCC"/>
-            <Button Text="Delete" BackgroundColor="Red" WidthRequest="200" FontSize="18" BorderWidth="0" VerticalOptions="End" Command="{Binding RemoverJogadorCommand}"/>
-        </StackLayout>
+        <Grid HeightRequest="50">
+            <!--region Column and Row Definitions -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--endregion -->
+            <Button Grid.Column="1" Grid.Row="0" Text="Delete" BackgroundColor="Red" FontSize="18" BorderWidth="0" Command="{Binding RemoverJogadorCommand}"/>
+        </Grid>
         
         <!-- Menu do Meio. -->
         <Grid HeightRequest="550">
@@ -35,7 +43,7 @@
             <!-- Foto. -->
             <StackLayout Grid.Column="0" Grid.Row="0" Padding="80">
                 <Image HeightRequest="350" WidthRequest="60" BackgroundColor="#CCCCCC" Source="{Binding Foto}" Aspect="Fill"/>
-                <Button Text="Take Photo" HeightRequest="50" WidthRequest="60" Margin="0,5,0,0" Command="{Binding TirarFotoCommand}"/>
+                <Button Text="Take Photo" HeightRequest="50" WidthRequest="60" Margin="0,5,0,0" BackgroundColor="White" TextColor="Black" Command="{Binding TirarFotoCommand}"/>
             </StackLayout>
 
             <!-- Formulário. -->

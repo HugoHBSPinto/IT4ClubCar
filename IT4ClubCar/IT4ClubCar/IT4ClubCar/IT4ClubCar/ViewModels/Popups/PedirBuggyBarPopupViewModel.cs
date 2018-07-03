@@ -123,6 +123,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             string mensagemAEnviar = "\n Campo : " + Campo.Nome + "\n Buraco : " + BuracoSelecionado.Numero;
 
             await _telemovelService.EnviarSMS(numeroTelemovelBuggyBar, mensagemAEnviar);
+
+            await base.NavigationService.SairDePedirBuggyBar();
         }
 
     }

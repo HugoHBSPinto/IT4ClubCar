@@ -288,6 +288,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         {
             //Registar à mensagem JogadorAEditar.
             MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.JogadorAEditar, async p => await PreencherInformacoes((JogadorWrapperViewModel)p));
+            base.MensagensUsadas.Add(MediadorMensagensService.ViewModelMensagens.JogadorAEditar);
         }
         
         
@@ -306,7 +307,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                 //O utilizador acabou de desbloquear este jogador. Todas as informações serão as default.
                 Nome = "Player";
 
-                Email.Valor = "Placeholder";
+                Email.Valor = "dont-want@aejd.pt";
                 
                 Foto = ImageSource.FromFile("Player.Png");
 
@@ -380,6 +381,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                 _jogador.Tee = Tee;
                 _jogador.Handicap = Handicap;
             }
+
+            _jogador = null;
+
+            base.LimparComunicacaoMediadorMensagens();
 
             //Fechar PopUp.
             await base.NavigationService.SairDeEditarJogador();

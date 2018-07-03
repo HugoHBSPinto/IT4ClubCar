@@ -50,19 +50,6 @@
             <Label Text="{Binding Dica}" FontSize="25" TextColor="#CCCCCC" HorizontalTextAlignment="Center"/>
         </StackLayout>
 
-        <!-- ActivityIndicator escondido -->
-        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" IsVisible="{Binding IsActivityIndicatorVisivel}">
-            <!--#region Definição de colunas e linhas. -->
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <!--#endregion -->
-            <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding IsActivityIndicatorACorrer}" Color="Green" VerticalOptions="Center" HorizontalOptions="Center"/>
-        </Grid>
-
     </Grid>
 
 </pages:PopupPage>

@@ -22,6 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\ObterSegundaMetadeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\ObterPrimeiraMetadeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\SomarListaConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\CustomControls\CustomMap.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\CustomControls\CustomPicker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\BuracoModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\CampoModel.cs" />

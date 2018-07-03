@@ -39,7 +39,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
 
         public async Task IrParaEditarJogador()
         {
-            await PopupNavigation.PushAsync(new EditarJogadorPopupView(),true);
+            await PopupNavigation.PushAsync(new EditarJogadorPopupView(), animate: false);
         }
 
 

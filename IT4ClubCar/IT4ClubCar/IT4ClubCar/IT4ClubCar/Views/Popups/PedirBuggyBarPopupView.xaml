@@ -39,7 +39,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!--endregion -->
-            <Label Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="45" Text="Ask For BuggyBar"/>
+            <Label Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="18" Text="Ask For BuggyBar" TextColor="White"/>
             <Image Grid.Column="1" Grid.Row="0" Source="IconFecharPopup">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding FecharPopupCommand}"/>
@@ -59,8 +59,7 @@
                 <RowDefinition Height="0.2*"/>
             </Grid.RowDefinitions>
             <!--endregion -->
-            <custom:CustomPicker Grid.Column="0" Grid.Row="0" Title="Buracos" ItemsSource="{Binding Campo.Buracos}" ItemDisplayBinding="{Binding Numero}" SelectedItem="{Binding BuracoSelecionado}"/>
-            <Label Grid.Column="0" Grid.Row="1" BackgroundColor="White"/>
+            <custom:CustomPicker Grid.Column="0" Grid.Row="0" Title="Buracos" ItemsSource="{Binding Campo.Buracos}" ItemDisplayBinding="{Binding Numero}" SelectedItem="{Binding BuracoSelecionado}" TextColor="White" FontSize="18"/>
             <Button Grid.Column="0" Grid.Row="2" Text="Ask" BackgroundColor="Orange" Command="{Binding EnviarPedidoCommand}"/>
         </Grid>
 

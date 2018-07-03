@@ -12,7 +12,7 @@
             HorizontalOptions="Center" 
             HeightRequest="650"
             WidthRequest="850"
-            BackgroundColor="#80000000"
+            BackgroundColor="#95000000"
             RowSpacing="0"
             ColumnSpacing="0">
 

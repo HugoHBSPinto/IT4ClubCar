@@ -282,6 +282,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.JogadorAdicionado, p => { Jogadores.Add((JogadorWrapperViewModel)p); });
             //Jogador Removido.
             MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.JogadorRemovido, p => { Jogadores.Remove((JogadorWrapperViewModel)p); });
+
+            base.MensagensUsadas.Add(MediadorMensagensService.ViewModelMensagens.JogadorAdicionado);
+            base.MensagensUsadas.Add(MediadorMensagensService.ViewModelMensagens.JogadorRemovido);
+            base.MensagensUsadas.Add(MediadorMensagensService.ViewModelMensagens.Teste);
         }
 
 
@@ -289,7 +293,6 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         /// <summary>
         /// Executado quando o utilizador clica no botão "Start" após ter configurado o jogo.
         /// </summary>
-        /// <returns></returns>
         private async Task ComecarJogo()
         {
             IsActivityIndicatorACorrer = true;
@@ -298,11 +301,13 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
 
             await ConfigurarJogo();
             await base.NavigationService.IrParaJogo();
+
             MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.NovoJogo, Jogo);
+
+            CleanUp();
 
             IsActivityIndicatorACorrer = false;
             IsActivityIndicatorVisivel = false;
-            CorDeFundo = "#00000000";
         }
 
 
@@ -396,6 +401,13 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             JogoModel jogoModel = new JogoModel(CampoSelecionado.ObterModel(), ModoJogoSelecionado.ObterModel(), MetricoSelecionado.ObterModel(), jogadores);
 
             Jogo = new JogoWrapperViewModel(jogoModel);
+        }
+        
+        
+        
+        private void CleanUp()
+        {
+            base.LimparComunicacaoMediadorMensagens();
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,5 +14,11 @@ namespace IT4ClubCar.IT4ClubCar.Views
 		{
             InitializeComponent();
 		}
-	}
+
+        protected override void OnDisappearing()
+        {
+            BindingContext = null;
+            base.OnDisappearing();
+        }
+    }
 }

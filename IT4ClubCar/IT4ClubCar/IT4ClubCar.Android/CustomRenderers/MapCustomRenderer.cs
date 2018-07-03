@@ -58,35 +58,38 @@ namespace IT4ClubCar.Droid.CustomRenderers
             var buracoPin = new MarkerOptions();
             buracoPin.SetPosition(new LatLng(_customMap.BuracoPinPosicao.Latitude, _customMap.BuracoPinPosicao.Longitude));
             buracoPin.Draggable(true);
+            buracoPin.SetTitle("Buraco");
             _buracoMarker = _mapa.AddMarker(buracoPin);
 
             //Tee Marker.
             var teePin = new MarkerOptions();
             teePin.SetPosition(new LatLng(_customMap.TeePinPosicao.Latitude, _customMap.TeePinPosicao.Longitude));
             teePin.Draggable(true);
+            teePin.SetTitle("Tee");
             _teeMarker = _mapa.AddMarker(teePin);
 
             //Tee Marker.
             var meioPin = new MarkerOptions();
             meioPin.SetPosition(new LatLng(_customMap.MeioPinPosicao.Latitude, _customMap.MeioPinPosicao.Longitude));
             meioPin.Draggable(true);
+            meioPin.SetTitle("Meio");
             _meioMarker = _mapa.AddMarker(meioPin);
-
-            _mapa.MarkerDrag += Map_MarkerDrag;
+            
+            _mapa.MarkerDragEnd += _mapa_MarkerDragEnd;
         }
 
 
 
-        private void Map_MarkerDrag(object sender, GoogleMap.MarkerDragEventArgs e)
+        private void _mapa_MarkerDragEnd(object sender, GoogleMap.MarkerDragEndEventArgs e)
         {
-            if(e.Marker.Equals(_buracoMarker))
+            if (e.Marker.Equals(_buracoMarker))
                 _customMap.BuracoPinPosicao = new Position(e.Marker.Position.Latitude, e.Marker.Position.Longitude);
             else
                 if (e.Marker.Equals(_teeMarker))
-                    _customMap.TeePinPosicao = new Position(e.Marker.Position.Latitude, e.Marker.Position.Longitude);
+                _customMap.TeePinPosicao = new Position(e.Marker.Position.Latitude, e.Marker.Position.Longitude);
             else
                 if (e.Marker.Equals(_meioMarker))
-                    _customMap.MeioPinPosicao = new Position(e.Marker.Position.Latitude, e.Marker.Position.Longitude);
+                _customMap.MeioPinPosicao = new Position(e.Marker.Position.Latitude, e.Marker.Position.Longitude);
         }
 
 

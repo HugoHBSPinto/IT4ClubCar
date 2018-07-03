@@ -17,9 +17,19 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 {
     class PedirBuggyBarPopupViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Obtém e define o _buggyBarService.
+        /// </summary>
         private IBuggyBarService _buggyBarService;
+
+        /// <summary>
+        /// Obtém e define o _telemovelService.
+        /// </summary>
         private ITelemovelService _telemovelService;
 
+        /// <summary>
+        /// Obtém e define o Campo.
+        /// </summary>
         private CampoWrapperViewModel _campo;
         public CampoWrapperViewModel Campo
         {
@@ -34,6 +44,9 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             }
         }
 
+        /// <summary>
+        /// Obtém e define o BuracoSelecionado.
+        /// </summary>
         private BuracoWrapperViewModel _buracoSelecionado;
         public BuracoWrapperViewModel BuracoSelecionado
         {
@@ -45,6 +58,57 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             {
                 _buracoSelecionado = value;
                 OnPropertyChanged("BuracoSelecionado");
+            }
+        }
+
+        /// <summary>
+        /// Obtém e define o IsActivityIndicatorVisivel.
+        /// </summary>
+        private bool _isActivityIndicatorVisivel;
+        public bool IsActivityIndicatorVisivel
+        {
+            get
+            {
+                return _isActivityIndicatorVisivel;
+            }
+            set
+            {
+                _isActivityIndicatorVisivel = value;
+                OnPropertyChanged("IsActivityIndicatorVisivel");
+            }
+        }
+
+        /// <summary>
+        /// Obtém e define o IsActivityIndicatorACorrer.
+        /// </summary>
+        private bool _isActivityIndicatorACorrer;
+        public bool IsActivityIndicatorACorrer
+        {
+            get
+            {
+                return _isActivityIndicatorACorrer;
+            }
+            set
+            {
+                _isActivityIndicatorACorrer = value;
+                OnPropertyChanged("IsActivityIndicatorACorrer");
+            }
+        }
+
+        /// <summary>
+        /// Obtém e define a CorDeFundo.
+        /// </summary>
+        private string _corDeFundo;
+        public string CorDeFundo
+        {
+            get
+            {
+                return _corDeFundo;
+            }
+            set
+            {
+                _corDeFundo = value;
+                OnPropertyChanged("CorDeFundo");
             }
         }
 
@@ -78,6 +142,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                                            ITelemovelService telemovelService)
                                            : base(navigationService,dialogService)
         {
+            CorDeFundo = "#80000000";
+
             _buggyBarService = buggyBarService;
             _telemovelService = telemovelService;
 
@@ -118,6 +184,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         /// </summary>
         private async Task EnviarPedido()
         {
+            IsActivityIndicatorACorrer = true;
+            IsActivityIndicatorVisivel = true;
+            CorDeFundo = "#CC000000";
+
             string numeroTelemovelBuggyBar = await _buggyBarService.ObterNumeroTelemovel();
 
             string mensagemAEnviar = "\n Campo : " + Campo.Nome + "\n Buraco : " + BuracoSelecionado.Numero;
@@ -125,6 +195,9 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             await _telemovelService.EnviarSMS(numeroTelemovelBuggyBar, mensagemAEnviar);
 
             await base.NavigationService.SairDePedirBuggyBar();
+
+            IsActivityIndicatorACorrer = false;
+            IsActivityIndicatorVisivel = false;
         }
 
     }

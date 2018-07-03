@@ -342,8 +342,11 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         private async Task TirarFoto()
         {
             MediaFile ficheiroImagem = await _cameraService.TirarFoto();
+
             string fotoBase64 = BytesHandlerHelper.ConverterMediaFileEmBase64(ficheiroImagem);
-            Foto = BytesHandlerHelper.ConverterBase64EmImageSource(fotoBase64);
+
+            if(!fotoBase64.Equals(String.Empty))
+                Foto = BytesHandlerHelper.ConverterBase64EmImageSource(fotoBase64);
         }
 
 

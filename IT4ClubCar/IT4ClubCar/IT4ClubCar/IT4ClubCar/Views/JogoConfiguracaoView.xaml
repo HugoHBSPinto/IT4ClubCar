@@ -97,9 +97,9 @@
                 </Grid.RowDefinitions>
                 <!--#endregion -->
                 <!-- Botão Cancelar -->
-                <Button Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" Text="Cancelar" StyleClass="BotaoCancelar" BorderWidth="2" BorderRadius="35" Command="{Binding CancelarJogoCommand}"/>
-                <!-- Bot --> 
-                <Button Grid.Column="1" Grid.Row="0" HorizontalOptions="End" Text="Começar" StyleClass="BotaoAvancar" BorderWidth="2" BorderRadius="35" Command="{Binding ComecarJogoCommand}"/>
+                <Button Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" Text="Cancel" StyleClass="BotaoCancelar" BorderWidth="2" BorderRadius="35" Margin="5,5,0,5" Command="{Binding CancelarJogoCommand}"/>
+                <!-- Bot -->
+                <Button Grid.Column="1" Grid.Row="0" HorizontalOptions="End" Text="Start" StyleClass="BotaoAvancar" BorderWidth="2" BorderRadius="35" Margin="0,5,0,5" Command="{Binding ComecarJogoCommand}"/>
             </Grid>
 
             <!-- ActivityIndicator escondido -->
@@ -115,7 +115,7 @@
                 </Grid.RowDefinitions>
                 <!--#endregion -->
                 <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding IsActivityIndicatorACorrer}" Color="Green"/>
-                <Label Grid.Column="0" Grid.Row="1" Text="Creating the game just for you..." FontSize="32"/>
+                <Label Grid.Column="0" Grid.Row="1" Text="Creating the game..." FontSize="32"/>
             </Grid>
 
         </Grid>

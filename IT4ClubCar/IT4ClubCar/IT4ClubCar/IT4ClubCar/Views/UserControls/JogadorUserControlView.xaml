@@ -20,9 +20,9 @@
     <!-- Definição de Linhas. -->
     <Grid.RowDefinitions>
         <!-- Primeira linha. 3* Triplo do tamanho da segunda linha. Contém a imagem. -->
-        <RowDefinition Height="2.4*"/>
-        <!-- Segunda linha. Contém o nome do jogador. -->
         <RowDefinition Height="*"/>
+        <!-- Segunda linha. Contém o nome do jogador. -->
+        <RowDefinition Height="0.4*"/>
     </Grid.RowDefinitions>
 
     <Image Grid.Column="0" Grid.Row="0" Source="{Binding Jogador.Foto}" Aspect="Fill"/>

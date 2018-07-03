@@ -8,12 +8,22 @@
              vml:ViewModelLocator.DefinirViewModelAutomaticamente="True"
              x:Class="IT4ClubCar.IT4ClubCar.Views.Popups.MenuJogoPopupView">
 
+    <pages:PopupPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="Black"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="BorderWidth" Value="1"/>
+            <Setter Property="BorderColor" Value="White"/>
+        </Style>
+    </pages:PopupPage.Resources>
+
     <Grid
             VerticalOptions="Center" 
             HorizontalOptions="Center" 
             HeightRequest="450"
             WidthRequest="350"
-            BackgroundColor="#80000000">
+            BackgroundColor="Transparent">
 
         <!--region Column and row definitions -->
 

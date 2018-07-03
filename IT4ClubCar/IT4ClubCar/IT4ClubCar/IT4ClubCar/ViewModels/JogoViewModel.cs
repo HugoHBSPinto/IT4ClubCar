@@ -83,6 +83,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         {
             get
             {
+                if (_buracoPinPosicao == null)
+                    _buracoPinPosicao = new Position(1.0,-1.0);
                 return _buracoPinPosicao;
             }
             set
@@ -98,6 +100,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         {
             get
             {
+                if (_teePinPosicao == null)
+                    _teePinPosicao = new Position(1.0, -1.0);
                 return _teePinPosicao;
             }
             set
@@ -113,6 +117,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         {
             get
             {
+                if (_meioPinPosicao == null)
+                    _meioPinPosicao = new Position(1.0, -1.0);
                 return _meioPinPosicao;
             }
             set
@@ -361,12 +367,6 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         private async Task VerScorecard()
         {
             await base.NavigationService.IrParaScorecard();
-
-            foreach (JogadorWrapperViewModel jogador in Jogo.Jogadores)
-            {
-                MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.PontuacaoAMostrar, jogador);
-                MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.NomeAMostrar, jogador);
-            }
 
             MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.JogoAtual,Jogo);
         }

@@ -47,23 +47,48 @@
             </StackLayout>
 
             <!-- Formulário. -->
-            <StackLayout Grid.Column="1" Grid.Row="0" BackgroundColor="#CCCCCC">
-                <Entry Placeholder="Name" Text="{Binding Nome}" BackgroundColor="#CCCCCC"/>
-                <Entry Placeholder="Email" Text="{Binding Email.Valor}" BackgroundColor="#CCCCCC">
+            <Grid Grid.Column="1" Grid.Row="0" BackgroundColor="#CCCCCC">
+                <!--region Column and Row Definitions -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--endregion -->
+                <Entry Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Placeholder="Name" Text="{Binding Nome}" BackgroundColor="#CCCCCC"/>
+                <Entry Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Placeholder="Email" Text="{Binding Email.Valor}" BackgroundColor="#CCCCCC">
                     <Entry.Triggers>
                         <DataTrigger TargetType="Entry" Binding="{Binding Email.IsValido}" Value="False">
                             <Setter Property="BackgroundColor" Value="Red"/>
                         </DataTrigger>
                     </Entry.Triggers>
                 </Entry>
-                <Picker Title="Genero" ItemsSource="{Binding GenerosExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding Genero}" BackgroundColor="#CCCCCC"/>
-                <Picker Title="Tee" ItemsSource="{Binding TeesExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding Tee}" BackgroundColor="#CCCCCC"/>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Handicap : " TextColor="Black" FontSize="18"/>
-                    <Label Text="{Binding Handicap.Valor}" TextColor="Black" FontSize="18"/>
-                </StackLayout>
-                <Slider Minimum="{Binding HandicapMinimo.Valor}" Maximum="{Binding HandicapMaximo.Valor}" Value="{Binding Handicap.Valor}"/>
-            </StackLayout>
+                <Label Grid.Column="0" Grid.Row="2" Text="Genero : " TextColor="Black" FontSize="20" VerticalTextAlignment="Center"/>
+                <Picker Grid.Column="1" Grid.Row="2" Title="Genero" ItemsSource="{Binding GenerosExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding Genero}" BackgroundColor="#CCCCCC"/>
+                <Label Grid.Column="0" Grid.Row="3" Text="Tee : " TextColor="Black" FontSize="20" VerticalTextAlignment="Center"/>
+                <Picker Grid.Column="1" Grid.Row="3" Title="Tee" ItemsSource="{Binding TeesExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding Tee}" BackgroundColor="#CCCCCC"/>
+                <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" RowSpacing="0">
+                    <!--region Column and Row Definitions -->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--endregion -->
+                    <Label Grid.Column="0" Grid.Row="0" Text="Handicap : " TextColor="Black" FontSize="18"/>
+                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding Handicap.Valor}" TextColor="Black" FontSize="18"/>
+                    <Slider Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Minimum="{Binding HandicapMinimo.Valor}" Maximum="{Binding HandicapMaximo.Valor}" Value="{Binding Handicap.Valor}"/>
+                </Grid>
+            </Grid>
         </Grid>
 
         <!-- Barra Baixo -->

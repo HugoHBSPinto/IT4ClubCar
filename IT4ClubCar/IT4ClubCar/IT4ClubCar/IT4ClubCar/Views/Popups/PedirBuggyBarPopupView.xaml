@@ -13,7 +13,7 @@
             HorizontalOptions="Center" 
             HeightRequest="350"
             WidthRequest="450"
-            BackgroundColor="#80000000">
+            BackgroundColor="{Binding CorDeFundo}">
 
         <!--region Column and row definitions -->
 
@@ -39,7 +39,6 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!--endregion -->
-            <Label Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="18" Text="Ask For BuggyBar" TextColor="White"/>
             <Image Grid.Column="1" Grid.Row="0" Source="IconFecharPopup">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding FecharPopupCommand}"/>
@@ -47,20 +46,36 @@
             </Image>
         </Grid>
 
-        <!-- Corpo do popup. Imagem e Texto. -->
+        <!-- Corpo do popup. Label e Picker. -->
         <Grid Grid.Column="0" Grid.Row="1" ColumnSpacing="0">
             <!--region Column and Row Definitions -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="0.2*"/>
-                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="0.4*"/>
             </Grid.RowDefinitions>
             <!--endregion -->
-            <custom:CustomPicker Grid.Column="0" Grid.Row="0" Title="Buracos" ItemsSource="{Binding Campo.Buracos}" ItemDisplayBinding="{Binding Numero}" SelectedItem="{Binding BuracoSelecionado}" TextColor="White" FontSize="18"/>
-            <Button Grid.Column="0" Grid.Row="2" Text="Ask" BackgroundColor="Orange" Command="{Binding EnviarPedidoCommand}"/>
+            <Label Grid.Column="0" Grid.Row="0" TextColor="White" FontSize="30" Text="Choose a hole : " VerticalTextAlignment="Center"/>
+            <custom:CustomPicker Grid.Column="1" Grid.Row="0" Title="Buracos" ItemsSource="{Binding Campo.Buracos}" ItemDisplayBinding="{Binding Numero}" SelectedItem="{Binding BuracoSelecionado}" TextColor="White" FontSize="30"/>
+            <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Text="Ask" BackgroundColor="Orange" Command="{Binding EnviarPedidoCommand}"/>
+        </Grid>
+
+        <!-- ActivityIndicator escondido -->
+        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" IsVisible="{Binding IsActivityIndicatorVisivel}" BackgroundColor="{Binding CorDeFundo}">
+            <!--#region Definição de colunas e linhas. -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.4*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--#endregion -->
+            <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding IsActivityIndicatorACorrer}" Color="Red"/>
+            <Label Grid.Column="0" Grid.Row="1" Text="Asking for the buggy car..." FontSize="28" TextColor="White" HorizontalTextAlignment="Center"/>
         </Grid>
 
     </Grid>

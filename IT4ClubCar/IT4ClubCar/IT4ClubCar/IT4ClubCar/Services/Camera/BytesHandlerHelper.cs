@@ -11,6 +11,9 @@ namespace IT4ClubCar.IT4ClubCar.Services.Camera
     {
         public static string ConverterMediaFileEmBase64(MediaFile mediaFile)
         {
+            if (mediaFile == null)
+                return String.Empty;
+
             string imagemBase64 = "";
 
             using (Stream stream = mediaFile.GetStream())

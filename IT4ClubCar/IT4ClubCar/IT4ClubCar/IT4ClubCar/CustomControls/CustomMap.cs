@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IT4ClubCar.IT4ClubCar.Models;
+using IT4ClubCar.IT4ClubCar.ViewModels.Wrappers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
@@ -12,7 +14,7 @@ namespace IT4ClubCar.IT4ClubCar.CustomControls
         BindableProperty.Create("Posicao", typeof(MapSpan), typeof(CustomMap), MapSpan.FromCenterAndRadius(new Position(37.147164, -8.354), Distance.FromMeters(80)), BindingMode.TwoWay);
 
         public static BindableProperty BuracoPinPosicaoProperty =
-        BindableProperty.Create("BuracoPinPosicao", typeof(Position), typeof(CustomMap), new Position(1.0, -1.0), BindingMode.TwoWay);
+        BindableProperty.Create("BuracoPinPosicao", typeof(Position), typeof(CustomMap), new Position(1.0,-1.0), BindingMode.TwoWay);
 
         public static BindableProperty TeePinPosicaoProperty =
         BindableProperty.Create("TeePinPosicao", typeof(Position), typeof(CustomMap), new Position(1.0, -1.0), BindingMode.TwoWay);

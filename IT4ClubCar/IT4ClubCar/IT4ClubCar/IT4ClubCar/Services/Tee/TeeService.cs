@@ -21,9 +21,26 @@ namespace IT4ClubCar.IT4ClubCar.Services.Tee
         {
             _webService = webService;
         }
-        
-        
-        
+
+
+
+        /// <summary>
+        /// Obtém o id do Tee definido como Starting Tee na BD.
+        /// </summary>
+        /// <returns>int que representa o id do starting tee default</returns>
+        public async Task<int> ObterStartingTeeDefault()
+        {
+            string dataJson = await _webService.GetStringJson("GetStartingTeeDefault");
+
+            JObject tee = JObject.Parse(dataJson);
+
+            int id = int.Parse(tee["Id"].ToString());
+
+            return id;
+        }
+
+
+
         /// <summary>
         /// Obtém o id do Tee definido como default na BD.
         /// </summary>

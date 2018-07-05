@@ -49,11 +49,13 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="0.4*"/>
+                        <RowDefinition Height="0.6*"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="0.4*"/>
+                        <RowDefinition Height="0.6*"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="0.4*"/>
+                        <RowDefinition Height="0.6*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.6*"/>
                     </Grid.RowDefinitions>
                     <!--#endregion -->
                     <!--  Mapas.  -->
@@ -65,6 +67,9 @@
                     <!-- Tipo Métrico. -->
                     <custom:CustomPicker Grid.Column="0" Grid.Row="4" TextColor="#CCCCCC" Title="Metric Type" ItemsSource="{Binding MetricosExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding MetricoSelecionado}"/>
                     <Label Grid.Column="0" Grid.Row="5" StyleClass="pickerComoUnderline"/>
+                    <!-- Tipo Starting Tee. -->
+                    <custom:CustomPicker Grid.Column="0" Grid.Row="6" TextColor="#CCCCCC" Title="Starting Tee" ItemsSource="{Binding TeesExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding TeeSelecionado}"/>
+                    <Label Grid.Column="0" Grid.Row="7" StyleClass="pickerComoUnderline"/>
                 </Grid>
                 <!-- Jogadores -->
                 <Grid Grid.Column="1" Grid.Row="0">
@@ -98,8 +103,15 @@
                 <!--#endregion -->
                 <!-- Botão Cancelar -->
                 <Button Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" Text="Cancel" StyleClass="BotaoCancelar" BorderWidth="2" BorderRadius="35" Margin="5,5,0,5" Command="{Binding CancelarJogoCommand}"/>
-                <!-- Bot -->
-                <Button Grid.Column="1" Grid.Row="0" HorizontalOptions="End" Text="Start" StyleClass="BotaoAvancar" BorderWidth="2" BorderRadius="35" Margin="0,5,0,5" Command="{Binding ComecarJogoCommand}"/>
+                <!-- Botão Avançar -->
+                <Button Grid.Column="1" Grid.Row="0" HorizontalOptions="End" Text="Start" TextColor="White" StyleClass="BotaoAvancar" BorderWidth="2" BorderRadius="35" Margin="0,5,0,5" BackgroundColor="Green" Command="{Binding ComecarJogoCommand}">
+                    <Button.Triggers>
+                        <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                            <Setter Property="BackgroundColor" Value="LightGray"/>
+                            <Setter Property="TextColor" Value="Black"/>
+                        </Trigger>
+                    </Button.Triggers>
+                </Button>
             </Grid>
 
             <!-- ActivityIndicator escondido -->
@@ -115,7 +127,7 @@
                 </Grid.RowDefinitions>
                 <!--#endregion -->
                 <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding IsActivityIndicatorACorrer}" Color="Green"/>
-                <Label Grid.Column="0" Grid.Row="1" Text="Creating the game..." FontSize="32"/>
+                <Label Grid.Column="0" Grid.Row="1" Text="Creating the game..." FontSize="35"/>
             </Grid>
 
         </Grid>

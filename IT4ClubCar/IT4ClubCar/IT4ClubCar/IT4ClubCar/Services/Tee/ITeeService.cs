@@ -17,6 +17,12 @@ namespace IT4ClubCar.IT4ClubCar.Services.Tee
 
 
         /// <summary>
+        /// Obtém o id do Tee definido como Starting Tee na BD.
+        /// </summary>
+        /// <returns>int que representa o id do starting tee default</returns>
+        Task<int> ObterStartingTeeDefault();
+
+        /// <summary>
         /// Obtém todos os tees existentes.
         /// </summary>
         /// <returns>ObservableCollection<TeeWrapperViewModel> com os tees existentes.</returns>

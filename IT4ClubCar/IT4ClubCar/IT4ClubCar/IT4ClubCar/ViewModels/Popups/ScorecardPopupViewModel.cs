@@ -200,8 +200,13 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
 
 
+        /// <summary>
+        /// Tira um screenshot do Scorecard, enviando para o email do jogador
+        /// da propriedade JogadorAEnviarPrint.
+        /// </summary>
         private async Task TirarPrint()
         {
+            //Mostrar Activity Indicator.
             IsActivityIndicatorACorrer = true;
             IsActivityIndicatorVisivel = true;
             CorDeFundo = "#CC000000";
@@ -218,6 +223,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
             await base.NavigationService.SairDeScorecard();
 
+            //Esconder Activity Indicator.
             IsActivityIndicatorACorrer = false;
             IsActivityIndicatorVisivel = false;
         }

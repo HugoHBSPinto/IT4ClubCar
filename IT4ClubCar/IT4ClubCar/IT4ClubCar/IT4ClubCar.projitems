@@ -33,6 +33,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\MetricoModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\ModoJogoModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\PontuacaoModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\PosicaoModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\PublicidadeModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\TeeBuracoDistanciaModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\TeeModel.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\MetricoWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\ModoJogoWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\PontuacaoWrapperViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\PosicaoWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\PublicidadeWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\TeeBuracoDistanciaWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\TeeWrapperViewModel.cs" />
@@ -279,5 +281,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\ScreenshotService\Info.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\AppResources\Resources.en.resw" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\AppResources\Resources.resw" />
   </ItemGroup>
 </Project>

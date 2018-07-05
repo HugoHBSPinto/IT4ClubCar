@@ -184,6 +184,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         /// </summary>
         private async Task EnviarPedido()
         {
+            //Mostrar Activity indicator.
             IsActivityIndicatorACorrer = true;
             IsActivityIndicatorVisivel = true;
             CorDeFundo = "#CC000000";
@@ -196,6 +197,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
             await base.NavigationService.SairDePedirBuggyBar();
 
+            //Esconder Activity Indicator.
             IsActivityIndicatorACorrer = false;
             IsActivityIndicatorVisivel = false;
         }

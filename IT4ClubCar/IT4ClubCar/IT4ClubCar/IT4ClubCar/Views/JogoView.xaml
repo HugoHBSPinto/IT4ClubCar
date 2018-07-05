@@ -6,59 +6,141 @@
              xmlns:vml="clr-namespace:IT4ClubCar.IT4ClubCar.ViewModels.Base"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              vml:ViewModelLocator.DefinirViewModelAutomaticamente="True">
+    <ContentPage.Resources>
+        <!-- Tabs -->
+        <Style TargetType="Grid" x:Key="Tab">
+            <Setter Property="BackgroundColor" Value="#00b300"/>
+        </Style>
+
+        <Style TargetType="Image" x:Key="ImagemTab">
+            <Setter Property="Aspect" Value="AspectFit"/>
+            <Setter Property="Margin" Value="0,5,0,5"/>
+        </Style>
+        
+        <Style TargetType="Label" x:Key="TextoTab">
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="TextColor" Value="White"/>
+        </Style>
+
+        <!-- Texto da barra inferior -->
+        <Style TargetType="Label" x:Key="TextoBarraInferiorLabel">
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style TargetType="Label" x:Key="LabelIndicadorBarraInferior" BasedOn="{StaticResource TextoBarraInferiorLabel}">
+            <Setter Property="HorizontalTextAlignment" Value="Right"/>
+        </Style>
+        <Style TargetType="Label" x:Key="LabelValorBarraInferior" BasedOn="{StaticResource TextoBarraInferiorLabel}">
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        </Style>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
         <Grid RowSpacing="0" ColumnSpacing="0">
             <!--region Column and row definition -->
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.8*"/>
                 <RowDefinition Height="0.5*"/>
                 <RowDefinition Height="5*"/>
-                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.6*"/>
             </Grid.RowDefinitions>
 
             <!--endregion -->
             <!-- Titulo -->
-            <StackLayout Grid.Column="0" Grid.Row="0" BackgroundColor="Green">
-                <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text="{Binding Jogo.Campo.Nome}" FontSize="40" TextColor="#CCCCCC"/>
-            </StackLayout>
+            <Grid Grid.Column="0" Grid.Row="0">
+                <!--region Column and row definition -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--endregion -->
+                <Image Grid.Column="0" Grid.Row="0" Source="GolfHeader.jpg" Aspect="AspectFill"/>
+                <Label Grid.Column="0" Grid.Row="0" Text="{Binding Jogo.Campo.Nome}" FontSize="40" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" TextColor="White"/>
+            </Grid>
 
             <!-- Tabs -->
-            <Grid Grid.Column="0" Grid.Row="1" ColumnSpacing="0.5" BackgroundColor="Black">
+            <Grid Grid.Column="0" Grid.Row="1" ColumnSpacing="2.5" RowSpacing="0">
                 <!--region Column and Row Definition -->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <!--endregion -->
-                <Label Grid.Column="0" Grid.Row="0" BackgroundColor="White" TextColor="Black" Text="Stroke Input" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
+                <!--endregion --> 
+                 <!--Stroke Input--> 
+                <Grid Style="{StaticResource Tab}" Grid.Column="0" Grid.Row="0">
+                    <Grid.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding DefinirPontuacoesCommand}"/>
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label Grid.Column="1" Grid.Row="0" BackgroundColor="White" TextColor="Black" Text="Pro Tip" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
+                    </Grid.GestureRecognizers>
+                    <!--region Column and Row Definition--> 
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <!--endregion--> 
+                     <!--Icon--> 
+                    <Image Style="{StaticResource ImagemTab}" Grid.Column="0" Grid.Row="0" Source="StrokeInputIcon.png"/>
+                     <!--Texto-->
+                    <Label  Style="{StaticResource TextoTab}" Grid.Column="1" Grid.Row="0" Text="Stroke Input"/>
+                </Grid>
+                
+                 <!--Pro Tip--> 
+                <Grid Style="{StaticResource Tab}" Grid.Column="1" Grid.Row="0">
+                    <Grid.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding VerProTipCommand}"/>
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label Grid.Column="2" Grid.Row="0" BackgroundColor="White" TextColor="Black" Text="Scorecard" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
-                    <Label.GestureRecognizers>
+                    </Grid.GestureRecognizers>
+                    <!--region Column and Row Definition--> 
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <!--endregion--> 
+                     <!--Icon--> 
+                    <Image Style="{StaticResource ImagemTab}" Grid.Column="0" Grid.Row="0" Source="ProTipIcon.png"/>
+                     <!--Texto-->
+                    <Label Style="{StaticResource TextoTab}" Grid.Column="1" Grid.Row="0" Text="Pro Tip"/>
+                </Grid>
+                
+                 <!--Scorecard-->
+                <Grid Style="{StaticResource Tab}" Grid.Column="2" Grid.Row="0">
+                    <Grid.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding VerScorecardCommand}"/>
-                    </Label.GestureRecognizers>
-                </Label>
+                    </Grid.GestureRecognizers>
+                    <!--region Column and Row Definition-->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <!--endregion-->
+                    <!--Icon-->
+                    <Image Style="{StaticResource ImagemTab}" Grid.Column="0" Grid.Row="0" Source="ScorecardIcon.png"/>
+                    <!--Texto-->
+                    <Label Style="{StaticResource TextoTab}" Grid.Column="1" Grid.Row="0" Text="Scorecard"/>
+                </Grid>
             </Grid>
 
             <!-- Mapa -->
-            <Grid Grid.Column="0" Grid.Row="2">
+            <Grid Grid.Column="0" Grid.Row="2" RowSpacing="0">
                 <!--region Column and Row Definitions -->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -81,14 +163,12 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <!--endregion -->
                     <Button Grid.Column="0" Grid.Row="0" BackgroundColor="#95000000" Text="My Location" TextColor="White"/>
-                    <custom:CustomPicker Grid.Column="0" Grid.Row="1" BackgroundColor="#95000000" Title="Tee Positions" TextColor="White" ItemsSource="{Binding TeesUsados}" ItemDisplayBinding="{Binding Nome}"/>
-                    <Button Grid.Column="0" Grid.Row="2" BackgroundColor="#95000000" Text="Manual" TextColor="White"/>
-                    <Button Grid.Column="0" Grid.Row="3" BackgroundColor="#95000000" Text="3D" TextColor="White"/>
-                    <Button Grid.Column="0" Grid.Row="4" BackgroundColor="#95000000" Text="Reset" TextColor="White"/>
+                    <custom:CustomPicker Grid.Column="0" Grid.Row="1" BackgroundColor="#95000000" Title="Tee Positions" TextColor="White" ItemsSource="{Binding TeesUsados}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding TeeSelecionado}"/>
+                    <Button Grid.Column="0" Grid.Row="2" BackgroundColor="#95000000" Text="Manual" TextColor="White" Command="{Binding AlterarEstadoPosicaoPinTee}"/>
+                    <Button Grid.Column="0" Grid.Row="3" BackgroundColor="#95000000" Text="Reset" TextColor="White" Command="{Binding ResetMapaCommand}"/>
                 </Grid>
                 <!-- Label com as distâncias -->
                 <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
@@ -109,7 +189,7 @@
             </Grid>
 
             <!-- Barra Inferior -->
-            <Grid Grid.Column="0" Grid.Row="3" BackgroundColor="Green">
+            <Grid Grid.Column="0" Grid.Row="3" RowSpacing="0">
                 <!--region Column and Row Definitions-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -121,6 +201,8 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <!--endregion -->
+
+                <Image Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Source="GolfHeader.jpg" Aspect="AspectFill"/>
 
                 <!-- Icon BuggyCar -->
                 <Grid Grid.Column="0" Grid.Row="0">
@@ -140,14 +222,14 @@
                 </Grid>
 
                 <!-- Informações Buraco -->
-                <Grid Grid.Column="1" Grid.Row="0" ColumnSpacing="0" BackgroundColor="White">
+                <Grid Grid.Column="1" Grid.Row="0" ColumnSpacing="2" BackgroundColor="#80000000">
                     <!--region Column and Row Definitions -->
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="0.8*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="0.8*"/>
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
@@ -159,10 +241,46 @@
                             <TapGestureRecognizer Command="{Binding IrBuracoAnteriorCommand}"/>
                         </Image.GestureRecognizers>
                     </Image>
-                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding BuracoAtual.Numero}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="20" TextColor="Black"/>
-                    <Label Grid.Column="2" Grid.Row="0" Text="{Binding BuracoAtual.Par}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="20" TextColor="Black"/>
-                    <Label Grid.Column="3" Grid.Row="0" Text="{Binding BuracoAtual.StrokeIndex}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="20" TextColor="Black"/>
-                    <Image Grid.Column="4" Grid.Row="0" Source="IconRightArrow.png" HeightRequest="60">
+                    <Grid Grid.Column="1" Grid.Row="0">
+                        <!--region Column and Row Definitions -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!--endregion -->
+                        <Label Style="{StaticResource LabelIndicadorBarraInferior}" Grid.Column="0" Grid.Row="0" Text="Nº"/>
+                        <Label Style="{StaticResource LabelValorBarraInferior}" Grid.Column="1" Grid.Row="0" Text="{Binding BuracoAtual.Numero}"/>
+                    </Grid>
+                    <Grid Grid.Column="2" Grid.Row="0">
+                        <!--region Column and Row Definitions -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!--endregion -->
+                        <Label Style="{StaticResource LabelIndicadorBarraInferior}" Grid.Column="0" Grid.Row="0" Text="Par :"/>
+                        <Label Style="{StaticResource  LabelValorBarraInferior}" Grid.Column="1" Grid.Row="0" Text="{Binding BuracoAtual.Par}"/>
+                    </Grid>
+                    <Grid Grid.Column="3" Grid.Row="0">
+                        <!--region Column and Row Definitions -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!--endregion -->
+                        <Label Style="{StaticResource LabelIndicadorBarraInferior}" Grid.Column="0" Grid.Row="0" Text="S.I :"/>
+                        <Label Style="{StaticResource LabelValorBarraInferior}" Grid.Column="1" Grid.Row="0" Text="{Binding BuracoAtual.Par}"/>
+                    </Grid>
+                    <Image Grid.Column="4" Grid.Row="0" Source="IconRightArrow.png">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding IrBuracoSeguinteCommand}"/>
                         </Image.GestureRecognizers>

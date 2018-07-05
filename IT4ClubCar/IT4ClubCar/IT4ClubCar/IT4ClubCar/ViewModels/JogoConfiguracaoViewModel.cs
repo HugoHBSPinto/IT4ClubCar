@@ -19,6 +19,7 @@ using IT4ClubCar.IT4ClubCar.Services.TeeDistancias;
 using IT4ClubCar.IT4ClubCar.Models;
 using IT4ClubCar.IT4ClubCar.Services.ScreenshotService;
 using IT4ClubCar.IT4ClubCar.Services.EmailService;
+using IT4ClubCar.IT4ClubCar.Services.Tee;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels
 {
@@ -30,6 +31,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         private IMetricoService _metricoService;
         private IBuracosService _buracoService;
         private ITeeDistanciaService _teeDistanciaService;
+        private ITeeService _teeService;
         #endregion
 
         #region Propriedades
@@ -137,6 +139,40 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         }
 
         /// <summary>
+        /// Obtém e define os TeesExistentes.
+        /// </summary>
+        private ObservableCollection<TeeWrapperViewModel> _teesExistentes;
+        public ObservableCollection<TeeWrapperViewModel> TeesExistentes
+        {
+            get
+            {
+                return _teesExistentes;
+            }
+            set
+            {
+                _teesExistentes = value;
+                OnPropertyChanged("TeesExistentes");
+            }
+        }
+
+        /// <summary>
+        /// Obtém e define o TeeSelecionado.
+        /// </summary>
+        private TeeWrapperViewModel _teeSelecionado;
+        public TeeWrapperViewModel TeeSelecionado
+        {
+            get
+            {
+                return _teeSelecionado;
+            }
+            set
+            {
+                _teeSelecionado = value;
+                OnPropertyChanged("TeeSelecionado");
+            }
+        }
+
+        /// <summary>
         /// Obtém e define os Jogadores.
         /// </summary>
         public ObservableCollection<JogadorWrapperViewModel> Jogadores { get; set; }
@@ -207,7 +243,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             get
             {
                 if (_comecarJogoCommand == null)
-                    _comecarJogoCommand = new Command(async p => await ComecarJogo(), p => { return true; });
+                    _comecarJogoCommand = new Command(async p => await ComecarJogo(), p => { return (Jogadores?.Count!=0); });
                 return _comecarJogoCommand;
             }
         }
@@ -234,6 +270,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             IModoJogoService modoJogoService,
             IMetricoService metricoService,
             IBuracosService buracoService,
+            ITeeService teeService, 
             ITeeDistanciaService teeDistanciaService) 
             : base(navigationService, dialogService)
         {
@@ -241,9 +278,12 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             _modoJogoService = modoJogoService;
             _metricoService = metricoService;
             _buracoService = buracoService;
+            _teeService = teeService;
             _teeDistanciaService = teeDistanciaService;
 
             CorDeFundo = "#00000000";
+
+            Jogadores = new ObservableCollection<JogadorWrapperViewModel>();
 
             //Preencher Pickers.
             Task.Run(async () => await InicializarDados())
@@ -254,22 +294,25 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
 
         private async Task InicializarDados()
         {
-            ///Preencher CamposExistentes e definir o CampoSelecionado como o CampoDefault.
+            //Preencher CamposExistentes e definir o CampoSelecionado como o CampoDefault.
             CamposExistentes = await _campoService.ObterCamposDisponiveis();
             int idCampoDefault = await _campoService.ObterCampoDefault();
             CampoSelecionado = CamposExistentes.Where(p => p.Id.Equals(idCampoDefault)).FirstOrDefault();
 
-            ///Preencher ModosJogoExistentes e definir o ModoSelecionado como o ModoJogoDefault.
+            //Preencher ModosJogoExistentes e definir o ModoSelecionado como o ModoJogoDefault.
             ModosJogoExistentes = await _modoJogoService.ObterModosJogoDisponiveis();
             int idModoJogoDefault = await _modoJogoService.ObterModoJogoDefault();
             ModoJogoSelecionado = ModosJogoExistentes.Where(p => p.Id.Equals(idModoJogoDefault)).FirstOrDefault();
 
-            ///Preencher MetricosExistentes e definir o MetricoSelecionado como o MetricoDefault.
+            //Preencher MetricosExistentes e definir o MetricoSelecionado como o MetricoDefault.
             MetricosExistentes = await _metricoService.ObterMetricosDisponiveis();
             int idMetricoDefault = await _metricoService.ObterMetricoDefault();
             MetricoSelecionado = MetricosExistentes.Where(p => p.Id.Equals(idMetricoDefault)).FirstOrDefault();
 
-            Jogadores = new ObservableCollection<JogadorWrapperViewModel>();
+            //Preencher os TeesExistentes e definir o TeeSelecionado como o StartingTeeDefault.
+            TeesExistentes = await _teeService.ObterTeesExistentes();
+            int idStartingTeeDefault = await _teeService.ObterStartingTeeDefault();
+            TeeSelecionado = TeesExistentes.Where(p => p.Id.Equals(idStartingTeeDefault)).FirstOrDefault();
         }
 
 
@@ -279,13 +322,41 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         private void InicializarComunicacaoMediadorMensagens()
         {
             //Jogador Adicionado.
-            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.JogadorAdicionado, p => { Jogadores.Add((JogadorWrapperViewModel)p); });
+            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.JogadorAdicionado, p => AdicionarJogador(jogadorAAdicionar: p as JogadorWrapperViewModel));
             //Jogador Removido.
-            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.JogadorRemovido, p => { Jogadores.Remove((JogadorWrapperViewModel)p); });
+            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.JogadorRemovido, p => RemoverJogador(jogadorARemover: p as JogadorWrapperViewModel));
 
             base.MensagensUsadas.Add(MediadorMensagensService.ViewModelMensagens.JogadorAdicionado);
             base.MensagensUsadas.Add(MediadorMensagensService.ViewModelMensagens.JogadorRemovido);
             base.MensagensUsadas.Add(MediadorMensagensService.ViewModelMensagens.Teste);
+        }
+
+
+
+        /// <summary>
+        /// Adiciona um jogador à lista de Jogadores definidos.
+        /// </summary>
+        /// <remarks>Atualiza o CanExecute do botão ComecarJogo.</remarks>
+        /// <param name="jogadorAAdicionar">Jogador a adicionar à lista de Jogadores definidos.</param>
+        private void AdicionarJogador(JogadorWrapperViewModel jogadorAAdicionar)
+        {
+            Jogadores?.Add(jogadorAAdicionar);
+            //Atualiar CanExecute do botão ComecarJogo.
+            ((Command)ComecarJogoCommand).ChangeCanExecute();
+        }
+
+
+
+        /// <summary>
+        /// Remove um jogador da lista de Jogadores definidos.
+        /// </summary>
+        /// <remarks>Atualiza o CanExecute do botão ComecarJogo.</remarks>
+        /// <param name="jogadorARemover">Jogador a remover da lista de Jogadores definidos.</param>
+        private void RemoverJogador(JogadorWrapperViewModel jogadorARemover)
+        {
+            Jogadores?.Remove(jogadorARemover);
+            //Atualiar CanExecute do botão ComecarJogo.
+            ((Command)ComecarJogoCommand).ChangeCanExecute();
         }
 
 
@@ -305,9 +376,6 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.NovoJogo, Jogo);
 
             CleanUp();
-
-            IsActivityIndicatorACorrer = false;
-            IsActivityIndicatorVisivel = false;
         }
 
 

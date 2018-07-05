@@ -25,7 +25,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.DataAccess
         {
             string data = "";
 
-            string pedido = "http://192.168.2.200/it4clubcar/it4clubcarWebService.php?pedido=" + dadosRequisitados;
+            string pedido = "http://192.168.9.94/it4clubcar/it4clubcarWebService.php?pedido=" + dadosRequisitados;
 
             try
             {

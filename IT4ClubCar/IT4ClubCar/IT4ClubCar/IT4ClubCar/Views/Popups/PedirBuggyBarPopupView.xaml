@@ -75,7 +75,7 @@
             </Grid.RowDefinitions>
             <!--#endregion -->
             <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding IsActivityIndicatorACorrer}" Color="Red"/>
-            <Label Grid.Column="0" Grid.Row="1" Text="Asking for the buggy car..." FontSize="28" TextColor="White" HorizontalTextAlignment="Center"/>
+            <Label Grid.Column="0" Grid.Row="1" Text="Calling the buggy car..." FontSize="28" TextColor="White" HorizontalTextAlignment="Center"/>
         </Grid>
 
     </Grid>

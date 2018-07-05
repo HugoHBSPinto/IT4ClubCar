@@ -9,7 +9,7 @@
 		<provider android:name="android.support.v4.content.FileProvider" android:authorities="${applicationId}.fileprovider" android:exported="false" android:grantUriPermissions="true">
 			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths"></meta-data>
 		</provider>
-		<meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyCKGSyso_nTW8iZ7_nw35oYgK6eoKhlYuo" />
+		<meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyD6yOks_IqqFWOqPSVBRMnSFGmpECB7BLM" />
 		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 	</application>
 </manifest>

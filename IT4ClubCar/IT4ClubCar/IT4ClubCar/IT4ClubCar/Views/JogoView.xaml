@@ -67,7 +67,7 @@
             </Grid>
 
             <!-- Tabs -->
-            <Grid Grid.Column="0" Grid.Row="1" ColumnSpacing="2.5" RowSpacing="0">
+            <Grid Grid.Column="0" Grid.Row="1" ColumnSpacing="2.5" RowSpacing="0" BackgroundColor="Black">
                 <!--region Column and Row Definition -->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -78,12 +78,9 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <!--endregion --> 
-                 <!--Stroke Input--> 
+                 <!--Stroke Input-->
                 <Grid Style="{StaticResource Tab}" Grid.Column="0" Grid.Row="0">
-                    <Grid.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding DefinirPontuacoesCommand}"/>
-                    </Grid.GestureRecognizers>
-                    <!--region Column and Row Definition--> 
+                    <!--region Column and Row Definition-->
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.4*"/>
                         <ColumnDefinition Width="*"/>
@@ -91,14 +88,17 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <!--endregion--> 
-                     <!--Icon--> 
+                    <!--endregion-->
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding DefinirPontuacoesCommand}"/>
+                    </Grid.GestureRecognizers>
+                    <!--Icon-->
                     <Image Style="{StaticResource ImagemTab}" Grid.Column="0" Grid.Row="0" Source="StrokeInputIcon.png"/>
-                     <!--Texto-->
+                    <!-- Texto -->
                     <Label  Style="{StaticResource TextoTab}" Grid.Column="1" Grid.Row="0" Text="Stroke Input"/>
                 </Grid>
-                
-                 <!--Pro Tip--> 
+
+                <!--Pro Tip--> 
                 <Grid Style="{StaticResource Tab}" Grid.Column="1" Grid.Row="0">
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding VerProTipCommand}"/>

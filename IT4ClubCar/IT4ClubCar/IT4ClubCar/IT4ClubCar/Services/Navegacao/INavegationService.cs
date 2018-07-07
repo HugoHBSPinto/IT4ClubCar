@@ -12,6 +12,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
     {
         Task IrParaPaginaAnterior();
         Task IrParaMenuPrincipal();
+        Task IrParaCampoInformacoes();
         Task IrParaJogoConfiguracao();
         Task IrParaEditarJogador();
         Task SairDeEditarJogador();

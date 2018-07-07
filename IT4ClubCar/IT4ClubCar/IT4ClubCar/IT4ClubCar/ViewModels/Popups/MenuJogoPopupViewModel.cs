@@ -49,6 +49,17 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             }
         }
 
+        private ICommand _comecarNovoJogoCommand;
+        public ICommand ComecarNovoJogoCommand
+        {
+            get
+            {
+                if (_comecarNovoJogoCommand == null)
+                    _comecarNovoJogoCommand = new Command(async p => await ComecarNovoJogo(), p => { return true; });
+                return _comecarNovoJogoCommand;
+            }
+        }
+
 
 
         public MenuJogoPopupViewModel(INavigationService navigationService,IDialogService dialogService) : base(navigationService,dialogService)
@@ -83,6 +94,17 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
 
         private async Task PausarJogo()
+        {
+            //Fechar Popup.
+            await base.NavigationService.SairDeMenuJogo();
+
+            //Abrir Menu Principal.
+            await base.NavigationService.IrParaMenuPrincipal();
+        }
+
+
+
+        private async Task ComecarNovoJogo()
         {
             //Fechar Popup.
             await base.NavigationService.SairDeMenuJogo();

@@ -4,6 +4,8 @@
              xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
              xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
              xmlns:custom="clr-namespace:IT4ClubCar.IT4ClubCar.CustomControls"
+             IsAnimating="False"
+             CloseWhenBackgroundIsClicked="False"
              xmlns:vml="clr-namespace:IT4ClubCar.IT4ClubCar.ViewModels.Base"
              vml:ViewModelLocator.DefinirViewModelAutomaticamente="True"
              x:Class="IT4ClubCar.IT4ClubCar.Views.Popups.MenuJogoPopupView">
@@ -70,7 +72,7 @@
             </Grid.RowDefinitions>
             <!--endregion -->
             <Button Grid.Column="0" Grid.Row="0" Text="End Game" Command="{Binding AbrirTerminarJogoCommand}"/>
-            <Button Grid.Column="0" Grid.Row="1" Text="Start New Game"/>
+            <Button Grid.Column="0" Grid.Row="1" Text="Start New Game" Command="{Binding ComecarNovoJogoCommand}"/>
             <Button Grid.Column="0" Grid.Row="2" Text="Pause" Command="{Binding PausarJogoCommand}"/>
         </Grid>
 

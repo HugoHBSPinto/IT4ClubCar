@@ -25,6 +25,17 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             }
         }
 
+        private ICommand _terminarJogoCommand;
+        public ICommand TerminarJogoCommand
+        {
+            get
+            {
+                if (_terminarJogoCommand == null)
+                    _terminarJogoCommand = new Command(async p => await TerminarJogo(), p => { return true; });
+                return _terminarJogoCommand;
+            }
+        }
+
 
 
         public TerminarJogoPopupViewModel(INavigationService navigationService,
@@ -42,6 +53,15 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.AFecharPopupTerminarJogo, null);
             MediadorMensagensService.Instancia.ResetMensagens(MediadorMensagensService.ViewModelMensagens.AFecharPopupTerminarJogo);
             MediadorMensagensService.Instancia.ResetMensagens(MediadorMensagensService.ViewModelMensagens.JogadorATerminarJogo);
+        }
+
+
+
+        private async Task TerminarJogo()
+        {
+            await base.NavigationService.SairDeTerminarJogo();
+            await base.NavigationService.SairDeMenuJogo();
+            await base.NavigationService.IrParaMenuPrincipal();
         }
 
     }

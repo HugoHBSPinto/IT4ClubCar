@@ -110,8 +110,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
         private JogadorWrapperViewModel _jogador;
 
-        private string _nome;
-        public string Nome
+        private ValidatableObject<string> _nome;
+        public ValidatableObject<string> Nome
         {
             get
             {
@@ -263,7 +263,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                 .ContinueWith(p => InicializarComunicacaoMediador());
 
             Email = new ValidatableObject<string>();
-            Email.RegrasValidacao.Add(new EmailValidationRule<string>());
+            Email.RegrasValidacao.AddRange(new List<IValidationRule<string>>() { new EmailValidationRule<string>(),new EspacoEmBrancoValidationRule<string>(),new EmptyValidationRule<string>()});
+
+            Nome = new ValidatableObject<string>();
+            Nome.RegrasValidacao.AddRange(new List<IValidationRule<string>>() { new EspacoEmBrancoValidationRule<string>(), new EmptyValidationRule<string>() });
         }
         
         
@@ -305,7 +308,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             if(_jogador.Bloqueado)
             {
                 //O utilizador acabou de desbloquear este jogador. Todas as informações serão as default.
-                Nome = "Player";
+                Nome.Valor = "Player";
 
                 Email.Valor = "dont-want@aejd.pt";
                 
@@ -323,7 +326,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             {
                 //Este jogador já estava desbloqueado. Copia-se o valor das propriedades deste jogador, para se
                 //poder alterá-las.
-                Nome = _jogador.Nome;
+                Nome.Valor = _jogador.Nome;
 
                 Email.Valor = _jogador.Email;
 
@@ -353,7 +356,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
         private bool ValidarDados()
         {
-            return Email.Validate();
+            return ((Nome.Validate()) && (Email.Validate()));
         }
 
 
@@ -367,7 +370,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             //Se o jogador antes estava bloqueado, é necessário criar um model para o mesmo.
             if(_jogador.Bloqueado)
             {
-                JogadorModel jogadorModel = new JogadorModel(Nome,Email.Valor,Genero.ObterModel(),Foto,Handicap.ObterModel(),Tee.ObterModel());
+                JogadorModel jogadorModel = new JogadorModel(Nome.Valor,Email.Valor,Genero.ObterModel(),Foto,Handicap.ObterModel(),Tee.ObterModel());
                 _jogador.DefinirModel(jogadorModel);
 
                 //Avisar que utilizador foi criado.
@@ -376,7 +379,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             else
             {
                 //O modelo já está criado. Basta atualizar os valores do mesmo.
-                _jogador.Nome = Nome;
+                _jogador.Nome = Nome.Valor;
                 _jogador.Email = Email.Valor;
                 _jogador.Foto = Foto;
                 _jogador.Foto = Foto;

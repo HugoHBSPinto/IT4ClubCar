@@ -22,9 +22,17 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
 
 
 
+        public async Task IrParaCampoInformacoes()
+        {
+            Application.Current.MainPage = new CampoInformacoesView();
+        }
+
+
+
         public async Task IrParaMenuPrincipal()
         {
-            await Application.Current.MainPage.Navigation.PushModalAsync(new MenuPrincipalView());
+            //await Application.Current.MainPage.Navigation.PushModalAsync(new MenuPrincipalView());
+            Application.Current.MainPage = new MenuPrincipalView();
         }
 
 

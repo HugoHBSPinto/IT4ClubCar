@@ -24,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\SomarListaConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\CustomControls\CustomMap.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\CustomControls\CustomPicker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Excepcoes\WebServiceException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\BuracoModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\CampoModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\GeneroModel.cs" />
@@ -37,6 +38,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\PublicidadeModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\TeeBuracoDistanciaModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\TeeModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Models\WeatherModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\BuggyBar\BuggyBarService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\BuggyBar\IBuggyBarService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Buracos\BuracosService.cs" />
@@ -46,9 +48,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Camera\ICameraService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Campo\CampoService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Campo\ICampoService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\DataAccess\WeatherAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\DataAccess\WebService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Genero\GeneroService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Genero\IGeneroService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Geometria\GeometriaService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Geometria\IGeometriaService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Handicap\HandicapService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Handicap\IHandicapService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\ScreenshotService\IScreenshotService.cs" />
@@ -66,7 +71,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Tee\TeeService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\EmailService\IEmailService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\EmailService\EmailService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Weather\IWeatherService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Weather\WeatherService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Validacoes\EmailValidationRule.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Validacoes\EmptyValidationRule.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Validacoes\EspacoEmBrancoValidationRule.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\MultiDicionario.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Dialog\IDialogService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Navegacao\INavegationService.cs" />
@@ -80,6 +89,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\BaseWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\ExtendedBindableObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Base\ViewModelLocator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\CampoInformacoesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\JogoViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Popups\EditarJogadorPopupViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Popups\MenuJogoPopupViewModel.cs" />
@@ -109,6 +119,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\PublicidadeWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\TeeBuracoDistanciaWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\TeeWrapperViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\WeatherWrapperViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\CampoInformacoesView.xaml.cs">
+      <DependentUpon>CampoInformacoesView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\JogoConfiguracaoView.xaml.cs">
       <DependentUpon>JogoConfiguracaoView.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -170,6 +185,10 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\UserControls\JogadorUserControlView.xaml.cs">
       <DependentUpon>JogadorUserControlView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\VerTempoView.xaml.cs">
+      <DependentUpon>VerTempoView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -285,5 +304,17 @@
   <ItemGroup>
     <PRIResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\AppResources\Resources.en.resw" />
     <PRIResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\AppResources\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\CampoInformacoesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\VerTempoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

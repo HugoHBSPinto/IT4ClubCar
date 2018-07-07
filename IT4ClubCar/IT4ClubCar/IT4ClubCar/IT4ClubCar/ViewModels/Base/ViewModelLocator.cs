@@ -23,6 +23,8 @@ using IT4ClubCar.IT4ClubCar.Services.TelemovelService;
 using IT4ClubCar.IT4ClubCar.Services.EmailService;
 using IT4ClubCar.IT4ClubCar.Services.ScreenshotService;
 using IT4ClubCar.Droid.InterfacesImplementadas;
+using IT4ClubCar.IT4ClubCar.Services.Geometria;
+using IT4ClubCar.IT4ClubCar.Services.Weather;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
 {
@@ -84,6 +86,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
             App.Container.RegisterType<MenuJogoPopupViewModel>();
             App.Container.RegisterType<TerminarJogoPopupViewModel>();
             App.Container.RegisterType<JogadorTerminarJogoUserControlViewModel>();
+            App.Container.RegisterType<CampoInformacoesViewModel>();
 
 
 
@@ -104,6 +107,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
             App.Container.RegisterType<ITelemovelService, TelemovelService>();
             App.Container.RegisterType<IEmailService, EmailService>();
             App.Container.RegisterType<IScreenshotService, ScreenshotService>();
+            App.Container.RegisterType<IGeometriaService, GeometriaService>();
+            App.Container.RegisterType<IWeatherService, WeatherService>();
         }
 
 

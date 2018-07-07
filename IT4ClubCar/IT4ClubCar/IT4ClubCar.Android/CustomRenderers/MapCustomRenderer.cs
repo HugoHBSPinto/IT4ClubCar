@@ -77,6 +77,7 @@ namespace IT4ClubCar.Droid.CustomRenderers
             teePin.Draggable(true);
             teePin.SetTitle("Tee");
             _teeMarker = _mapa.AddMarker(teePin);
+            _teeMarker.Draggable = false;
 
             //Meio Marker.
             var meioPin = new MarkerOptions();

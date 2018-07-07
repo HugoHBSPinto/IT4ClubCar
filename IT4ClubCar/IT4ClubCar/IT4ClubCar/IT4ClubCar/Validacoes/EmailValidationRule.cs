@@ -6,7 +6,7 @@ namespace IT4ClubCar.IT4ClubCar.Validacoes
 {
     class EmailValidationRule<T> : IValidationRule<T>
     {
-        public string ValidationMensagem { get => "Email Inválido"; set => throw new NotImplementedException(); }
+        public string ValidationMensagem => "Email Inválido";
 
         public bool Check(T value)
         {

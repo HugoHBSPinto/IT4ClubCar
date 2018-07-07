@@ -91,9 +91,11 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.UserControls
                                                        : base(navigationService, dialogService)
         {
             _emailService = emailService;
+
             InicializarComunicacaoComMediadorMensagens();
+
             Email = new ValidatableObject<string>();
-            Email.RegrasValidacao.Add(new EmailValidationRule<string>());
+            Email.RegrasValidacao.AddRange(new List<IValidationRule<string>>() { new EmailValidationRule<string>(), new EspacoEmBrancoValidationRule<string>(), new EmptyValidationRule<string>() });
         }
 
 

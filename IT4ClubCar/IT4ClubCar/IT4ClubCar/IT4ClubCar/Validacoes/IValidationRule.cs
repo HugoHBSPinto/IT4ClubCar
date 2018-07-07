@@ -15,13 +15,13 @@ namespace IT4ClubCar.IT4ClubCar.Validacoes
         /// Obtém e define a ValidationMensagem.
         /// </summary>
         /// <remarks>Mensagem a aparecer caso o valor seja inválido.</remarks>
-        string ValidationMensagem { get; set; }
+        string ValidationMensagem { get; }
 
         /// <summary>
         /// Verifica se um determinado valor cumpre esta regra de validação.
         /// </summary>
         /// <param name="value"></param>
-        /// <returns></returns>
+        /// <returns>Verdadeiro se o value cumprir a regra, false se não cumprir.</returns>
         bool Check(T value);
     }
 }

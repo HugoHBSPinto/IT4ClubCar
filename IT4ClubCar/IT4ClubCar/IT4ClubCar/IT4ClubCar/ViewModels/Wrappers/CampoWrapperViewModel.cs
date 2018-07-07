@@ -1,10 +1,12 @@
 ﻿using IT4ClubCar.IT4ClubCar.Models;
+using IT4ClubCar.IT4ClubCar.Services.Camera;
 using IT4ClubCar.IT4ClubCar.ViewModels.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using Xamarin.Forms;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
 {
@@ -64,6 +66,67 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
             get
             {
                 return _campoModel.NumeroBuracos;
+            }
+        }
+
+        /// <summary>
+        /// Obtém Distância.
+        /// </summary>
+        public int Distancia
+        {
+            get
+            {
+                return _campoModel.Distancia;
+            }
+        }
+
+        /// <summary>
+        /// Obtém o Arquitecto.
+        /// </summary>
+        public string Arquitecto
+        {
+            get
+            {
+                return _campoModel.Arquitecto;
+            }
+        }
+
+        /// <summary>
+        /// Obtém a Localização.
+        /// </summary>
+        public string Localizacao
+        {
+            get
+            {
+                return _campoModel.Localizacao;
+            }
+        }
+
+        /// <summary>
+        /// Obtém o Icon.
+        /// </summary>
+        public ImageSource Icon
+        {
+            get
+            {
+                if (_campoModel.IconBase64.Equals(String.Empty))
+                    return null;
+
+                return BytesHandlerHelper.ConverterBase64EmImageSource(_campoModel.IconBase64);
+            }
+        }
+
+        /// <summary>
+        /// Obtém a ImagemAmostra.
+        /// </summary>
+        public ImageSource ImagemAmostra
+        {
+            get
+            {
+                if (_campoModel.ImagemAmostraBase64.Equals(String.Empty))
+                    return null;
+
+                return BytesHandlerHelper.ConverterBase64EmImageSource(_campoModel.ImagemAmostraBase64);
             }
         }
 

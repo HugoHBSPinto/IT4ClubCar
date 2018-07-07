@@ -1,8 +1,5 @@
-﻿using IT4ClubCar.IT4ClubCar.Excepcoes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -10,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IT4ClubCar.IT4ClubCar.Services.DataAccess
 {
-    class WebService
+    class WeatherAPI
     {
         private static HttpClient _cliente = new HttpClient()
         {
@@ -19,7 +16,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.DataAccess
 
 
 
-        public WebService()
+        public WeatherAPI()
         {
             
         }
@@ -31,11 +28,11 @@ namespace IT4ClubCar.IT4ClubCar.Services.DataAccess
         /// </summary>
         /// <param name="dadosRequisitados">Dados a serem obtidos</param>
         /// <returns>String que pode ser convertida em json</returns>
-        public async Task<string> GetStringJson(string dadosRequisitados,CancellationToken token = new CancellationToken())
+        public async Task<string> GetStringJson(string apiKey,string dadosRequisitados, CancellationToken token = new CancellationToken())
         {
             string data = "";
 
-            string pedido = "http://192.168.9.94/it4clubcar/it4clubcarWebService.php?pedido=" + dadosRequisitados;
+            string pedido = "http://api.openweathermap.org/data/2.5/weather?q=" + dadosRequisitados + "&APPID=9ea50f72023fede98b2d8929b8b5a693" + apiKey;
 
             try
             {

@@ -25,6 +25,18 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             }
         }
 
+        private ICommand _irParaCampoInformacoesCommand;
+        public ICommand IrParaCampoInformacoesCommand
+        {
+            get
+            {
+                if (_irParaCampoInformacoesCommand == null)
+                    _irParaCampoInformacoesCommand = new Command(async p => await IrParaCampoInformacoes(), p => { return true; });
+                return _irParaCampoInformacoesCommand;
+            }
+        }
+
+
         private ICommand _voltarParaJogoCommand;
         public ICommand VoltarParaJogoCommand
         {
@@ -48,6 +60,14 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         private async Task IrParaJogoConfiguracao()
         {
             await base.NavigationService.IrParaJogoConfiguracao();
+            base.LimparComunicacaoMediadorMensagens();
+        }
+
+
+
+        private async Task IrParaCampoInformacoes()
+        {
+            await base.NavigationService.IrParaCampoInformacoes();
             base.LimparComunicacaoMediadorMensagens();
         }
 

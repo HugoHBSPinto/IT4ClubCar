@@ -53,7 +53,7 @@
                 <Button Grid.Column="1" Grid.Row="0" Text="Return to Game" Command="{Binding VoltarParaJogoCommand}"/>
 
                 <Button Grid.Column="0" Grid.Row="1" Text="Review a Game"/>
-                <Button Grid.Column="1" Grid.Row="1" Text="Course Info"/>
+                <Button Grid.Column="1" Grid.Row="1" Text="Course Info" Command="{Binding IrParaCampoInformacoesCommand}"/>
 
                 <Button Grid.Column="0" Grid.Row="2" Text="Weather Forecast"/>
                 <Button Grid.Column="1" Grid.Row="2" Text="Feedback"/>

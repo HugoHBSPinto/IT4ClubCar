@@ -20,6 +20,7 @@ using IT4ClubCar.IT4ClubCar.Models;
 using IT4ClubCar.IT4ClubCar.Services.ScreenshotService;
 using IT4ClubCar.IT4ClubCar.Services.EmailService;
 using IT4ClubCar.IT4ClubCar.Services.Tee;
+using IT4ClubCar.IT4ClubCar.Excepcoes;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels
 {
@@ -390,7 +391,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
 
             //Definir as pontuações iniciais de cada jogador.
             DefinirPontuacoes();
-
+            
             //Criar novo jogo.
             CriarNovoJogo();
         }

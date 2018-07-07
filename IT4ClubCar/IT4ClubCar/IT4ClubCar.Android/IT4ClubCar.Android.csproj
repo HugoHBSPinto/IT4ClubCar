@@ -179,6 +179,9 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\IconLeftArrow.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\BackgroundGolfInfo.jpg" />
+  </ItemGroup>
   <Import Project="..\IT4ClubCar\IT4ClubCar.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

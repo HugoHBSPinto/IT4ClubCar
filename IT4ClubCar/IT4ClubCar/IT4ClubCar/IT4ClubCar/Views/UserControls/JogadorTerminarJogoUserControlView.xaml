@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IT4ClubCar.IT4ClubCar.Views.UserControls.JogadorTerminarJogoUserControlView"
+             xmlns:vml="clr-namespace:IT4ClubCar.IT4ClubCar.ViewModels.Base"
+             vml:ViewModelLocator.DefinirViewModelAutomaticamente="True"
+             BackgroundColor="#30CCCCCC"
+             xmlns:customConverters="clr-namespace:IT4ClubCar.IT4ClubCar.Converters">
+
+    <Grid.Resources>
+        <Style x:Key="NomeJogadorLabel" TargetType="Label">
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="BackgroundColor" Value="Black"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="TextColor" Value="White"/>
+        </Style>
+
+        <Style x:Key="EnviarScoreBotao" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="TextColor" Value="Black"/>
+        </Style>
+
+        <Style x:Key="EditarEmailEntry" TargetType="Entry">
+            <Setter Property="BackgroundColor" Value="#CCCCCC"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="TextColor" Value="Black"/>
+        </Style>
+
+        <customConverters:JogadorParaVisibilidadeConverter x:Key="JogadorParaVisibilidade"/>
+    </Grid.Resources>
+    
+    <!--region Column and Row Definitions -->
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <!--endregion -->
+
+    <Grid Grid.Column="0" Grid.Row="0" ColumnSpacing="0" RowSpacing="0" IsVisible="{Binding Jogador, Converter={StaticResource JogadorParaVisibilidade}}">
+        <!--region Column and Row Definitions  -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2.5*"/>
+            <ColumnDefinition Width="0.3*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--endregion -->
+        <!-- Controlos do utilizador -->
+        
+        <!-- Nome -->
+        <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource NomeJogadorLabel}" Text="{Binding Jogador.Nome}"/>
+        
+        <!-- Botão para enviar Scores -->
+        <Button Grid.Column="1" Grid.Row="0" Text="Send Scores!" Style="{StaticResource EnviarScoreBotao}" Command="{Binding EnviarScoresCommand}"/>
+        
+        <!-- Entry para editar Email -->
+        <Entry Grid.Column="2" Grid.Row="0" Placeholder="Email" Style="{StaticResource EditarEmailEntry}" Text="{Binding Email.Valor}" IsEnabled="{Binding PodeAlterarEmail}">
+            <Entry.Triggers>
+                <DataTrigger TargetType="Entry" Binding="{Binding Email.IsValido}" Value="False">
+                    <Setter Property="BackgroundColor" Value="Red"/>
+                </DataTrigger>
+            </Entry.Triggers>
+        </Entry>
+        
+        <!-- Botão para desbloquear e bloquear entry para editar ou bloquear email -->
+        <Image Grid.Column="3" Grid.Row="0" Source="IconEdit.png">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding AlterarEmailCommand}"/>
+            </Image.GestureRecognizers>
+        </Image>
+        
+    </Grid>
+
+</Grid>

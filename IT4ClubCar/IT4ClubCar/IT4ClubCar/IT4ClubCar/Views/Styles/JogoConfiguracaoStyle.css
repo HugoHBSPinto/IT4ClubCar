@@ -1,0 +1,54 @@
+﻿label {
+    margin: 0,20,0,20;
+    text-align: center;
+    font-size: 40;
+    font-weight: lighter;
+    color: #CCCCCC;
+    font-family: sans-serif-light;
+}
+
+CustomPicker {
+    font-family: sans-serif-light;
+    font-size: 32;
+}
+
+.pickerComoUnderline {
+    background-color: #CCCCCC;
+}
+
+.ContainerPickers {
+    padding: 20,0,20,0;
+}
+
+.ContainerJogadores {
+    padding: 88,0,20,0;
+}
+
+#try {
+    width: 1000;
+    background-color: red;
+}
+
+.ContainerBotoes {
+    margin: 0,25,0,0;
+}
+
+button {
+    height: 80;
+    width: 250;
+    border-width: 2;
+    border-radius: 50;
+    font-family: sans-serif;
+    font-size: 20;
+    color: #ffffff;
+}
+
+.BotaoCancelar {
+    background-color: red;
+    margin: 20,0,0,0;
+}
+
+.BotaoAvancar {
+    background-color: green;
+    margin: 0,0,20,0;
+}

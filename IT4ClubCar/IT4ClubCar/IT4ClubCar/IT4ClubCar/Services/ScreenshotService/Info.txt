@@ -1,0 +1,3 @@
+﻿Este serviço é implementado independentemente em cada plataforma e utilizado
+através de DependencyInjection. Para se ver a implementação para cada plataforma
+ir ao projecto de sistema, na pasta InterfacesImplementadas e ver a classe ScreenshotService.

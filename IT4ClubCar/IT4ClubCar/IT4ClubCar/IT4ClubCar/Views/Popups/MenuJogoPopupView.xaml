@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage  xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             xmlns:custom="clr-namespace:IT4ClubCar.IT4ClubCar.CustomControls"
+             IsAnimating="False"
+             CloseWhenBackgroundIsClicked="False"
+             xmlns:vml="clr-namespace:IT4ClubCar.IT4ClubCar.ViewModels.Base"
+             vml:ViewModelLocator.DefinirViewModelAutomaticamente="True"
+             x:Class="IT4ClubCar.IT4ClubCar.Views.Popups.MenuJogoPopupView">
+
+    <pages:PopupPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="Black"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="BorderWidth" Value="1"/>
+            <Setter Property="BorderColor" Value="White"/>
+        </Style>
+    </pages:PopupPage.Resources>
+
+    <Grid
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            HeightRequest="450"
+            WidthRequest="350"
+            BackgroundColor="Transparent">
+
+        <!--region Column and row definitions -->
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--endregion -->
+
+        <!-- Barra de Cima. Titulo e Botão para fechar. -->
+        <Grid Grid.Column="0" Grid.Row="0" ColumnSpacing="0">
+            <!--region Column and Row Definitions -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--endregion -->
+            <Label Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="45"/>
+            <Image Grid.Column="1" Grid.Row="0" Source="IconFecharPopup">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding FecharPopupCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+        </Grid>
+
+        <!-- Corpo do popup. Imagem e Texto. -->
+        <Grid Grid.Column="0" Grid.Row="1" ColumnSpacing="0">
+            <!--region Column and Row Definitions -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--endregion -->
+            <Button Grid.Column="0" Grid.Row="0" Text="End Game" Command="{Binding AbrirTerminarJogoCommand}"/>
+            <Button Grid.Column="0" Grid.Row="1" Text="Start New Game" Command="{Binding ComecarNovoJogoCommand}"/>
+            <Button Grid.Column="0" Grid.Row="2" Text="Pause" Command="{Binding PausarJogoCommand}"/>
+        </Grid>
+
+    </Grid>
+
+</pages:PopupPage>

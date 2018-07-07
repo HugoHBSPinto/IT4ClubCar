@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage  xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             IsAnimating="False"
+             CloseWhenBackgroundIsClicked="False"
+             xmlns:vml="clr-namespace:IT4ClubCar.IT4ClubCar.ViewModels.Base"
+             vml:ViewModelLocator.DefinirViewModelAutomaticamente="True"
+             x:Class="IT4ClubCar.IT4ClubCar.Views.Popups.ProTipPopupView">
+
+    <Grid
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            HeightRequest="650"
+            WidthRequest="450"
+            BackgroundColor="#80000000">
+
+        <!--region Column and row definitions -->
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+        
+        <!--endregion -->
+
+        <!-- Barra de Cima. Titulo e Botão para fechar. -->
+        <Grid Grid.Column="0" Grid.Row="0" ColumnSpacing="0">
+            <!--region Column and Row Definitions -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--endregion -->
+            <Label Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="45" Text="{Binding Publicidade.Titulo}"/>
+            <Image Grid.Column="1" Grid.Row="0" Source="IconFecharPopup">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding FecharPopupCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+        </Grid>
+
+        <StackLayout Grid.Column="0" Grid.Row="1" Padding="20">
+            <Label Text="{Binding Dica}" FontSize="25" TextColor="#CCCCCC" HorizontalTextAlignment="Center"/>
+        </StackLayout>
+
+    </Grid>
+
+</pages:PopupPage>

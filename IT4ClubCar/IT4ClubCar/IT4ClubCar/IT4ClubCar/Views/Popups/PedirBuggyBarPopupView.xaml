@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage  xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             xmlns:custom="clr-namespace:IT4ClubCar.IT4ClubCar.CustomControls"
+             IsAnimating="False"
+             CloseWhenBackgroundIsClicked="False"
+             xmlns:vml="clr-namespace:IT4ClubCar.IT4ClubCar.ViewModels.Base"
+             vml:ViewModelLocator.DefinirViewModelAutomaticamente="True"
+             x:Class="IT4ClubCar.IT4ClubCar.Views.Popups.PedirBuggyBarPopupView">
+
+    <Grid
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            HeightRequest="350"
+            WidthRequest="450"
+            BackgroundColor="{Binding CorDeFundo}">
+
+        <!--region Column and row definitions -->
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--endregion -->
+
+        <!-- Barra de Cima. Titulo e Botão para fechar. -->
+        <Grid Grid.Column="0" Grid.Row="0" ColumnSpacing="0">
+            <!--region Column and Row Definitions -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--endregion -->
+            <Image Grid.Column="1" Grid.Row="0" Source="IconFecharPopup">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding FecharPopupCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+        </Grid>
+
+        <!-- Corpo do popup. Label e Picker. -->
+        <Grid Grid.Column="0" Grid.Row="1" ColumnSpacing="0">
+            <!--region Column and Row Definitions -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.4*"/>
+            </Grid.RowDefinitions>
+            <!--endregion -->
+            <Label Grid.Column="0" Grid.Row="0" TextColor="White" FontSize="30" Text="Choose a hole : " VerticalTextAlignment="Center"/>
+            <custom:CustomPicker Grid.Column="1" Grid.Row="0" Title="Buracos" ItemsSource="{Binding Campo.Buracos}" ItemDisplayBinding="{Binding Numero}" SelectedItem="{Binding BuracoSelecionado}" TextColor="White" FontSize="30"/>
+            <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Text="Ask" BackgroundColor="Orange" Command="{Binding EnviarPedidoCommand}"/>
+        </Grid>
+
+        <!-- ActivityIndicator escondido -->
+        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" IsVisible="{Binding IsActivityIndicatorVisivel}" BackgroundColor="{Binding CorDeFundo}">
+            <!--#region Definição de colunas e linhas. -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.4*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--#endregion -->
+            <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding IsActivityIndicatorACorrer}" Color="Red"/>
+            <Label Grid.Column="0" Grid.Row="1" Text="Calling the buggy car..." FontSize="28" TextColor="White" HorizontalTextAlignment="Center"/>
+        </Grid>
+
+    </Grid>
+
+</pages:PopupPage>

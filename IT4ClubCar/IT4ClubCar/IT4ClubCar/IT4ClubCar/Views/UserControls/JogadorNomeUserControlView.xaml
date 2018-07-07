@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IT4ClubCar.IT4ClubCar.Views.UserControls.JogadorNomeUserControlView"
+             xmlns:vml="clr-namespace:IT4ClubCar.IT4ClubCar.ViewModels.Base"
+             vml:ViewModelLocator.DefinirViewModelAutomaticamente="True">
+
+    <Grid.Resources>
+        <StyleSheet Source="../../Views/Styles/JogadorNomeUserControlStyle.css"/>
+    </Grid.Resources>
+
+
+     <!--region Column and Rows Definitions -->
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <!--endregion -->
+    <Label Grid.Column="0" Grid.Row="0" VerticalTextAlignment="Center" Text="{Binding Jogador.Nome}"/>
+    
+</Grid>

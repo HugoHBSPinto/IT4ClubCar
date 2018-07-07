@@ -10,6 +10,26 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
     /// </summary>
     interface INavigationService
     {
-        
+        Task IrParaPaginaAnterior();
+        Task IrParaMenuPrincipal();
+        Task IrParaCampoInformacoes();
+        Task IrParaJogoConfiguracao();
+        Task IrParaEditarJogador();
+        Task SairDeEditarJogador();
+        Task IrParaJogo();
+        Task IrParaProTip();
+        Task SairDeProTip();
+        Task IrParaPontuacoes();
+        Task SairDePontuacoes();
+        Task IrParaScorecard();
+        Task SairDeScorecard();
+        Task IrParaPublicidadeDoDia();
+        Task SairDePublicidadeDoDia();
+        Task IrParaPedirBuggyBar();
+        Task SairDePedirBuggyBar();
+        Task IrParaMenuJogo();
+        Task SairDeMenuJogo();
+        Task IrParaTerminarJogo();
+        Task SairDeTerminarJogo();
     }
 }

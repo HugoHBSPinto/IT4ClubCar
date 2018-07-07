@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IT4ClubCar.IT4ClubCar.Views.JogoConfiguracaoView"
+             xmlns:vml="clr-namespace:IT4ClubCar.IT4ClubCar.ViewModels.Base"
+             vml:ViewModelLocator.DefinirViewModelAutomaticamente="True"
+             xmlns:control="clr-namespace:IT4ClubCar.IT4ClubCar.Views.UserControls"
+             xmlns:custom="clr-namespace:IT4ClubCar.IT4ClubCar.CustomControls"
+             BackgroundImage="teste5">
+
+    <ContentPage.Resources>
+        <StyleSheet Source="../Views/Styles/JogoConfiguracaoStyle.css"/>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+
+        <Grid ColumnSpacing="0" RowSpacing="5">
+            <!--region Column and Row Definitions -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.2*"/>
+            </Grid.RowDefinitions>
+            <!--endregion -->
+            
+            <!-- Titulo -->
+            <Label Grid.Column="0" Grid.Row="0" Text="Game Configuration"/>
+
+            <!-- Menu do meio. Metade com os pickers - Metade com os jogadores -->
+            <Grid Grid.Column="0" Grid.Row="1">
+                <!--#region Definição de colunas e linhas. -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--#endregion -->
+                <!-- Pickers -->
+                <Grid Grid.Column="0" Grid.Row="0" StyleClass="ContainerPickers">
+                    <!--#region Definição de colunas e linhas. -->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.6*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.6*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.6*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.6*"/>
+                    </Grid.RowDefinitions>
+                    <!--#endregion -->
+                    <!--  Mapas.  -->
+                    <custom:CustomPicker Grid.Column="0" Grid.Row="0" TextColor="#CCCCCC" Title="Maps" ItemsSource="{Binding CamposExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding CampoSelecionado}"/>
+                    <Label Grid.Column="0" Grid.Row="1" StyleClass="pickerComoUnderline"/>
+                    <!--  Modo jogo. -->
+                    <custom:CustomPicker Grid.Column="0" Grid.Row="2" TextColor="#CCCCCC" Title="Game Mode" ItemsSource="{Binding ModosJogoExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding ModoJogoSelecionado}"/>
+                    <Label Grid.Column="0" Grid.Row="3" StyleClass="pickerComoUnderline"/>
+                    <!-- Tipo Métrico. -->
+                    <custom:CustomPicker Grid.Column="0" Grid.Row="4" TextColor="#CCCCCC" Title="Metric Type" ItemsSource="{Binding MetricosExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding MetricoSelecionado}"/>
+                    <Label Grid.Column="0" Grid.Row="5" StyleClass="pickerComoUnderline"/>
+                    <!-- Tipo Starting Tee. -->
+                    <custom:CustomPicker Grid.Column="0" Grid.Row="6" TextColor="#CCCCCC" Title="Starting Tee" ItemsSource="{Binding TeesExistentes}" ItemDisplayBinding="{Binding Nome}" SelectedItem="{Binding TeeSelecionado}"/>
+                    <Label Grid.Column="0" Grid.Row="7" StyleClass="pickerComoUnderline"/>
+                </Grid>
+                <!-- Jogadores -->
+                <Grid Grid.Column="1" Grid.Row="0">
+                    <!--#region Definição de colunas e linhas. -->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--#endregion -->
+                    <control:JogadorUserControlView Grid.Column="0" Grid.Row="0"/>
+                    <control:JogadorUserControlView Grid.Column="1" Grid.Row="0"/>
+                    <control:JogadorUserControlView Grid.Column="0" Grid.Row="1"/>
+                    <control:JogadorUserControlView Grid.Column="1" Grid.Row="1"/>
+                </Grid>
+            </Grid>
+            
+            <!-- Botões -->
+            <Grid Grid.Column="0" Grid.Row="2">
+                <!--#region Definição de colunas e linhas. -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--#endregion -->
+                <!-- Botão Cancelar -->
+                <Button Grid.Column="0" Grid.Row="0" HorizontalOptions="Start" Text="Cancel" StyleClass="BotaoCancelar" BorderWidth="2" BorderRadius="35" Margin="5,5,0,5" Command="{Binding CancelarJogoCommand}"/>
+                <!-- Botão Avançar -->
+                <Button Grid.Column="1" Grid.Row="0" HorizontalOptions="End" Text="Start" TextColor="White" StyleClass="BotaoAvancar" BorderWidth="2" BorderRadius="35" Margin="0,5,0,5" BackgroundColor="Green" Command="{Binding ComecarJogoCommand}">
+                    <Button.Triggers>
+                        <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                            <Setter Property="BackgroundColor" Value="LightGray"/>
+                            <Setter Property="TextColor" Value="Black"/>
+                        </Trigger>
+                    </Button.Triggers>
+                </Button>
+            </Grid>
+
+            <!-- ActivityIndicator escondido -->
+            <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" IsVisible="{Binding IsActivityIndicatorVisivel}" BackgroundColor="{Binding CorDeFundo}">
+                <!--#region Definição de colunas e linhas. -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--#endregion -->
+                <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding IsActivityIndicatorACorrer}" Color="Green"/>
+                <Label Grid.Column="0" Grid.Row="1" Text="Creating the game..." FontSize="35"/>
+            </Grid>
+
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

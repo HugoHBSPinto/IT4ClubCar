@@ -27,6 +27,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
         [Dependency]
         public IDialogService DialogService { get; set; }
 
+        public List<MediadorMensagensService.ViewModelMensagens> MensagensUsadas { get; private set; }
+
 
         /// <summary>
         /// Construtor com parâmetros para o viewmodel.
@@ -37,6 +39,18 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
         {
             NavigationService = navigationService;
             DialogService = dialogService;
+            MensagensUsadas = new List<MediadorMensagensService.ViewModelMensagens>();
+        }
+        
+        
+        
+        /// <summary>
+        /// Remove todos os métodos do viewmodel registado no MediadorMensagens.
+        /// </summary>
+        protected void LimparComunicacaoMediadorMensagens()
+        {
+            foreach (MediadorMensagensService.ViewModelMensagens mensagem in MensagensUsadas)
+                MediadorMensagensService.Instancia.ResetMensagens(mensagem);
         }
 
     }

@@ -10,6 +10,6 @@ namespace IT4ClubCar.IT4ClubCar.Services.Dialog
     /// </summary>
     interface IDialogService
     {
-        
+        Task MostrarMensagem(string mensagem);
     }
 }

@@ -72,7 +72,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.EmailService
         /// <returns>String com o email.</returns>
         public async Task<string> ObterEmailEnvio()
         {
-            string dataJson = await _webService.GetStringJson("GetEmailEnvio");
+            string dataJson = await _webService.ObterDadosJson("GetEmailEnvio");
 
             JObject emailObject = JObject.Parse(dataJson);
 
@@ -89,7 +89,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.EmailService
         /// <returns>String com a senha.</returns>
         public async Task<string> ObterSenhaEmailEnvio()
         {
-            string dataJson = await _webService.GetStringJson("GetEmailSenha");
+            string dataJson = await _webService.ObterDadosJson("GetEmailSenha");
 
             JObject senhaObject = JObject.Parse(dataJson);
 

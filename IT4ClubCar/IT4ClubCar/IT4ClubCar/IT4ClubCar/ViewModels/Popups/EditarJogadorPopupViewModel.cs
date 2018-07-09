@@ -207,6 +207,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                     _tirarFotoCommand = new Command(async p => await TirarFoto(), p => { return true; });
                 return _tirarFotoCommand;
             }
+            set
+            {
+                _tirarFotoCommand = value;
+            }
         }
 
         private ICommand _guardarDadosCommand;
@@ -217,6 +221,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                 if (_guardarDadosCommand == null)
                     _guardarDadosCommand = new Command(async p => await GuardarDados(), p => { return true; });
                 return _guardarDadosCommand;
+            }
+            set
+            {
+                _guardarDadosCommand = null;
             }
         }
 
@@ -229,6 +237,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                     _removerJogadorCommand = new Command(async p => await RemoverUtilizador(), p => { return true; });
                 return _removerJogadorCommand;
             }
+            set
+            {
+                _removerJogadorCommand = null;
+            }
         }
 
         private ICommand _cancelarEdicaoCommand;
@@ -239,6 +251,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                 if (_cancelarEdicaoCommand == null)
                     _cancelarEdicaoCommand = new Command(async p => await CancelarEdicao(), p => { return true; });
                 return _cancelarEdicaoCommand;
+            }
+            set
+            {
+                _cancelarEdicaoCommand = null;
             }
         }
 
@@ -259,8 +275,9 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             _generoService = generoService;
             _cameraService = cameraService;
 
-            Task.Run(async () => await InicializarDados())
-                .ContinueWith(p => InicializarComunicacaoMediador());
+            InicializarComunicacaoMediador();
+
+            Task.Run(async () => await InicializarDados());
 
             Email = new ValidatableObject<string>();
             Email.RegrasValidacao.AddRange(new List<IValidationRule<string>>() { new EmailValidationRule<string>(),new EspacoEmBrancoValidationRule<string>(),new EmptyValidationRule<string>()});
@@ -388,13 +405,12 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                 _jogador.Handicap = Handicap;
             }
 
-            _jogador = null;
-
-            base.LimparComunicacaoMediadorMensagens();
-
             //Fechar PopUp.
             await base.NavigationService.SairDeEditarJogador();
+
+            LimparMemoria();
         }
+
         
         
         
@@ -407,6 +423,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
             //Fechar PopUp.
             await base.NavigationService.SairDeEditarJogador();
+
+            LimparMemoria();
         }
         
 
@@ -415,7 +433,38 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         {
             //Fechar PopUp.
             await base.NavigationService.SairDeEditarJogador();
+
+            LimparMemoria();
         }
 
+
+
+        protected override void LimparMemoria()
+        {
+            _teeService = null;
+            _handicapService = null;
+            _generoService = null;
+            _cameraService = null;
+
+            TeesExistentes = null;
+            GenerosExistentes = null;
+            HandicapMinimo = null;
+            HandicapMaximo = null;
+
+            _jogador = null;
+            Nome = null;
+            Email = null;
+            Foto = null;
+            Genero = null;
+            Tee = null;
+            Handicap = null;
+
+            TirarFotoCommand = null;
+            GuardarDadosCommand = null;
+            RemoverJogadorCommand = null;
+            CancelarEdicaoCommand = null;
+
+            base.LimparMemoria();
+        }
     }
 }

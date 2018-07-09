@@ -28,7 +28,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Buracos
         /// <returns>HandicapWrapperViewModel que representa o handicap default.</returns>
         public async Task<HandicapWrapperViewModel> ObterHandicapDefault()
         {
-            string dataJson = await _webService.GetStringJson("GetHandicapDefault");
+            string dataJson = await _webService.ObterDadosJson("GetHandicapDefault");
 
             JObject handicap = JObject.Parse(dataJson);
 
@@ -47,7 +47,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Buracos
         /// <returns>HandicapWrapperViewModel que representa o handicap mínimo.</returns>
         public async Task<HandicapWrapperViewModel> ObterHandicapMinimo()
         {
-            string dataJson = await _webService.GetStringJson("GetHandicapMinimo");
+            string dataJson = await _webService.ObterDadosJson("GetHandicapMinimo");
 
             JObject handicap = JObject.Parse(dataJson);
 
@@ -66,7 +66,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Buracos
         /// <returns>HandicapWrapperViewModel que representa o handicap mínimo.</returns>
         public async Task<HandicapWrapperViewModel> ObterHandicapMaximo()
         {
-            string dataJson = await _webService.GetStringJson("GetHandicapMaximo");
+            string dataJson = await _webService.ObterDadosJson("GetHandicapMaximo");
 
             JObject handicap = JObject.Parse(dataJson);
 

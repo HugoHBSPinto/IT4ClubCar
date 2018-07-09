@@ -30,7 +30,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Tee
         /// <returns>int que representa o id do starting tee default</returns>
         public async Task<int> ObterStartingTeeDefault()
         {
-            string dataJson = await _webService.GetStringJson("GetStartingTeeDefault");
+            string dataJson = await _webService.ObterDadosJson("GetStartingTeeDefault");
 
             JObject tee = JObject.Parse(dataJson);
 
@@ -47,7 +47,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Tee
         /// <returns>int que representa o id do tee default.</returns>
         public async Task<int> ObterTeeDefault()
         {
-            string dataJson = await _webService.GetStringJson("GetTeeDefault");
+            string dataJson = await _webService.ObterDadosJson("GetTeeDefault");
 
             JObject tee = JObject.Parse(dataJson);
 
@@ -64,7 +64,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Tee
         /// <returns>ObservableCollection<TeeWrapperViewModel> com os tees existentes.</returns>
         public async Task<ObservableCollection<TeeWrapperViewModel>> ObterTeesExistentes()
         {
-            string dataJson = await _webService.GetStringJson("GetTees");
+            string dataJson = await _webService.ObterDadosJson("GetTees");
 
             JArray tees = JArray.Parse(dataJson);
 

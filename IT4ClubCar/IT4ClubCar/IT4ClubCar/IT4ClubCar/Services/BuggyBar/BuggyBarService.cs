@@ -22,7 +22,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.BuggyBar
 
         public async Task<string> ObterNumeroTelemovel()
         {
-            string dataJson = await _webService.GetStringJson("GetNumeroTelemovelBuggyBar");
+            string dataJson = await _webService.ObterDadosJson("GetNumeroTelemovelBuggyBar");
 
             JObject numeroTelemovelObject = JObject.Parse(dataJson);
 

@@ -50,7 +50,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.TelemovelService
         /// <returns>String com o número de telemóvel.</returns>
         public async Task<string> ObterNumeroDeOndeEnviar()
         {
-            string dataJson = await _webService.GetStringJson("GetNumeroTelemovelTwilio");
+            string dataJson = await _webService.ObterDadosJson("GetNumeroTelemovelTwilio");
 
             JObject numeroTelemovelObject = JObject.Parse(dataJson);
 
@@ -67,7 +67,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.TelemovelService
         /// <returns>String com o token de autenticação.</returns>
         public async Task<string> ObterSID()
         {
-            string dataJson = await _webService.GetStringJson("GetSIDTwilio");
+            string dataJson = await _webService.ObterDadosJson("GetSIDTwilio");
 
             JObject SIDObject = JObject.Parse(dataJson);
 
@@ -84,7 +84,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.TelemovelService
         /// <returns>String com o SID.</returns>
         public async Task<string> ObterAuthToken()
         {
-            string dataJson = await _webService.GetStringJson("GetAuthTokenTwilio");
+            string dataJson = await _webService.ObterDadosJson("GetAuthTokenTwilio");
 
             JObject authTokenObject = JObject.Parse(dataJson);
 

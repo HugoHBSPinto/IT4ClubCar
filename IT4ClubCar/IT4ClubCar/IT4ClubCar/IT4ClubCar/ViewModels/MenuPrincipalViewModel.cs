@@ -9,6 +9,7 @@ using IT4ClubCar.IT4ClubCar.ViewModels.Base;
 using System.Diagnostics;
 using IT4ClubCar.IT4ClubCar.Services.ScreenshotService;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels
 {
@@ -23,6 +24,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                     _irParaJogoConfiguracaoCommand = new Command(async p => await IrParaJogoConfiguracao(), p => { return true; });
                 return _irParaJogoConfiguracaoCommand;
             }
+            set
+            {
+                _irParaCampoInformacoesCommand = value;
+            }
         }
 
         private ICommand _irParaCampoInformacoesCommand;
@@ -33,6 +38,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                 if (_irParaCampoInformacoesCommand == null)
                     _irParaCampoInformacoesCommand = new Command(async p => await IrParaCampoInformacoes(), p => { return true; });
                 return _irParaCampoInformacoesCommand;
+            }
+            set
+            {
+                _irParaCampoInformacoesCommand = value;
             }
         }
 
@@ -45,6 +54,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                 if (_voltarParaJogoCommand == null)
                     _voltarParaJogoCommand = new Command(async p => await VoltarParaJogo(), p => { return true; });
                 return _voltarParaJogoCommand;
+            }
+            set
+            {
+                _voltarParaJogoCommand = value;
             }
         }
 
@@ -60,7 +73,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         private async Task IrParaJogoConfiguracao()
         {
             await base.NavigationService.IrParaJogoConfiguracao();
-            base.LimparComunicacaoMediadorMensagens();
+            LimparMemoria();
         }
 
 
@@ -68,7 +81,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         private async Task IrParaCampoInformacoes()
         {
             await base.NavigationService.IrParaCampoInformacoes();
-            base.LimparComunicacaoMediadorMensagens();
+            LimparMemoria();
         }
 
 
@@ -76,8 +89,18 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         private async Task VoltarParaJogo()
         {
             await base.NavigationService.IrParaPaginaAnterior();
-            base.LimparComunicacaoMediadorMensagens();
+            LimparMemoria();
         }
-        
+
+
+
+        protected override void LimparMemoria()
+        {
+            IrParaJogoConfiguracaoCommand = null;
+            IrParaCampoInformacoesCommand = null;
+            VoltarParaJogoCommand = null;
+            base.LimparMemoria();
+        }
+
     }
 }

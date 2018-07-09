@@ -28,7 +28,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Publicidade
         /// <returns>PublicidadeWrapperViewModel com a publicidade do dia.</returns>
         public async Task<PublicidadeWrapperViewModel> ObterPublicidadeDoDia()
         {
-            string dataJson = await _webService.GetStringJson("GetPublicidadeDoDia");
+            string dataJson = await _webService.ObterDadosJson("GetPublicidadeDoDia");
 
             JObject publicidade = JObject.Parse(dataJson);
 

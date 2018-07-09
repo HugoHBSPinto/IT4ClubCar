@@ -19,6 +19,8 @@ namespace IT4ClubCar.IT4ClubCar.Views
         {
             BindingContext = null;
             base.OnDisappearing();
+            GC.Collect();
         }
+
     }
 }

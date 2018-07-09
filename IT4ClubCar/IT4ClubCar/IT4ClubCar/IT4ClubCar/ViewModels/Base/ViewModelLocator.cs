@@ -22,7 +22,6 @@ using IT4ClubCar.IT4ClubCar.Services.BuggyBar;
 using IT4ClubCar.IT4ClubCar.Services.TelemovelService;
 using IT4ClubCar.IT4ClubCar.Services.EmailService;
 using IT4ClubCar.IT4ClubCar.Services.ScreenshotService;
-using IT4ClubCar.Droid.InterfacesImplementadas;
 using IT4ClubCar.IT4ClubCar.Services.Geometria;
 using IT4ClubCar.IT4ClubCar.Services.Weather;
 
@@ -91,6 +90,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
 
 
             //Registar services existentes. Se criar-se um novo adicionar o seu registo aqui.
+            //AVISO : Serviços que têm uma implementação independente para cada plataforma devem ser
+            //registados em cada projecto.
             App.Container.RegisterType<INavigationService, IT4ClubCarNavigationService>();
             App.Container.RegisterType<IDialogService, IT4ClubCarDialogService>();
             App.Container.RegisterType<IBuracosService, BuracosService>();
@@ -106,7 +107,6 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
             App.Container.RegisterType<IBuggyBarService, BuggyBarService>();
             App.Container.RegisterType<ITelemovelService, TelemovelService>();
             App.Container.RegisterType<IEmailService, EmailService>();
-            App.Container.RegisterType<IScreenshotService, ScreenshotService>();
             App.Container.RegisterType<IGeometriaService, GeometriaService>();
             App.Container.RegisterType<IWeatherService, WeatherService>();
         }

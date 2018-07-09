@@ -30,7 +30,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.ModoJogo
         /// <returns>int que representa o id do ModoJogo default.</returns>
         public async Task<int> ObterModoJogoDefault()
         {
-            string dataJson = await _webService.GetStringJson("GetModoJogoDefault");
+            string dataJson = await _webService.ObterDadosJson("GetModoJogoDefault");
 
             JObject modoJogo = JObject.Parse(dataJson);
 
@@ -48,7 +48,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.ModoJogo
         /// <returns>ObservableCollection<CampoWrapperViewModel> só preenchidos com o id e o nome.</returns>
         public async Task<ObservableCollection<ModoJogoWrapperViewModel>> ObterModosJogoDisponiveis()
         {
-            string dataJson = await _webService.GetStringJson("GetModosJogo");
+            string dataJson = await _webService.ObterDadosJson("GetModosJogo");
 
             JArray modosJogo = JArray.Parse(dataJson);
 

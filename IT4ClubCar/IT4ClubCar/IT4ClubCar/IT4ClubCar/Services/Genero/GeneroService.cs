@@ -30,7 +30,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Genero
         /// <returns>int que representa o id do genero default.</returns>
         public async Task<int> ObterGeneroDefault()
         {
-            string dataJson = await _webService.GetStringJson("GetGeneroDefault");
+            string dataJson = await _webService.ObterDadosJson("GetGeneroDefault");
 
             JObject genero = JObject.Parse(dataJson);
 
@@ -47,7 +47,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Genero
         /// <returns>ObservableCollection<GeneroWrapperViewModel> com os generos existentes.</returns>
         public async Task<ObservableCollection<GeneroWrapperViewModel>> ObterGenerosDisponiveis()
         {
-            string dataJson = await _webService.GetStringJson("GetGeneros");
+            string dataJson = await _webService.ObterDadosJson("GetGeneros");
 
             JArray generos = JArray.Parse(dataJson);
 

@@ -32,7 +32,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Buracos
         /// <returns>ObservableCollection<BuracoWrapperViewModel> com os buracos do campo.</returns>
         public async Task<ObservableCollection<BuracoWrapperViewModel>> ObterBuracosDeCampo(CampoWrapperViewModel campo)
         {
-            string dataJson = await _webService.GetStringJson("GetBuracosCampo&IdCampo="+campo.Id);
+            string dataJson = await _webService.ObterDadosJson("GetBuracosCampo&IdCampo="+campo.Id);
 
             JArray buracos = JArray.Parse(dataJson);
 

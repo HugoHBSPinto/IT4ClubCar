@@ -16,5 +16,6 @@ namespace IT4ClubCar.IT4ClubCar.Views.UserControls
 		{
 			InitializeComponent ();
 		}
-	}
+
+    }
 }

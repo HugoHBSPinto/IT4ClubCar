@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using IT4ClubCar.IT4ClubCar.Models;
 using IT4ClubCar.IT4ClubCar.Services.DataAccess;
 using IT4ClubCar.IT4ClubCar.ViewModels.Wrappers;
 using Newtonsoft.Json.Linq;
@@ -25,13 +26,13 @@ namespace IT4ClubCar.IT4ClubCar.Services.Weather
         {
             string apiKey = await ObterAPIKey();
 
-            string weatherInfoData = await _weatherAPI.GetStringJson(apiKey, nomeCidade);
+            string weatherInfoData = await _weatherAPI.ObterDadosJson(apiKey, nomeCidade);
 
             JObject weatherObject = JObject.Parse(weatherInfoData);
 
-            
+            WeatherModel weatherModel = new WeatherModel(String.Empty, String.Empty, String.Empty, 0, 0, 0);
 
-            return id;
+            return new WeatherWrapperViewModel(weatherModel);
         }
 
 

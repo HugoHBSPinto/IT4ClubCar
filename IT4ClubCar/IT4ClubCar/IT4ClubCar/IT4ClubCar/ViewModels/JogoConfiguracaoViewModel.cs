@@ -247,6 +247,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                     _comecarJogoCommand = new Command(async p => await ComecarJogo(), p => { return (Jogadores?.Count!=0); });
                 return _comecarJogoCommand;
             }
+            set
+            {
+                _comecarJogoCommand = value;
+            }
         }
 
         private ICommand _cancelarJogoCommand;
@@ -257,6 +261,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                 if (_cancelarJogoCommand == null)
                     _cancelarJogoCommand = new Command(async p => await base.NavigationService.IrParaPaginaAnterior(), p => { return true; });
                 return _cancelarJogoCommand;
+            }
+            set
+            {
+                _comecarJogoCommand = value;
             }
         }
 
@@ -286,9 +294,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
 
             Jogadores = new ObservableCollection<JogadorWrapperViewModel>();
 
+            InicializarComunicacaoMediadorMensagens();
+
             //Preencher Pickers.
-            Task.Run(async () => await InicializarDados())
-                .ContinueWith(p => InicializarComunicacaoMediadorMensagens());
+            Task.Run(async () => await InicializarDados());
         }
 
 
@@ -376,7 +385,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
 
             MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.NovoJogo, Jogo);
 
-            CleanUp();
+            LimparMemoria();
         }
 
 
@@ -471,13 +480,36 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
 
             Jogo = new JogoWrapperViewModel(jogoModel);
         }
-        
-        
-        
-        private void CleanUp()
-        {
-            base.LimparComunicacaoMediadorMensagens();
-        }
 
+
+
+        protected override void LimparMemoria()
+        {
+            _campoService = null;
+            _modoJogoService = null;
+            _metricoService = null;
+            _buracoService = null;
+            _teeDistanciaService = null;
+            _teeService = null;
+
+            CamposExistentes = null;
+            CampoSelecionado = null;
+            ModosJogoExistentes = null;
+            ModoJogoSelecionado = null;
+            MetricosExistentes = null;
+            MetricoSelecionado =  null;
+            TeesExistentes = null;
+            TeeSelecionado = null;
+            Jogadores = null;
+            Jogo = null;
+            IsActivityIndicatorVisivel = false;
+            IsActivityIndicatorACorrer = false;
+            CorDeFundo = null;
+
+            ComecarJogoCommand = null;
+            CancelarJogoCommand = null;
+
+            base.LimparMemoria();
+        }
     }
 }

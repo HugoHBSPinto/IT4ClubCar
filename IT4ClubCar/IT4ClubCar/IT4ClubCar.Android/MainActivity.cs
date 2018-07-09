@@ -12,6 +12,9 @@ using Android.Content;
 using Android.Util;
 using Plugin.Permissions;
 using PluginPermission = Plugin.Permissions.Abstractions;
+using IT4ClubCar.IT4ClubCar.Services.ScreenshotService;
+using IT4ClubCar.Droid.InterfacesImplementadas;
+using Unity;
 
 namespace IT4ClubCar.Droid
 {
@@ -36,6 +39,8 @@ namespace IT4ClubCar.Droid
             CrossCurrentActivity.Current.Init(this, bundle);
 
             Xamarin.FormsMaps.Init(this, bundle);
+
+            App.Container.RegisterType<IScreenshotService,ScreenshotService>();
         }
 
 

@@ -1,5 +1,4 @@
-﻿using Android.Gms.Maps.Model;
-using IT4ClubCar.IT4ClubCar.Services.Dialog;
+﻿using IT4ClubCar.IT4ClubCar.Services.Dialog;
 using IT4ClubCar.IT4ClubCar.Services.Navegacao;
 using IT4ClubCar.IT4ClubCar.ViewModels.Base;
 using IT4ClubCar.IT4ClubCar.ViewModels.Wrappers;
@@ -497,9 +496,13 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         /// <returns>Position com a posição do meio.</returns>
         private Position CalcularPosicaoMeio()
         {
-            LatLngBounds centro = new LatLngBounds(new LatLng(BuracoPinPosicao.Latitude, BuracoPinPosicao.Longitude), new LatLng(TeePinPosicao.Latitude, TeePinPosicao.Longitude));
-            LatLng posicaoMeio = centro.Center;
-            return new Position(posicaoMeio.Latitude, posicaoMeio.Longitude);
+            Position pontoOrigem = BuracoPinPosicao;
+            Position pontoDestino = TeePinPosicao;
+
+            double latitudeMedia = (pontoOrigem.Latitude + pontoDestino.Latitude) / 2;
+            double longitudeMedia = (pontoOrigem.Longitude + pontoDestino.Longitude) / 2;
+
+            return new Position(latitudeMedia, longitudeMedia);
         }
 
     }

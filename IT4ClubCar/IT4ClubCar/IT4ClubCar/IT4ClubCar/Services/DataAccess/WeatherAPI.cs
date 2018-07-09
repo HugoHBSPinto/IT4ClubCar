@@ -7,19 +7,10 @@ using System.Threading.Tasks;
 
 namespace IT4ClubCar.IT4ClubCar.Services.DataAccess
 {
-    class WeatherAPI
+    class WeatherAPI : BaseWebService
     {
-        private static HttpClient _cliente = new HttpClient()
-        {
-            Timeout = TimeSpan.FromSeconds(2)
-        };
 
-
-
-        public WeatherAPI()
-        {
-            
-        }
+        public WeatherAPI() { }
 
 
 
@@ -28,26 +19,9 @@ namespace IT4ClubCar.IT4ClubCar.Services.DataAccess
         /// </summary>
         /// <param name="dadosRequisitados">Dados a serem obtidos</param>
         /// <returns>String que pode ser convertida em json</returns>
-        public async Task<string> GetStringJson(string apiKey,string dadosRequisitados, CancellationToken token = new CancellationToken())
+        public async Task<string> ObterDadosJson(string apiKey,string dadosRequisitados, CancellationToken token = new CancellationToken())
         {
-            string data = "";
-
-            string pedido = "http://api.openweathermap.org/data/2.5/weather?q=" + dadosRequisitados + "&APPID=9ea50f72023fede98b2d8929b8b5a693" + apiKey;
-
-            try
-            {
-                using (HttpResponseMessage resposta = await _cliente.GetAsync(requestUri: pedido, cancellationToken: token))
-                {
-                    if (resposta.IsSuccessStatusCode)
-                        data = await resposta.Content.ReadAsStringAsync();
-                }
-            }
-            catch (TaskCanceledException e)
-            {
-                throw;
-            }
-
-            return data;
+            return await base.GetStringJson("http://api.openweathermap.org/data/2.5/weather?q=", dadosRequisitados + "&APPID" + apiKey, token);
         }
     }
 }

@@ -16,5 +16,15 @@ namespace IT4ClubCar.IT4ClubCar.Views.Popups
 		{
 			InitializeComponent ();
 		}
-	}
+
+
+
+        protected override void OnDisappearing()
+        {
+            BindingContext = null;
+            base.OnDisappearing();
+            GC.Collect();
+        }
+
+    }
 }

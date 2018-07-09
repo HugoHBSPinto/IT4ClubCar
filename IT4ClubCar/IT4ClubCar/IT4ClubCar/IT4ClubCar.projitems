@@ -48,6 +48,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Camera\ICameraService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Campo\CampoService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Campo\ICampoService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\DataAccess\BaseWebService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\DataAccess\WeatherAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\DataAccess\WebService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Genero\GeneroService.cs" />
@@ -193,11 +194,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)IT4ClubCar\Helpers\" />
     <Folder Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Navegacao\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Styles\MenuPrincipalStyle.css" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\UserControls\JogadorUserControlView.xaml">

@@ -33,7 +33,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Campo
         /// <returns>int que representa o id do campo default.</returns>
         public async Task<int> ObterCampoDefault()
         {
-            string dataJson = await _webService.GetStringJson("GetCampoDefault");
+            string dataJson = await _webService.ObterDadosJson("GetCampoDefault");
 
             JObject idCampo = JObject.Parse(dataJson);
 
@@ -52,7 +52,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Campo
         {
             ObservableCollection<CampoWrapperViewModel> camposDisponiveis = new ObservableCollection<CampoWrapperViewModel>();
 
-            string dataJson = await _webService.GetStringJson("GetCampos");
+            string dataJson = await _webService.ObterDadosJson("GetCampos");
 
             JArray campos = JArray.Parse(dataJson);
 

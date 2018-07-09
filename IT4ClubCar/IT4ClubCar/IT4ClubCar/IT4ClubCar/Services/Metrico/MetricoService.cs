@@ -30,7 +30,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Metrico
         /// <returns>int que representa o id do Metrico default.</returns>
         public async Task<int> ObterMetricoDefault()
         {
-            string dataJson = await _webService.GetStringJson("GetMetricoDefault");
+            string dataJson = await _webService.ObterDadosJson("GetMetricoDefault");
 
             JObject metrico = JObject.Parse(dataJson);
 
@@ -47,7 +47,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Metrico
         /// <returns>ObservableCollection<MetricoWrapperViewModel> com o tipo de métrica disponível.</returns>
         public async Task<ObservableCollection<MetricoWrapperViewModel>> ObterMetricosDisponiveis()
         {
-            string dataJson = await _webService.GetStringJson("GetMetricos");
+            string dataJson = await _webService.ObterDadosJson("GetMetricos");
 
             JArray metricos = JArray.Parse(dataJson);
 

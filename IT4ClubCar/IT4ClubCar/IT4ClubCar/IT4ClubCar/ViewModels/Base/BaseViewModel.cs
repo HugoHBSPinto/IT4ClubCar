@@ -45,9 +45,23 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
         
         
         /// <summary>
+        /// Elimina o viewmodel da memória.
+        /// </summary>
+        protected virtual void LimparMemoria()
+        {
+            LimparComunicacaoMediadorMensagens();
+            NavigationService = null;
+            DialogService = null;
+            MensagensUsadas = null;
+            GC.Collect();
+        }
+
+
+
+        /// <summary>
         /// Remove todos os métodos do viewmodel registado no MediadorMensagens.
         /// </summary>
-        protected void LimparComunicacaoMediadorMensagens()
+        private void LimparComunicacaoMediadorMensagens()
         {
             foreach (MediadorMensagensService.ViewModelMensagens mensagem in MensagensUsadas)
                 MediadorMensagensService.Instancia.ResetMensagens(mensagem);

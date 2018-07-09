@@ -4,6 +4,7 @@ using IT4ClubCar.IT4ClubCar.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -34,14 +35,20 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             get
             {
                 if (_fecharPopupCommand == null)
-                    _fecharPopupCommand = new Command(async p => { await base.NavigationService.SairDeProTip(); }, p => { return true; });
+                    _fecharPopupCommand = new Command(async p => await FecharPopup(), p => { return true; });
                 return _fecharPopupCommand;
+            }
+            set
+            {
+                _fecharPopupCommand = null;
             }
         }
 
 
 
-        public ProTipPopupViewModel(INavigationService navigationService, IDialogService dialogService) : base(navigationService,dialogService)
+        public ProTipPopupViewModel(INavigationService navigationService, 
+                                    IDialogService dialogService) 
+                                    : base(navigationService,dialogService)
         {
             InicializarComunicacaoComMediadorMensagens();
         }
@@ -54,6 +61,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         private void InicializarComunicacaoComMediadorMensagens()
         {
             MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.ProTipConteudo, p => DefinirDica(p as string));
+            base.MensagensUsadas.Add(MediadorMensagensService.ViewModelMensagens.ProTipConteudo);
         }
 
 
@@ -67,5 +75,21 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             Dica = dica;
         }
 
+
+
+        private async Task FecharPopup()
+        {
+            await base.NavigationService.SairDeProTip();
+            LimparMemoria();
+        }
+
+
+
+        protected override void LimparMemoria()
+        {
+            Dica = null;
+            FecharPopupCommand = null;
+            base.LimparMemoria();
+        }
     }
 }

@@ -31,7 +31,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.TeeDistancias
         /// <returns></returns>
         public async Task<TeeBuracoDistanciaWrapperViewModel> ObterDistancias(BuracoWrapperViewModel buraco, TeeWrapperViewModel tee)
         {
-            string dataJson = await _webService.GetStringJson("GetTeeBuracoDistancia&IdBuraco="+buraco.Id+"&IdTee="+tee.Id);
+            string dataJson = await _webService.ObterDadosJson("GetTeeBuracoDistancia&IdBuraco="+buraco.Id+"&IdTee="+tee.Id);
 
             if (dataJson.Equals("[]"))
                 return null;

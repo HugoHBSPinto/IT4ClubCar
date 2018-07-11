@@ -55,6 +55,57 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                 return _camposExistentes[_indicadorCampoAtual];
             }
         }
+
+        /// <summary>
+        /// Obtém e define o IsActivityIndicatorVisivel.
+        /// </summary>
+        private bool _isActivityIndicatorVisivel;
+        public bool IsActivityIndicatorVisivel
+        {
+            get
+            {
+                return _isActivityIndicatorVisivel;
+            }
+            set
+            {
+                _isActivityIndicatorVisivel = value;
+                OnPropertyChanged("IsActivityIndicatorVisivel");
+            }
+        }
+
+        /// <summary>
+        /// Obtém e define o IsActivityIndicatorACorrer.
+        /// </summary>
+        private bool _isActivityIndicatorACorrer;
+        public bool IsActivityIndicatorACorrer
+        {
+            get
+            {
+                return _isActivityIndicatorACorrer;
+            }
+            set
+            {
+                _isActivityIndicatorACorrer = value;
+                OnPropertyChanged("IsActivityIndicatorACorrer");
+            }
+        }
+
+        /// <summary>
+        /// Obtém e define a CorDeFundo.
+        /// </summary>
+        private string _corDeFundo;
+        public string CorDeFundo
+        {
+            get
+            {
+                return _corDeFundo;
+            }
+            set
+            {
+                _corDeFundo = value;
+                OnPropertyChanged("CorDeFundo");
+            }
+        }
         #endregion
 
         #region Servicos
@@ -71,6 +122,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                     _verProximoCampoCommand = new Command(p => VerProximoCampo(),p => { return true; });
                 return _verProximoCampoCommand;
             }
+            set
+            {
+                _verProximoCampoCommand = value;
+            }
         }
 
         private ICommand _verCampoAnteriorCommand;
@@ -82,16 +137,24 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                     _verCampoAnteriorCommand = new Command(p => VerCampoAnterior(), p => { return true; });
                 return _verCampoAnteriorCommand;
             }
+            set
+            {
+                _verCampoAnteriorCommand = value;
+            }
         }
 
-        private ICommand _irParaMenuPrincipalCommand;
-        public ICommand IrParaMenuPrincipalCommand
+        private ICommand _fecharJanelaCommand;
+        public ICommand FecharJanelaCommand
         {
             get
             {
-                if (_irParaMenuPrincipalCommand == null)
-                    _irParaMenuPrincipalCommand = new Command(async p => await FecharJanela(), p => { return true; });
-                return _irParaMenuPrincipalCommand;
+                if (_fecharJanelaCommand == null)
+                    _fecharJanelaCommand = new Command(async p => await FecharJanela(), p => { return true; });
+                return _fecharJanelaCommand;
+            }
+            set
+            {
+                _fecharJanelaCommand = value;
             }
         }
         #endregion
@@ -105,6 +168,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         {
             _campoService = campoService;
 
+            CorDeFundo = "#00000000";
+
             Task.Run(async () => await ObterCamposExistentes());
         }
 
@@ -115,6 +180,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         /// </summary>
         private async Task ObterCamposExistentes()
         {
+            IsActivityIndicatorACorrer = true;
+            IsActivityIndicatorVisivel = true;
+            CorDeFundo = "#CC000000";
+
             _camposExistentes = await _campoService.ObterCamposDisponiveis();
 
             if (_camposExistentes.Count.Equals(0))
@@ -122,6 +191,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
 
             //Definir primeiro campo a mostrar os detalhes.
             IndicadorCampoAtual = 0;
+
+            IsActivityIndicatorACorrer = false;
+            IsActivityIndicatorVisivel = false;
+            CorDeFundo = "#00000000";
         }
 
 
@@ -157,9 +230,23 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
 
         private async Task FecharJanela()
         {
-            _camposExistentes = null;
             await base.NavigationService.IrParaMenuPrincipal();
+            LimparMemoria();
         }
 
+
+
+        protected override void LimparMemoria()
+        {
+            _camposExistentes = null;
+
+            _campoService = null;
+
+            _verCampoAnteriorCommand = null;
+            _verProximoCampoCommand = null;
+            _fecharJanelaCommand = null;
+
+            base.LimparMemoria();
+        }
     }
 }

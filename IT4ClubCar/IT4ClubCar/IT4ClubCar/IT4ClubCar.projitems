@@ -18,6 +18,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\GetPrimeiroErroConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\JogadorParaVisibilidadeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\NomeTempoParaIcon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\NumeroParaCorConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\ObterSegundaMetadeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Converters\ObterPrimeiraMetadeConverter.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\UserControls\JogadorUserControlViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\JogoConfiguracaoViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\MenuPrincipalViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\VerTempoViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\BuracoWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\CampoWrapperViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Wrappers\GeneroWrapperViewModel.cs" />

@@ -78,7 +78,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.UserControls
             get
             {
                 if (_enviarScoresCommand == null)
-                    _enviarScoresCommand = new Command(async p => await EnviarScores(), p => { return true; });
+                    _enviarScoresCommand = new Command(async p => await EnviarScores(), p => VerificarSePodeClicarEmEnviar());
                 return _enviarScoresCommand;
             }
         }
@@ -123,6 +123,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.UserControls
                 Jogador = jogador;
                 Jogador.EmUso = true;
                 Email.Valor = Jogador.Email;
+
+                ((Command)EnviarScoresCommand).ChangeCanExecute();
             }
         }
 
@@ -152,7 +154,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.UserControls
             if (!PodeAlterarEmail)
                 DesbloquearEntryEmail();
             else
+            {
                 BloquearEntryEmail();
+                ((Command)EnviarScoresCommand).ChangeCanExecute();
+            }
         }
 
         /// <summary>
@@ -161,6 +166,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.UserControls
         private void DesbloquearEntryEmail()
         {
             PodeAlterarEmail = true;
+            ((Command)EnviarScoresCommand).ChangeCanExecute();
         }
 
         /// <summary>
@@ -174,6 +180,27 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.UserControls
                 Jogador.Email = Email.Valor;
             }
         }
+
+
+
+        /// <summary>
+        /// Bloqueia ou desbloqueia o botão "Enviar Scores".
+        /// </summary>
+        /// <returns>True se deve estar desbloqueado,false se deve estar bloqueado.</returns>
+        private bool VerificarSePodeClicarEmEnviar()
+        {
+            //Se o email ainda não estiver carregado em memória bloquear botão.
+            if (Email.Valor == null)
+                return false;
+
+            //Se o jogador estiver a editar o email, bloquear o botão.
+            if (PodeAlterarEmail)
+                return false;
+
+            //Se o jogador não tiver alterado o email, sendo ainda o default, bloquear o botão.
+            return !Email.Valor.Equals("dont-want@aejd.pt");
+        }
+
 
 
         /// <summary>

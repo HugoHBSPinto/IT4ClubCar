@@ -11,15 +11,15 @@
         <Style x:Key="NomeJogadorLabel" TargetType="Label">
             <Setter Property="VerticalTextAlignment" Value="Center"/>
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
-            <Setter Property="BackgroundColor" Value="Black"/>
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="TextColor" Value="White"/>
-        </Style>
-
-        <Style x:Key="EnviarScoreBotao" TargetType="Button">
             <Setter Property="BackgroundColor" Value="White"/>
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="TextColor" Value="Black"/>
+        </Style>
+
+        <Style x:Key="EnviarScoreBotao" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#4286f4"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="TextColor" Value="#CCCCCC"/>
         </Style>
 
         <Style x:Key="EditarEmailEntry" TargetType="Entry">
@@ -59,7 +59,7 @@
         <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource NomeJogadorLabel}" Text="{Binding Jogador.Nome}"/>
         
         <!-- Botão para enviar Scores -->
-        <Button Grid.Column="1" Grid.Row="0" Text="Send Scores!" Style="{StaticResource EnviarScoreBotao}" Command="{Binding EnviarScoresCommand}"/>
+        <Button Style="{StaticResource EnviarScoreBotao}" Grid.Column="1" Grid.Row="0" Text="Send Scores!" Command="{Binding EnviarScoresCommand}"/>
         
         <!-- Entry para editar Email -->
         <Entry Grid.Column="2" Grid.Row="0" Placeholder="Email" Style="{StaticResource EditarEmailEntry}" Text="{Binding Email.Valor}" IsEnabled="{Binding PodeAlterarEmail}">
@@ -71,7 +71,7 @@
         </Entry>
         
         <!-- Botão para desbloquear e bloquear entry para editar ou bloquear email -->
-        <Image Grid.Column="3" Grid.Row="0" Source="IconEdit.png">
+        <Image Grid.Column="3" Grid.Row="0" Source="IconEdit.png" BackgroundColor="#4286f4" Aspect="AspectFit">
             <Image.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding AlterarEmailCommand}"/>
             </Image.GestureRecognizers>

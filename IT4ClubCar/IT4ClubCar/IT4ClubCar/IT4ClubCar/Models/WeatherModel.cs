@@ -7,6 +7,9 @@ namespace IT4ClubCar.IT4ClubCar.Models
 {
     class WeatherModel
     {
+        public enum TipoTemperatura { ºC, ºF, Indefinido };
+
+
         /// <summary>
         /// Obtém e define o NomeCidade.
         /// </summary>
@@ -37,9 +40,19 @@ namespace IT4ClubCar.IT4ClubCar.Models
         /// </summary>
         public float TemperaturaMinima { get; set; }
 
+        /// <summary>
+        /// Obtém e define o TipoTemp.
+        /// </summary>
+        public TipoTemperatura TipoTemp { get; set; }
+
+        /// <summary>
+        /// Obtém e define as Horas.
+        /// </summary>
+        public string Horas { get; set; }
 
 
-        public WeatherModel(string nomeCidade,string nome,string descricao,float temperatura,float temperaturaMaxima,float temperaturaMinima)
+
+        public WeatherModel(string nomeCidade,string nome,string descricao,float temperatura,float temperaturaMaxima,float temperaturaMinima,string horas)
         {
             NomeCidade = nomeCidade;
             Nome = nome;
@@ -47,6 +60,8 @@ namespace IT4ClubCar.IT4ClubCar.Models
             Temperatura = temperatura;
             TemperaturaMaxima = temperaturaMaxima;
             TemperaturaMinima = temperaturaMinima;
+            Horas = horas;
+            TipoTemp = TipoTemperatura.ºC;
         }
 
     }

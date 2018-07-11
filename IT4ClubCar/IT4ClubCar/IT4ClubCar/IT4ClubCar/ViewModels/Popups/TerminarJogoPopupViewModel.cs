@@ -14,6 +14,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 {
     class TerminarJogoPopupViewModel : BaseViewModel
     {
+        #region Commands
         private ICommand _fecharPopupCommand;
         public ICommand FecharPopupCommand
         {
@@ -35,6 +36,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                 return _terminarJogoCommand;
             }
         }
+        #endregion
 
 
 
@@ -44,7 +46,6 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         {
             
         }
-
 
 
         private async Task FecharPopup()

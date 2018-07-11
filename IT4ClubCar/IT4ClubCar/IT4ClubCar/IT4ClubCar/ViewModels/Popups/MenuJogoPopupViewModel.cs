@@ -75,7 +75,21 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         private void InicializarComunicacaoComMediadorMensagens()
         {
             //Obtém o jogo em uso.
-            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.JogoAtual, p => { _jogo = (JogoWrapperViewModel)p; });
+            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.JogoAtual, p => DefinirJogo(p as JogoWrapperViewModel));
+        }
+
+
+
+        /// <summary>
+        /// Define a propriedade _jogo.
+        /// </summary>
+        /// <param name="jogo">jogo com o qual se vai definir a propriedade _jogo.</param>
+        private void DefinirJogo(JogoWrapperViewModel jogo)
+        {
+            if (jogo == null)
+                return;
+
+            _jogo = jogo;
         }
 
 
@@ -95,11 +109,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
         private async Task PausarJogo()
         {
-            //Fechar Popup.
+            _jogo.BuracoPausado = _jogo.BuracoAtual;
             await base.NavigationService.SairDeMenuJogo();
-
-            //Abrir Menu Principal.
             await base.NavigationService.IrParaMenuPrincipal();
+            MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.JogoPausado, _jogo);
         }
 
 

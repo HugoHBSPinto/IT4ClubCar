@@ -252,7 +252,7 @@
                         </Grid.RowDefinitions>
                         <!--endregion -->
                         <Label Style="{StaticResource LabelIndicadorBarraInferior}" Grid.Column="0" Grid.Row="0" Text="Nº"/>
-                        <Label Style="{StaticResource LabelValorBarraInferior}" Grid.Column="1" Grid.Row="0" Text="{Binding BuracoAtual.Numero}"/>
+                        <Label Style="{StaticResource LabelValorBarraInferior}" Grid.Column="1" Grid.Row="0" Text="{Binding Jogo.BuracoAtual.Numero}"/>
                     </Grid>
                     <Grid Grid.Column="2" Grid.Row="0">
                         <!--region Column and Row Definitions -->
@@ -265,7 +265,7 @@
                         </Grid.RowDefinitions>
                         <!--endregion -->
                         <Label Style="{StaticResource LabelIndicadorBarraInferior}" Grid.Column="0" Grid.Row="0" Text="Par :"/>
-                        <Label Style="{StaticResource  LabelValorBarraInferior}" Grid.Column="1" Grid.Row="0" Text="{Binding BuracoAtual.Par}"/>
+                        <Label Style="{StaticResource  LabelValorBarraInferior}" Grid.Column="1" Grid.Row="0" Text="{Binding Jogo.BuracoAtual.Par}"/>
                     </Grid>
                     <Grid Grid.Column="3" Grid.Row="0">
                         <!--region Column and Row Definitions -->
@@ -278,7 +278,7 @@
                         </Grid.RowDefinitions>
                         <!--endregion -->
                         <Label Style="{StaticResource LabelIndicadorBarraInferior}" Grid.Column="0" Grid.Row="0" Text="S.I :"/>
-                        <Label Style="{StaticResource LabelValorBarraInferior}" Grid.Column="1" Grid.Row="0" Text="{Binding BuracoAtual.Par}"/>
+                        <Label Style="{StaticResource LabelValorBarraInferior}" Grid.Column="1" Grid.Row="0" Text="{Binding Jogo.BuracoAtual.Par}"/>
                     </Grid>
                     <Image Grid.Column="4" Grid.Row="0" Source="IconRightArrow.png">
                         <Image.GestureRecognizers>

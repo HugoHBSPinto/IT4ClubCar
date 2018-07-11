@@ -142,11 +142,11 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                                            ITelemovelService telemovelService)
                                            : base(navigationService,dialogService)
         {
-            CorDeFundo = "#80000000";
-
             _buggyBarService = buggyBarService;
             _telemovelService = telemovelService;
 
+            CorDeFundo = "#20000000";
+            
             InicializarComunicacaoComMediadorMensagens();
         }
 
@@ -158,9 +158,21 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         private void InicializarComunicacaoComMediadorMensagens()
         {
             //Campo Atual.
-            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.CampoAtual, p => Campo = (CampoWrapperViewModel)p);
-            //Buraco Atual do jogo cujo valor vai ser inicialmente atribuído ao BuracoSelecionado.
-            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.BuracoAtual, p => InicializarBuracoSelecionado((BuracoWrapperViewModel)p));
+            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.CampoAtual, p => InicializarCampo((CampoWrapperViewModel)p));
+        }
+
+
+
+        /// <summary>
+        /// Inicializa a propriedade Campo inicializando também a propriedade BuracoSelecionado.
+        /// </summary>
+        private void InicializarCampo(CampoWrapperViewModel campoEscolhido)
+        {
+            if (campoEscolhido == null)
+                return;
+
+            Campo = campoEscolhido;
+            InicializarBuracoSelecionado(Campo.Buracos[0]);
         }
 
 

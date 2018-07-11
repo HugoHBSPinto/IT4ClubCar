@@ -4,6 +4,7 @@ using IT4ClubCar.IT4ClubCar.Services.Navegacao;
 using IT4ClubCar.IT4ClubCar.Services.ScreenshotService;
 using IT4ClubCar.IT4ClubCar.ViewModels.Base;
 using IT4ClubCar.IT4ClubCar.ViewModels.Wrappers;
+using MailKit.Security;
 using MimeKit;
 using System;
 using System.Collections.Generic;
@@ -20,9 +21,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 {
     class ScorecardPopupViewModel : BaseViewModel
     {
-        private IScreenshotService _screenshotService;
-        private IEmailService _emailService;
-
+        #region Propriedades
         /// <summary>
         /// Obtém e define o Jogo.
         /// </summary>
@@ -82,6 +81,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         {
             get
             {
+                
                 return _isActivityIndicatorVisivel;
             }
             set
@@ -124,7 +124,14 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                 OnPropertyChanged("CorDeFundo");
             }
         }
+        #endregion
 
+        #region Services
+        private IScreenshotService _screenshotService;
+        private IEmailService _emailService;
+        #endregion
+
+        #region Commands
         private ICommand _tirarPrintCommand;
         public ICommand TirarPrintCommand
         {
@@ -146,6 +153,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                 return _fecharPopupCommand;
             }
         }
+        #endregion
 
 
 
@@ -155,12 +163,13 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                                         IEmailService emailService) 
                                         : base(navigationService,dialogService)
         {
+            CorDeFundo = "#80000000";
+
             _screenshotService = screenshotService;
             _emailService = emailService;
 
-            CorDeFundo = "#80000000";
-
             TeesUsados = new ObservableCollection<TeeWrapperViewModel>();
+
             InicializarComunicacaoMediadorMensagens();
         }
 
@@ -172,9 +181,9 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         private void InicializarComunicacaoMediadorMensagens()
         {
             //Jogo a mostrar no scorecard.
-            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.JogoAtual, p => InicializarPropriedadeJogo(p as JogoWrapperViewModel));
+            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.JogoAtual, p => Task.Run(() => InicializarPropriedadeJogo((JogoWrapperViewModel)p)));
             //Jogador a enviar uma print do scorecard.
-            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.JogadorAEnviarScorecard, p => { JogadorAEnviarPrint = p as JogadorWrapperViewModel; });
+            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.JogadorAEnviarScorecard, p => { JogadorAEnviarPrint = (JogadorWrapperViewModel)p; });
         }
 
 
@@ -219,7 +228,18 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             attachments.Add("ScorecardPNG,", screenshot, ContentType.Parse("image/png"));
 
             //Enviar Email.
-            await _emailService.EnviarEmail(emailDestino: JogadorAEnviarPrint.Email, assunto: "IT4ClubCar Game Results",mensagemConteudo: "Like you asked :)",attachments: attachments);
+            try
+            {
+                await _emailService.EnviarEmail(emailDestino: JogadorAEnviarPrint.Email, assunto: "IT4ClubCar Game Results", mensagemConteudo: "Like you asked :)", attachments: attachments);
+            }
+            catch(SaslException e)
+            {
+                await base.DialogService.MostrarMensagem("Error while sending the email. Please try again later");
+            }
+            catch (AuthenticationException e)
+            {
+                await base.DialogService.MostrarMensagem("Error while sending the email. Please try again later");
+            }
 
             await base.NavigationService.SairDeScorecard();
 

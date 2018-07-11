@@ -24,5 +24,16 @@ namespace IT4ClubCar.IT4ClubCar.Services.Geometria
 
             return distanciaFinal;
         }
+
+
+
+        public Position ObterPosicaoMeio(Position posicaoOrigem, Position posicaoDestino)
+        {
+            double latitudeMedia = (posicaoOrigem.Latitude + posicaoDestino.Latitude) / 2;
+            double longitudeMedia = (posicaoOrigem.Longitude + posicaoDestino.Longitude) / 2;
+
+            return new Position(latitudeMedia, longitudeMedia);
+        }
+
     }
 }

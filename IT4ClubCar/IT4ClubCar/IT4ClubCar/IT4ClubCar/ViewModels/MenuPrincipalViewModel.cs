@@ -10,11 +10,15 @@ using System.Diagnostics;
 using IT4ClubCar.IT4ClubCar.Services.ScreenshotService;
 using System.Threading.Tasks;
 using System.Threading;
+using IT4ClubCar.IT4ClubCar.ViewModels.Wrappers;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels
 {
     class MenuPrincipalViewModel : BaseViewModel
     {
+        private JogoWrapperViewModel _jogoPausado;
+
+        #region Commands
         private ICommand _irParaJogoConfiguracaoCommand;
         public ICommand IrParaJogoConfiguracaoCommand
         {
@@ -45,6 +49,20 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             }
         }
 
+        private ICommand _irParaVerTempoCommand;
+        public ICommand IrParaVerTempoCommand
+        {
+            get
+            {
+                if (_irParaVerTempoCommand == null)
+                    _irParaVerTempoCommand = new Command(async p => await IrParaVerTempo(), p => { return true; });
+                return _irParaVerTempoCommand;
+            }
+            set
+            {
+                _irParaVerTempoCommand = value;
+            }
+        }
 
         private ICommand _voltarParaJogoCommand;
         public ICommand VoltarParaJogoCommand
@@ -52,7 +70,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             get
             {
                 if (_voltarParaJogoCommand == null)
-                    _voltarParaJogoCommand = new Command(async p => await VoltarParaJogo(), p => { return true; });
+                    _voltarParaJogoCommand = new Command(async p => await VoltarParaJogo(), p => { return _jogoPausado != null; });
                 return _voltarParaJogoCommand;
             }
             set
@@ -60,12 +78,39 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                 _voltarParaJogoCommand = value;
             }
         }
+        #endregion
 
 
 
         public MenuPrincipalViewModel(INavigationService navegationService, IDialogService dialogService) : base(navegationService,dialogService)
         {
-            
+            InicializarComunicacaoComViewModel();
+        }
+
+
+
+        /// <summary>
+        /// Regista o viewmodel às mensagens necessárias do MediadorMensagens.
+        /// </summary>
+        private void InicializarComunicacaoComViewModel()
+        {
+            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.JogoPausado,p => DefinirJogoPausado(p as JogoWrapperViewModel));
+        }
+
+
+
+        /// <summary>
+        /// Define a propriedade JogoPausado.
+        /// </summary>
+        /// <param name="jogo">Jogo com o qual se vai definir a propriedade JogoPausado.</param>
+        private void DefinirJogoPausado(JogoWrapperViewModel jogo)
+        {
+            if (jogo == null)
+                return;
+
+            _jogoPausado = jogo;
+
+            ((Command)VoltarParaJogoCommand).ChangeCanExecute();
         }
 
 
@@ -86,9 +131,18 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
 
 
 
+        private async Task IrParaVerTempo()
+        {
+            await base.NavigationService.IrParaVerTempo();
+            LimparMemoria();
+        }
+
+
+
         private async Task VoltarParaJogo()
         {
-            await base.NavigationService.IrParaPaginaAnterior();
+            await base.NavigationService.IrParaJogo();
+            MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.RecomecarJogo, _jogoPausado);
             LimparMemoria();
         }
 

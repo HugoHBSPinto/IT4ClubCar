@@ -29,6 +29,13 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
 
 
 
+        public async Task IrParaVerTempo()
+        {
+            Application.Current.MainPage = new VerTempoView();
+        }
+
+
+
         public async Task IrParaMenuPrincipal()
         {
             //await Application.Current.MainPage.Navigation.PushModalAsync(new MenuPrincipalView());

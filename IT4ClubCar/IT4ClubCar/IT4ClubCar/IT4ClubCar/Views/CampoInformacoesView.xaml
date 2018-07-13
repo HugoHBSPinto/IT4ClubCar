@@ -103,7 +103,7 @@
             </Grid>
 
             <!-- ActivityIndicator escondido -->
-            <Grid Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0" IsVisible="{Binding IsActivityIndicatorVisivel}" BackgroundColor="{Binding CorDeFundo}">
+            <Grid Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0" IsVisible="{Binding ActivityIndicatorTool.IsVisivel}" BackgroundColor="{Binding ActivityIndicatorTool.BackgroundCorEmUso}">
                 <!--#region Definição de colunas e linhas. -->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -113,8 +113,8 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <!--#endregion -->
-                <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding IsActivityIndicatorACorrer}" Color="Green"/>
-                <Label Grid.Column="0" Grid.Row="1" Text="Obtaining all existing courses..." HorizontalTextAlignment="Center" BackgroundColor="Transparent" TextColor="White" FontSize="35"/>
+                <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding ActivityIndicatorTool.IsRunning}" Color="{Binding ActivityIndicatorTool.ActivityIndicatorCor}"/>
+                <Label Grid.Column="0" Grid.Row="1" Text="{Binding ActivityIndicatorTool.MensagemAMostrar}" HorizontalTextAlignment="Center" BackgroundColor="Transparent" TextColor="White" FontSize="35"/>
             </Grid>
 
         </Grid>

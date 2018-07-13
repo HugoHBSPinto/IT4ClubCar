@@ -52,6 +52,14 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
 
 
 
+        public async Task IrParaLogIn()
+        {
+            await PopupNavigation.PushAsync(new LogInPopupView(), animate: false);
+            //await Application.Current.MainPage.Navigation.PushModalAsync(new JogoConfiguracaoView());
+        }
+
+
+
         public async Task IrParaEditarJogador()
         {
             await PopupNavigation.PushAsync(new EditarJogadorPopupView(), animate: false);

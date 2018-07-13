@@ -82,7 +82,7 @@
         </Grid>
 
         <!-- ActivityIndicator escondido -->
-        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" IsVisible="{Binding IsActivityIndicatorVisivel}" BackgroundColor="{Binding CorDeFundo}">
+        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" IsVisible="{Binding ActivityIndicatorTool.IsVisivel}" BackgroundColor="{Binding ActivityIndicatorTool.BackgroundCorEmUso}">
             <!--#region Definição de colunas e linhas. -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -92,8 +92,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!--#endregion -->
-            <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding IsActivityIndicatorACorrer}" Color="Red"/>
-            <Label Grid.Column="0" Grid.Row="1" Text="Calling the buggy car..." FontSize="28" TextColor="White" HorizontalTextAlignment="Center"/>
+            <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding ActivityIndicatorTool.IsRunning}" Color="{Binding ActivityIndicatorTool.ActivityIndicatorCor}"/>
+            <Label Grid.Column="0" Grid.Row="1" Text="{Binding ActivityIndicatorTool.MensagemAMostrar}" FontSize="28" TextColor="White" HorizontalTextAlignment="Center"/>
         </Grid>
 
     </Grid>

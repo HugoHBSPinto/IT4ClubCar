@@ -1,6 +1,7 @@
 ﻿using IT4ClubCar.IT4ClubCar.Services.Dialog;
 using IT4ClubCar.IT4ClubCar.Services.Navegacao;
 using IT4ClubCar.IT4ClubCar.Services.Weather;
+using IT4ClubCar.IT4ClubCar.Toolbox;
 using IT4ClubCar.IT4ClubCar.ViewModels.Base;
 using IT4ClubCar.IT4ClubCar.ViewModels.Wrappers;
 using System;
@@ -70,53 +71,19 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         }
 
         /// <summary>
-        /// Obtém e define o IsActivityIndicatorVisivel.
+        /// Obtém e define a ActivityIndicatorTool.
         /// </summary>
-        private bool _isActivityIndicatorVisivel;
-        public bool IsActivityIndicatorVisivel
+        private ActivityIndicatorTool _activityIndicatorTool;
+        public ActivityIndicatorTool ActivityIndicatorTool
         {
             get
             {
-                return _isActivityIndicatorVisivel;
+                return _activityIndicatorTool;
             }
             set
             {
-                _isActivityIndicatorVisivel = value;
-                OnPropertyChanged("IsActivityIndicatorVisivel");
-            }
-        }
-
-        /// <summary>
-        /// Obtém e define o IsActivityIndicatorACorrer.
-        /// </summary>
-        private bool _isActivityIndicatorACorrer;
-        public bool IsActivityIndicatorACorrer
-        {
-            get
-            {
-                return _isActivityIndicatorACorrer;
-            }
-            set
-            {
-                _isActivityIndicatorACorrer = value;
-                OnPropertyChanged("IsActivityIndicatorACorrer");
-            }
-        }
-
-        /// <summary>
-        /// Obtém e define a CorDeFundo.
-        /// </summary>
-        private string _corDeFundo;
-        public string CorDeFundo
-        {
-            get
-            {
-                return _corDeFundo;
-            }
-            set
-            {
-                _corDeFundo = value;
-                OnPropertyChanged("CorDeFundo");
+                _activityIndicatorTool = value;
+                OnPropertyChanged("ActivityIndicatorTool");
             }
         }
         #endregion
@@ -161,7 +128,9 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                                     : base(navigationService,dialogService)
         {
             _weatherService = weatherService;
-            
+
+            ActivityIndicatorTool = new ActivityIndicatorTool(activityIndicatorCor: "#4286f4", mensagemAMostrar: "Predicting weather...", backgroundCorVisivel: "#CC000000", backgroundCorEscondido: "#00000000");
+
             //Obter tempo atual
             Task.Run(async () => await ObterTempoAtual());
         }
@@ -173,15 +142,11 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         /// </summary>
         private async Task ObterTempoAtual()
         {
-            IsActivityIndicatorACorrer = true;
-            IsActivityIndicatorVisivel = true;
-            CorDeFundo = "#CC000000";
+            ActivityIndicatorTool.ExecutarRoda();
 
             PrevisoesTempo = await _weatherService.ObterPrevisoesPorNomeCidade("Alcantarilha");
 
-            IsActivityIndicatorACorrer = false;
-            IsActivityIndicatorVisivel = false;
-            CorDeFundo = "#00000000";
+            ActivityIndicatorTool.PararRoda();
         }
 
 
@@ -212,7 +177,6 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         protected override void LimparMemoria()
         {
             PrevisoesTempo = null;
-            CorDeFundo = null;
 
             _weatherService = null;
 
@@ -221,5 +185,6 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
 
             base.LimparMemoria();
         }
+
     }
 }

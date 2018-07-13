@@ -150,7 +150,7 @@
             <Button Grid.Column="1" Grid.Row="0" BackgroundColor="Red" TextColor="White" FontSize="18" Text="X" Command="{Binding FecharJanelaCommand}"/>
 
             <!-- ActivityIndicator escondido -->
-            <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="3" IsVisible="{Binding IsActivityIndicatorVisivel}" BackgroundColor="{Binding CorDeFundo}">
+            <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="3" IsVisible="{Binding ActivityIndicatorTool.IsVisivel}" BackgroundColor="{Binding ActivityIndicatorTool.BackgroundCorEmUso}">
                 <!--#region Definição de colunas e linhas. -->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -161,8 +161,8 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <!--#endregion -->
-                <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding IsActivityIndicatorACorrer}" Color="Blue"/>
-                <Label Grid.Column="0" Grid.Row="1" Text="Predicting the Weather..." TextColor="White" HorizontalTextAlignment="Center" FontSize="35"/>
+                <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding ActivityIndicatorTool.IsRunning}" Color="{Binding ActivityIndicatorTool.ActivityIndicatorCor}"/>
+                <Label Grid.Column="0" Grid.Row="1" Text="{Binding ActivityIndicatorTool.MensagemAMostrar}" TextColor="White" HorizontalTextAlignment="Center" FontSize="35"/>
             </Grid>
 
         </Grid>

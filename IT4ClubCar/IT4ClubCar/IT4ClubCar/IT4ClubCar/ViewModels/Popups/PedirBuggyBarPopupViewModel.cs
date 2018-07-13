@@ -3,6 +3,7 @@ using IT4ClubCar.IT4ClubCar.Services.Dialog;
 using IT4ClubCar.IT4ClubCar.Services.EmailService;
 using IT4ClubCar.IT4ClubCar.Services.Navegacao;
 using IT4ClubCar.IT4ClubCar.Services.TelemovelService;
+using IT4ClubCar.IT4ClubCar.Toolbox;
 using IT4ClubCar.IT4ClubCar.ViewModels.Base;
 using IT4ClubCar.IT4ClubCar.ViewModels.Wrappers;
 using System;
@@ -17,16 +18,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 {
     class PedirBuggyBarPopupViewModel : BaseViewModel
     {
-        /// <summary>
-        /// Obtém e define o _buggyBarService.
-        /// </summary>
-        private IBuggyBarService _buggyBarService;
-
-        /// <summary>
-        /// Obtém e define o _telemovelService.
-        /// </summary>
-        private ITelemovelService _telemovelService;
-
+        #region Propriedades
         /// <summary>
         /// Obtém e define o Campo.
         /// </summary>
@@ -62,56 +54,36 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         }
 
         /// <summary>
-        /// Obtém e define o IsActivityIndicatorVisivel.
+        /// Obtém e define a ActivityIndicatorTool.
         /// </summary>
-        private bool _isActivityIndicatorVisivel;
-        public bool IsActivityIndicatorVisivel
+        private ActivityIndicatorTool _activityIndicatorTool;
+        public ActivityIndicatorTool ActivityIndicatorTool
         {
             get
             {
-                return _isActivityIndicatorVisivel;
+                return _activityIndicatorTool;
             }
             set
             {
-                _isActivityIndicatorVisivel = value;
-                OnPropertyChanged("IsActivityIndicatorVisivel");
+                _activityIndicatorTool = value;
+                OnPropertyChanged("ActivityIndicatorTool");
             }
         }
+        #endregion
+
+        #region Services
+        /// <summary>
+        /// Obtém e define o _buggyBarService.
+        /// </summary>
+        private IBuggyBarService _buggyBarService;
 
         /// <summary>
-        /// Obtém e define o IsActivityIndicatorACorrer.
+        /// Obtém e define o _telemovelService.
         /// </summary>
-        private bool _isActivityIndicatorACorrer;
-        public bool IsActivityIndicatorACorrer
-        {
-            get
-            {
-                return _isActivityIndicatorACorrer;
-            }
-            set
-            {
-                _isActivityIndicatorACorrer = value;
-                OnPropertyChanged("IsActivityIndicatorACorrer");
-            }
-        }
+        private ITelemovelService _telemovelService;
+        #endregion
 
-        /// <summary>
-        /// Obtém e define a CorDeFundo.
-        /// </summary>
-        private string _corDeFundo;
-        public string CorDeFundo
-        {
-            get
-            {
-                return _corDeFundo;
-            }
-            set
-            {
-                _corDeFundo = value;
-                OnPropertyChanged("CorDeFundo");
-            }
-        }
-
+        #region Commands
         private ICommand _fecharPopupCommand;
         public ICommand FecharPopupCommand
         {
@@ -133,6 +105,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                 return _enviarPedidoCommand;
             }
         }
+        #endregion
 
 
 
@@ -145,8 +118,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             _buggyBarService = buggyBarService;
             _telemovelService = telemovelService;
 
-            CorDeFundo = "#20000000";
-            
+            ActivityIndicatorTool = new ActivityIndicatorTool(activityIndicatorCor: "#e2243d", mensagemAMostrar: "Calling BuggyBar...", backgroundCorVisivel: "#CC000000", backgroundCorEscondido: "#00000000");
+
             InicializarComunicacaoComMediadorMensagens();
         }
 
@@ -196,10 +169,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         /// </summary>
         private async Task EnviarPedido()
         {
-            //Mostrar Activity indicator.
-            IsActivityIndicatorACorrer = true;
-            IsActivityIndicatorVisivel = true;
-            CorDeFundo = "#CC000000";
+            ActivityIndicatorTool.ExecutarRoda();
 
             string numeroTelemovelBuggyBar = await _buggyBarService.ObterNumeroTelemovel();
 
@@ -209,9 +179,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
             await base.NavigationService.SairDePedirBuggyBar();
 
-            //Esconder Activity Indicator.
-            IsActivityIndicatorACorrer = false;
-            IsActivityIndicatorVisivel = false;
+            ActivityIndicatorTool.PararRoda();
         }
 
     }

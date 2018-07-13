@@ -21,13 +21,13 @@ using IT4ClubCar.IT4ClubCar.Services.ScreenshotService;
 using IT4ClubCar.IT4ClubCar.Services.EmailService;
 using IT4ClubCar.IT4ClubCar.Services.Tee;
 using IT4ClubCar.IT4ClubCar.Excepcoes;
+using IT4ClubCar.IT4ClubCar.Toolbox;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels
 {
     class JogoConfiguracaoViewModel : BaseViewModel
     {
         #region Propriedades
-
         /// <summary>
         /// Obtém e define os CamposExistentes.
         /// </summary>
@@ -170,56 +170,21 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         public ObservableCollection<JogadorWrapperViewModel> Jogadores { get; set; }
 
         /// <summary>
-        /// Obtém e define o IsActivityIndicatorVisivel.
+        /// Obtém e define a ActivityIndicatorTool.
         /// </summary>
-        private bool _isActivityIndicatorVisivel;
-        public bool IsActivityIndicatorVisivel
+        private ActivityIndicatorTool _activityIndicatorTool;
+        public ActivityIndicatorTool ActivityIndicatorTool
         {
             get
             {
-                return _isActivityIndicatorVisivel;
+                return _activityIndicatorTool;
             }
             set
             {
-                _isActivityIndicatorVisivel = value;
-                OnPropertyChanged("IsActivityIndicatorVisivel");
+                _activityIndicatorTool = value;
+                OnPropertyChanged("ActivityIndicatorTool");
             }
         }
-
-        /// <summary>
-        /// Obtém e define o IsActivityIndicatorACorrer.
-        /// </summary>
-        private bool _isActivityIndicatorACorrer;
-        public bool IsActivityIndicatorACorrer
-        {
-            get
-            {
-                return _isActivityIndicatorACorrer;
-            }
-            set
-            {
-                _isActivityIndicatorACorrer = value;
-                OnPropertyChanged("IsActivityIndicatorACorrer");
-            }
-        }
-
-        /// <summary>
-        /// Obtém e define a CorDeFundo.
-        /// </summary>
-        private string _corDeFundo;
-        public string CorDeFundo
-        {
-            get
-            {
-                return _corDeFundo;
-            }
-            set
-            {
-                _corDeFundo = value;
-                OnPropertyChanged("CorDeFundo");
-            }
-        }
-
         #endregion
 
         #region Serviços
@@ -285,7 +250,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             _teeService = teeService;
             _teeDistanciaService = teeDistanciaService;
 
-            CorDeFundo = "#00000000";
+            ActivityIndicatorTool = new ActivityIndicatorTool(activityIndicatorCor: "#11990f", mensagemAMostrar: "Creating the game...", backgroundCorVisivel: "#CC000000", backgroundCorEscondido: "#00000000");
 
             Jogadores = new ObservableCollection<JogadorWrapperViewModel>();
 
@@ -370,9 +335,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         /// </summary>
         private async Task ComecarJogo()
         {
-            IsActivityIndicatorACorrer = true;
-            IsActivityIndicatorVisivel = true;
-            CorDeFundo = "#CC000000";
+            ActivityIndicatorTool.ExecutarRoda();
 
             JogoWrapperViewModel novoJogo = null;
 
@@ -380,11 +343,9 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
 
             await base.NavigationService.IrParaJogo();
 
-            IsActivityIndicatorACorrer = false;
-            IsActivityIndicatorVisivel = false;
-            CorDeFundo = "#00000000";
-
             MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.NovoJogo, novoJogo);
+
+            ActivityIndicatorTool.PararRoda();
 
             LimparMemoria();
         }
@@ -531,9 +492,6 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             TeesExistentes = null;
             TeeSelecionado = null;
             Jogadores = null;
-            IsActivityIndicatorVisivel = false;
-            IsActivityIndicatorACorrer = false;
-            CorDeFundo = null;
 
             ComecarJogoCommand = null;
             CancelarJogoCommand = null;

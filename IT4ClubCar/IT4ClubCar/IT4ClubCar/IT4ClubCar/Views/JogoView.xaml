@@ -9,7 +9,7 @@
     <ContentPage.Resources>
         <!-- Tabs -->
         <Style TargetType="Grid" x:Key="Tab">
-            <Setter Property="BackgroundColor" Value="#00b300"/>
+            <Setter Property="BackgroundColor" Value="#4286f4"/>
         </Style>
 
         <Style TargetType="Image" x:Key="ImagemTab">

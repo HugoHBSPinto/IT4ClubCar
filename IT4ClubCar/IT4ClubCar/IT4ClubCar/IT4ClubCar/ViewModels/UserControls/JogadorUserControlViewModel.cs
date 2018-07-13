@@ -14,8 +14,11 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.UserControls
 {
     class JogadorUserControlViewModel : BaseViewModel
     {
+        #region Propriedades
         public JogadorWrapperViewModel Jogador { get; set; }
+        #endregion
 
+        #region Commands
         private ICommand _editarJogadorCommand;
         public ICommand EditarJogadorCommand
         {
@@ -26,6 +29,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.UserControls
                 return _editarJogadorCommand;
             }
         }
+        #endregion
 
 
 
@@ -41,8 +45,9 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.UserControls
         /// </summary>
         private async Task EditarJogador()
         {
-            await base.NavigationService.IrParaEditarJogador();
-            MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.JogadorAEditar, Jogador);
+            //await base.NavigationService.IrParaEditarJogador();
+            //MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.JogadorAEditar, Jogador);
+            await base.NavigationService.IrParaLogIn();
         }
 
 

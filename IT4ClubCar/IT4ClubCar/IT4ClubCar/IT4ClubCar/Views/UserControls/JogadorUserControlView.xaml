@@ -11,24 +11,20 @@
         <TapGestureRecognizer Command="{Binding EditarJogadorCommand}"/>
     </Grid.GestureRecognizers>
 
-    <!-- Definição de Colunas. -->
+    <!--region Column and Row Definitions -->
     <Grid.ColumnDefinitions>
-        <!-- Só existe uma coluna. -->
         <ColumnDefinition Width="*"/>
     </Grid.ColumnDefinitions>
-
-    <!-- Definição de Linhas. -->
     <Grid.RowDefinitions>
-        <!-- Primeira linha. 3* Triplo do tamanho da segunda linha. Contém a imagem. -->
         <RowDefinition Height="*"/>
-        <!-- Segunda linha. Contém o nome do jogador. -->
         <RowDefinition Height="0.4*"/>
     </Grid.RowDefinitions>
+    <!--endregion -->
 
     <Frame Grid.Column="0" Grid.Row="0" BackgroundColor="Transparent" BorderColor="Transparent" Padding="5">
         <Image Source="{Binding Jogador.Foto}" Aspect="AspectFit"/>
     </Frame>
 
     <Label Grid.Column="0" Grid.Row="1" Text="{Binding Jogador.Nome}" FontSize="18"/>
-    
+
 </Grid>

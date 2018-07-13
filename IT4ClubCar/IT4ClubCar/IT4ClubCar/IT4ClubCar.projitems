@@ -75,6 +75,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\EmailService\EmailService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Weather\IWeatherService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Weather\WeatherService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Toolbox\ActivityIndicatorTool.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Toolbox\BaseToolbox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Validacoes\EmailValidationRule.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Validacoes\EmptyValidationRule.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Validacoes\EspacoEmBrancoValidationRule.cs" />
@@ -140,6 +142,10 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Popups\EditarJogadorPopupView.xaml.cs">
       <DependentUpon>EditarJogadorPopupView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Popups\LogInPopupView.xaml.cs">
+      <DependentUpon>LogInPopupView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Popups\MenuJogoPopupView.xaml.cs">
@@ -312,6 +318,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\VerTempoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)IT4ClubCar\Views\Popups\LogInPopupView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

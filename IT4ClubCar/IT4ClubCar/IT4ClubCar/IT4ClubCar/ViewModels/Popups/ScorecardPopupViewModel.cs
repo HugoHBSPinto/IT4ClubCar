@@ -2,6 +2,7 @@
 using IT4ClubCar.IT4ClubCar.Services.EmailService;
 using IT4ClubCar.IT4ClubCar.Services.Navegacao;
 using IT4ClubCar.IT4ClubCar.Services.ScreenshotService;
+using IT4ClubCar.IT4ClubCar.Toolbox;
 using IT4ClubCar.IT4ClubCar.ViewModels.Base;
 using IT4ClubCar.IT4ClubCar.ViewModels.Wrappers;
 using MailKit.Security;
@@ -74,54 +75,19 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         }
 
         /// <summary>
-        /// Obtém e define o IsActivityIndicatorVisivel.
+        /// Obtém e define a ActivityIndicatorTool.
         /// </summary>
-        private bool _isActivityIndicatorVisivel;
-        public bool IsActivityIndicatorVisivel
+        private ActivityIndicatorTool _activityIndicatorTool;
+        public ActivityIndicatorTool ActivityIndicatorTool
         {
             get
             {
-                
-                return _isActivityIndicatorVisivel;
+                return _activityIndicatorTool;
             }
             set
             {
-                _isActivityIndicatorVisivel = value;
-                OnPropertyChanged("IsActivityIndicatorVisivel");
-            }
-        }
-
-        /// <summary>
-        /// Obtém e define o IsActivityIndicatorACorrer.
-        /// </summary>
-        private bool _isActivityIndicatorACorrer;
-        public bool IsActivityIndicatorACorrer
-        {
-            get
-            {
-                return _isActivityIndicatorACorrer;
-            }
-            set
-            {
-                _isActivityIndicatorACorrer = value;
-                OnPropertyChanged("IsActivityIndicatorACorrer");
-            }
-        }
-
-        /// <summary>
-        /// Obtém e define a CorDeFundo.
-        /// </summary>
-        private string _corDeFundo;
-        public string CorDeFundo
-        {
-            get
-            {
-                return _corDeFundo;
-            }
-            set
-            {
-                _corDeFundo = value;
-                OnPropertyChanged("CorDeFundo");
+                _activityIndicatorTool = value;
+                OnPropertyChanged("ActivityIndicatorTool");
             }
         }
         #endregion
@@ -163,10 +129,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                                         IEmailService emailService) 
                                         : base(navigationService,dialogService)
         {
-            CorDeFundo = "#80000000";
-
             _screenshotService = screenshotService;
             _emailService = emailService;
+
+            ActivityIndicatorTool = new ActivityIndicatorTool(activityIndicatorCor: "#e2243d", mensagemAMostrar: "Sending print to email...", backgroundCorVisivel: "#CC000000", backgroundCorEscondido: "#00000000");
 
             TeesUsados = new ObservableCollection<TeeWrapperViewModel>();
 
@@ -195,15 +161,11 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         private void InicializarPropriedadeJogo(JogoWrapperViewModel jogo)
         {
             Jogo = jogo;
-
-            //Jogo.Jogadores.ToList().ForEach(p => {
-            //    if (!TeesUsados.Select(s => s.Nome.Equals(p.Tee.Nome)).Any())
-            //        TeesUsados.Add(p.Tee);
-            //});
-
+            
             Jogo.Jogadores.ToList().ForEach(p =>
             {
-                TeesUsados.Add(p.Tee);
+                if (!TeesUsados.Where(s => s.Nome.Equals(p.Tee.Nome)).Any())
+                    TeesUsados.Add(p.Tee);
             });
         }
 
@@ -215,10 +177,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         /// </summary>
         private async Task TirarPrint()
         {
-            //Mostrar Activity Indicator.
-            IsActivityIndicatorACorrer = true;
-            IsActivityIndicatorVisivel = true;
-            CorDeFundo = "#CC000000";
+            ActivityIndicatorTool.ExecutarRoda();
 
             //Tirar screenshot.
             byte[] screenshot = await _screenshotService.TirarScreenshotAsync();
@@ -231,6 +190,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             try
             {
                 await _emailService.EnviarEmail(emailDestino: JogadorAEnviarPrint.Email, assunto: "IT4ClubCar Game Results", mensagemConteudo: "Like you asked :)", attachments: attachments);
+                await base.NavigationService.SairDeScorecard();
             }
             catch(SaslException e)
             {
@@ -241,11 +201,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                 await base.DialogService.MostrarMensagem("Error while sending the email. Please try again later");
             }
 
-            await base.NavigationService.SairDeScorecard();
-
-            //Esconder Activity Indicator.
-            IsActivityIndicatorACorrer = false;
-            IsActivityIndicatorVisivel = false;
+            ActivityIndicatorTool.PararRoda();
         }
 
 

@@ -120,9 +120,6 @@ namespace IT4ClubCar.Droid.CustomRenderers
                 return;
 
             _teeMarker.Position = new LatLng(novaPosicao.Latitude, novaPosicao.Longitude);
-
-            _linhaTeeMeio?.Remove();
-            _linhaTeeMeio = _mapa.AddPolyline(new PolylineOptions().Add(_meioMarker.Position, _teeMarker.Position).InvokeWidth(4));
         }
 
 
@@ -137,12 +134,6 @@ namespace IT4ClubCar.Droid.CustomRenderers
                 return;
 
             _meioMarker.Position = new LatLng(novaPosicao.Latitude, novaPosicao.Longitude);
-
-            _linhaBuracoMeio?.Remove();
-            _linhaBuracoMeio = _mapa.AddPolyline(new PolylineOptions().Add(_buracoMarker.Position, _meioMarker.Position).InvokeWidth(4));
-
-            _linhaTeeMeio?.Remove();
-            _linhaTeeMeio = _mapa.AddPolyline(new PolylineOptions().Add(_meioMarker.Position, _teeMarker.Position).InvokeWidth(4));
         }
 
 

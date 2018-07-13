@@ -14,6 +14,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using IT4ClubCar.IT4ClubCar.CustomControls;
 using IT4ClubCar.IT4ClubCar.Services.Geometria;
+using IT4ClubCar.IT4ClubCar.Toolbox;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels
 {
@@ -156,7 +157,6 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                 OnPropertyChanged("DistanciaTeeMeio");
             }
         }
-
         #endregion
 
         #region Commands
@@ -314,7 +314,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
             TeePinPosicao = new Position(teeDistanciaInicial.Latitude, teeDistanciaInicial.Longitude);
 
             MeioPinPosicao = _geometriaService.ObterPosicaoMeio(BuracoPinPosicao,TeePinPosicao);
-
+            
             //Atualizar as coordenadas do mapa para estarem voltadas para as coordenadas do primeiro buraco.
             CentroMapa = MapSpan.FromCenterAndRadius(new Position(MeioPinPosicao.Latitude, MeioPinPosicao.Longitude), Distance.FromMeters(80));
         }

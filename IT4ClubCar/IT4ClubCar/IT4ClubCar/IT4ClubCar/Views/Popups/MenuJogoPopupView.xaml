@@ -12,11 +12,11 @@
 
     <pages:PopupPage.Resources>
         <Style TargetType="Button">
-            <Setter Property="BackgroundColor" Value="Black"/>
+            <Setter Property="BackgroundColor" Value="#4286f4"/>
             <Setter Property="TextColor" Value="White"/>
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="BorderWidth" Value="1"/>
             <Setter Property="BorderColor" Value="White"/>
+            <Setter Property="CornerRadius" Value="25"/>
+            <Setter Property="FontSize" Value="18"/>
         </Style>
     </pages:PopupPage.Resources>
 

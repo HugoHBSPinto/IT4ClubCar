@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using IT4ClubCar.IT4ClubCar.Services.DataAccess;
 using Newtonsoft.Json.Linq;
 using MailKit.Net.Smtp;
-using MailKit;
 using MimeKit;
 using Xamarin.Forms;
 using IT4ClubCar.IT4ClubCar.Services.ScreenshotService;

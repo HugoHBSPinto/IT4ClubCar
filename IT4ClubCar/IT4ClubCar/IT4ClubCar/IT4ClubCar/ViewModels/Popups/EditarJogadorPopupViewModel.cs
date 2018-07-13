@@ -224,7 +224,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             }
             set
             {
-                _guardarDadosCommand = null;
+                _guardarDadosCommand = value;
             }
         }
 
@@ -239,7 +239,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             }
             set
             {
-                _removerJogadorCommand = null;
+                _removerJogadorCommand = value;
             }
         }
 
@@ -254,7 +254,22 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             }
             set
             {
-                _cancelarEdicaoCommand = null;
+                _cancelarEdicaoCommand = value;
+            }
+        }
+
+        private ICommand _resetEmailCommand;
+        public ICommand ResetEmailCommand
+        {
+            get
+            {
+                if (_resetEmailCommand == null)
+                    _resetEmailCommand = new Command(p => ResetEmail(), p => { return true; });
+                return _resetEmailCommand;
+            }
+            set
+            {
+                _resetEmailCommand = value;
             }
         }
 
@@ -439,6 +454,19 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
 
 
+        /// <summary>
+        /// Atribui um valor default ao Email.
+        /// </summary>
+        private void ResetEmail()
+        {
+            if (Email == null)
+                return;
+
+            Email.Valor = "dont-want@aejd.pt";
+        }
+
+
+
         protected override void LimparMemoria()
         {
             _teeService = null;
@@ -463,8 +491,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             GuardarDadosCommand = null;
             RemoverJogadorCommand = null;
             CancelarEdicaoCommand = null;
+            ResetEmailCommand = null;
 
             base.LimparMemoria();
         }
+        
     }
 }

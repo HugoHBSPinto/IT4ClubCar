@@ -49,7 +49,7 @@
         </Grid>
 
         <!-- Corpo do popup. Label e Picker. -->
-        <Grid Grid.Column="0" Grid.Row="1" ColumnSpacing="0">
+        <Grid Grid.Column="0" Grid.Row="1" ColumnSpacing="25" RowSpacing="10">
             <!--region Column and Row Definitions -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -60,13 +60,29 @@
                 <RowDefinition Height="0.4*"/>
             </Grid.RowDefinitions>
             <!--endregion -->
-            <Label Grid.Column="0" Grid.Row="0" TextColor="White" FontSize="30" Text="Choose a hole : " VerticalTextAlignment="Center"/>
-            <custom:CustomPicker Grid.Column="1" Grid.Row="0" Title="Buracos" ItemsSource="{Binding Campo.Buracos}" ItemDisplayBinding="{Binding Numero}" SelectedItem="{Binding BuracoSelecionado}" TextColor="White" FontSize="30"/>
-            <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Text="Ask" BackgroundColor="Orange" Command="{Binding EnviarPedidoCommand}"/>
+            <!-- Icon -->
+            <Image Grid.Column="0" Grid.Row="0" Aspect="AspectFit" Source="IconBuggyCar.png"/>
+            <!-- Label e Picker para escolher buraco -->
+            <Grid Grid.Column="1" Grid.Row="0">
+                <!--region Column and Row Definitions -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--endregion -->
+                <Label Grid.Column="0" Grid.Row="0" TextColor="White" FontSize="30" VerticalOptions="Center" Text="Choose a hole : "/>
+                <Frame Grid.Column="0" Grid.Row="1" BackgroundColor="White" CornerRadius="25">
+                    <custom:CustomPicker TextColor="Black" Title="Buracos" ItemsSource="{Binding Campo.Buracos}" ItemDisplayBinding="{Binding Numero}" SelectedItem="{Binding BuracoSelecionado}" FontSize="30"/>
+                </Frame>
+            </Grid>
+            <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" TextColor="White" BackgroundColor="#4286f4" Text="Ask for Buggy Bar" Command="{Binding EnviarPedidoCommand}"/>
         </Grid>
 
         <!-- ActivityIndicator escondido -->
-        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" IsVisible="{Binding IsActivityIndicatorVisivel}" BackgroundColor="{Binding CorDeFundo}">
+        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" IsVisible="{Binding ActivityIndicatorTool.IsVisivel}" BackgroundColor="{Binding ActivityIndicatorTool.BackgroundCorEmUso}">
             <!--#region Definição de colunas e linhas. -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -76,8 +92,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!--#endregion -->
-            <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding IsActivityIndicatorACorrer}" Color="Red"/>
-            <Label Grid.Column="0" Grid.Row="1" Text="Calling the buggy car..." FontSize="28" TextColor="White" HorizontalTextAlignment="Center"/>
+            <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding ActivityIndicatorTool.IsRunning}" Color="{Binding ActivityIndicatorTool.ActivityIndicatorCor}"/>
+            <Label Grid.Column="0" Grid.Row="1" Text="{Binding ActivityIndicatorTool.MensagemAMostrar}" FontSize="28" TextColor="White" HorizontalTextAlignment="Center"/>
         </Grid>
 
     </Grid>

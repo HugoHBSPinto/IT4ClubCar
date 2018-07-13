@@ -42,6 +42,8 @@ namespace IT4ClubCar.Droid.CustomRenderers
             MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.NovaPosicaoTeePin, p => AtualizarPosicaoPinTee(novaPosicao: (Position)p));
             //Ouvir pelo pedido de fazer reset à posição do meio.
             MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.NovaPosicaoMeio, p => AtualizarPosicaoPinMeio(novaPosicao: (Position)p));
+            //Ouvir pelo pedido de fazer reste à posição do buraco.
+            MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.NovaPosicaoBuraco, p => AtualizarPosicaoPinBuraco((Position)p));
             //Ouvir pelo pedido de bloquear ou desbloquear a possibilidade de mover o pin do tee.
             MediadorMensagensService.Instancia.Registar(MediadorMensagensService.ViewModelMensagens.AlterarDraggablePinTee, p => AlterarEstadoPinTee());
             //Ouvir pelo pedido de fazer reset à region do mapa.
@@ -118,9 +120,6 @@ namespace IT4ClubCar.Droid.CustomRenderers
                 return;
 
             _teeMarker.Position = new LatLng(novaPosicao.Latitude, novaPosicao.Longitude);
-
-            _linhaTeeMeio?.Remove();
-            _linhaTeeMeio = _mapa.AddPolyline(new PolylineOptions().Add(_meioMarker.Position, _teeMarker.Position).InvokeWidth(4));
         }
 
 
@@ -135,12 +134,20 @@ namespace IT4ClubCar.Droid.CustomRenderers
                 return;
 
             _meioMarker.Position = new LatLng(novaPosicao.Latitude, novaPosicao.Longitude);
+        }
 
-            _linhaBuracoMeio?.Remove();
-            _linhaBuracoMeio = _mapa.AddPolyline(new PolylineOptions().Add(_buracoMarker.Position, _meioMarker.Position).InvokeWidth(4));
 
-            _linhaTeeMeio?.Remove();
-            _linhaTeeMeio = _mapa.AddPolyline(new PolylineOptions().Add(_meioMarker.Position, _teeMarker.Position).InvokeWidth(4));
+
+        /// <summary>
+        /// Atualiza a posição do Pin do Buraco.
+        /// </summary>
+        /// <param name="novaPosicao">Nova posição do Pin do Tee.</param>
+        private void AtualizarPosicaoPinBuraco(Position novaPosicao)
+        {
+            if (_buracoMarker == null)
+                return;
+
+            _buracoMarker.Position = new LatLng(novaPosicao.Latitude, novaPosicao.Longitude);
         }
 
 

@@ -1,6 +1,7 @@
 ﻿using IT4ClubCar.IT4ClubCar.Services.Campo;
 using IT4ClubCar.IT4ClubCar.Services.Dialog;
 using IT4ClubCar.IT4ClubCar.Services.Navegacao;
+using IT4ClubCar.IT4ClubCar.Toolbox;
 using IT4ClubCar.IT4ClubCar.ViewModels.Base;
 using IT4ClubCar.IT4ClubCar.ViewModels.Wrappers;
 using System;
@@ -55,6 +56,23 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                 return _camposExistentes[_indicadorCampoAtual];
             }
         }
+
+        /// <summary>
+        /// Obtém e define a ActivityIndicatorTool.
+        /// </summary>
+        private ActivityIndicatorTool _activityIndicatorTool;
+        public ActivityIndicatorTool ActivityIndicatorTool
+        {
+            get
+            {
+                return _activityIndicatorTool;
+            }
+            set
+            {
+                _activityIndicatorTool = value;
+                OnPropertyChanged("ActivityIndicatorTool");
+            }
+        }
         #endregion
 
         #region Servicos
@@ -71,6 +89,10 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                     _verProximoCampoCommand = new Command(p => VerProximoCampo(),p => { return true; });
                 return _verProximoCampoCommand;
             }
+            set
+            {
+                _verProximoCampoCommand = value;
+            }
         }
 
         private ICommand _verCampoAnteriorCommand;
@@ -82,16 +104,24 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                     _verCampoAnteriorCommand = new Command(p => VerCampoAnterior(), p => { return true; });
                 return _verCampoAnteriorCommand;
             }
+            set
+            {
+                _verCampoAnteriorCommand = value;
+            }
         }
 
-        private ICommand _irParaMenuPrincipalCommand;
-        public ICommand IrParaMenuPrincipalCommand
+        private ICommand _fecharJanelaCommand;
+        public ICommand FecharJanelaCommand
         {
             get
             {
-                if (_irParaMenuPrincipalCommand == null)
-                    _irParaMenuPrincipalCommand = new Command(async p => await FecharJanela(), p => { return true; });
-                return _irParaMenuPrincipalCommand;
+                if (_fecharJanelaCommand == null)
+                    _fecharJanelaCommand = new Command(async p => await FecharJanela(), p => { return true; });
+                return _fecharJanelaCommand;
+            }
+            set
+            {
+                _fecharJanelaCommand = value;
             }
         }
         #endregion
@@ -104,6 +134,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
                                             : base(navigationService,dialogService)
         {
             _campoService = campoService;
+            
+            ActivityIndicatorTool = new ActivityIndicatorTool(activityIndicatorCor: "#11990f",mensagemAMostrar: "Obtaining Courses...",backgroundCorVisivel: "#CC000000",backgroundCorEscondido: "#00000000");
 
             Task.Run(async () => await ObterCamposExistentes());
         }
@@ -115,6 +147,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
         /// </summary>
         private async Task ObterCamposExistentes()
         {
+            ActivityIndicatorTool.ExecutarRoda();
+
             _camposExistentes = await _campoService.ObterCamposDisponiveis();
 
             if (_camposExistentes.Count.Equals(0))
@@ -122,6 +156,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
 
             //Definir primeiro campo a mostrar os detalhes.
             IndicadorCampoAtual = 0;
+            
+            ActivityIndicatorTool.PararRoda();
         }
 
 
@@ -157,9 +193,23 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels
 
         private async Task FecharJanela()
         {
-            _camposExistentes = null;
             await base.NavigationService.IrParaMenuPrincipal();
+            LimparMemoria();
         }
 
+
+
+        protected override void LimparMemoria()
+        {
+            _camposExistentes = null;
+
+            _campoService = null;
+
+            _verCampoAnteriorCommand = null;
+            _verProximoCampoCommand = null;
+            _fecharJanelaCommand = null;
+
+            base.LimparMemoria();
+        }
     }
 }

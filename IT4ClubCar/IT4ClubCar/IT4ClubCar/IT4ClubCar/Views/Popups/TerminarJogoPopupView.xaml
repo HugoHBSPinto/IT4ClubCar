@@ -11,12 +11,19 @@
              vml:ViewModelLocator.DefinirViewModelAutomaticamente="True"
              x:Class="IT4ClubCar.IT4ClubCar.Views.Popups.TerminarJogoPopupView">
 
+    <pages:PopupPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="Green"/>
+            <Setter Property="TextColor" Value="White"/>
+        </Style>
+    </pages:PopupPage.Resources>
+    
     <Grid
             VerticalOptions="Center" 
             HorizontalOptions="Center" 
             HeightRequest="650"
             WidthRequest="650"
-            BackgroundColor="#95000000">
+            BackgroundColor="Transparent">
 
         <!--region Column and row definitions -->
 
@@ -42,7 +49,6 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!--endregion -->
-            <Label Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="45" Text="Ask For BuggyBar"/>
             <Image Grid.Column="1" Grid.Row="0" Source="IconFecharPopup">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding FecharPopupCommand}"/>
@@ -50,7 +56,7 @@
             </Image>
         </Grid>
 
-        <!-- Corpo do popup. Imagem e Texto. -->
+        <!-- Corpo do popup -->
         <Grid Grid.Column="0" Grid.Row="1" ColumnSpacing="0">
             <!--region Column and Row Definitions -->
             <Grid.ColumnDefinitions>
@@ -80,7 +86,7 @@
                 <control:JogadorTerminarJogoUserControlView Grid.Column="0" Grid.Row="3"/>
             </Grid>
             <!-- Botão para terminar jogo -->
-            <Button Grid.Column="0" Grid.Row="1" BackgroundColor="White" Text="End!" Command="{Binding TerminarJogoCommand}"/>
+            <Button Grid.Column="0" Grid.Row="1" Text="End the Game" Command="{Binding TerminarJogoCommand}"/>
         </Grid>
 
     </Grid>

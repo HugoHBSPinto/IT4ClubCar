@@ -1,22 +1,170 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IT4ClubCar.IT4ClubCar.Views.VerTempoView">
+             x:Class="IT4ClubCar.IT4ClubCar.Views.VerTempoView"
+             xmlns:customConverters="clr-namespace:IT4ClubCar.IT4ClubCar.Converters"
+             xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             xmlns:vml="clr-namespace:IT4ClubCar.IT4ClubCar.ViewModels.Base"
+             vml:ViewModelLocator.DefinirViewModelAutomaticamente="True">
+
+    <ContentPage.Resources>
+        
+        <!-- Estilos --> 
+        <Style TargetType="Label" x:Key="InformacoesTempoAtual">
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="BackgroundColor" Value="#95000000"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="TextColor" Value="White"/>
+        </Style>
+        
+        <!-- Conversores -->
+        <customConverters:NomeTempoParaIcon x:Key="NomeParaIcon"/>
+        
+    </ContentPage.Resources>
+
     <ContentPage.Content>
+
         <Grid>
             <!--region Column and Row Definitions -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.05*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.4*"/>
+                <RowDefinition Height="0.1*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.4*"/>
             </Grid.RowDefinitions>
             <!--endregion -->
-            <Label Grid.Column="0" Grid.Row="0"/>
-            <Label Grid.Column="0" Grid.Row="1"/>
-            <Label Grid.Column="0" Grid.Row="2"/>
+            
+            <!-- Background Image -->
+            <Image Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="3" Aspect="AspectFill" Source="WeatherForecastBackground.png"/>
+            
+            <!-- Tempo Atual -->
+            <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
+                <Grid>
+                    <!--region Column and Row Definitions -->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--endregion -->
+                    <!-- Icon -->
+                    <Grid Grid.Column="0" Grid.Row="0">
+                        <!--region Column and Row Definitions -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!--endregion -->
+                        <Image Grid.Column="0" Grid.Row="0" Aspect="AspectFit" Source="{Binding WeatherAtual.Nome,Converter={StaticResource NomeParaIcon}}"/>
+                    </Grid>
+                    <!-- Informações tempo atual -->
+                    <Grid Grid.Column="1" Grid.Row="0">
+                        <!--region Column and Row Definitions -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="0.1*"/>
+                        </Grid.RowDefinitions>
+                        <!--endregion -->
+                        <!-- Nome Tempo Atual -->
+                        <Label Style="{StaticResource InformacoesTempoAtual}" Grid.Column="0" Grid.Row="0" Text="Tempo : "/>
+                        <Label Style="{StaticResource InformacoesTempoAtual}" Grid.Column="1" Grid.Row="0" Text="{Binding WeatherAtual.Nome}"/>
+                        <!-- Descrição Tempo -->
+                        <Label Style="{StaticResource InformacoesTempoAtual}" Grid.Column="0" Grid.Row="1" Text="Descrição : "/>
+                        <Label Style="{StaticResource InformacoesTempoAtual}" Grid.Column="1" Grid.Row="1" Text="{Binding WeatherAtual.Descricao}"/>
+                        <!-- Temperatura -->
+                        <Label Style="{StaticResource InformacoesTempoAtual}" Grid.Column="0" Grid.Row="2" Text="Temperatura : "/>
+                        <Label Style="{StaticResource InformacoesTempoAtual}" Grid.Column="1" Grid.Row="2" Text="{Binding WeatherAtual.Temperatura}"/>
+                        <!-- Temperatura Máxima -->
+                        <Label Style="{StaticResource InformacoesTempoAtual}" Grid.Column="0" Grid.Row="3" Text="Temp Max : "/>
+                        <Label Style="{StaticResource InformacoesTempoAtual}" Grid.Column="1" Grid.Row="3" Text="{Binding WeatherAtual.TemperaturaMaxima}"/>
+                        <!-- Temperatura Mínima -->
+                        <Label Style="{StaticResource InformacoesTempoAtual}" Grid.Column="0" Grid.Row="4" Text="Temp Min : "/>
+                        <Label Style="{StaticResource InformacoesTempoAtual}" Grid.Column="1" Grid.Row="4" Text="{Binding WeatherAtual.TemperaturaMinima}"/>
+                        <!-- Botão para mudar temperatura entre ºC e ºF -->
+                        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" TextColor="#CCCCCC" BackgroundColor="#4286f4" FontSize="20" Text="{Binding TipoTemperaturaEmUso}" Command="{Binding AlterarTipoTemperaturaCommand}"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+            
+            <!-- Tempo próximas horas -->
+            <flv:FlowListView Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" FlowColumnCount="8" FlowItemsSource="{Binding PrevisoesTempo}" SeparatorVisibility="Default" SeparatorColor="Transparent" HasUnevenRows="True">
+                <flv:FlowListView.FlowColumnTemplate>
+                    <DataTemplate>
+                        <ContentView>
+                            <ContentView.Content>
+                                <Grid ColumnSpacing="0" RowSpacing="0" BackgroundColor="Transparent">
+                                    <!--region Column and Row Definitions -->
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.4*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <!--endregion -->
+                                    <!-- Hora do dia -->
+                                    <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="20" Grid.Column="0" Grid.Row="0" Text="{Binding Horas}"/>
+                                    <!-- Icon, Nome Tempo e Temperaturas -->
+                                    <Grid ColumnSpacing="0" RowSpacing="0" Grid.Column="0" Grid.Row="1">
+                                        <!--region Column and Row Definitions -->
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="0.4*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <!--endregion -->
+                                        <!-- Icon -->
+                                        <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Aspect="AspectFit"  Source="{Binding Nome,Converter={StaticResource NomeParaIcon}}"/>
+                                        <!-- Nome -->
+                                        <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="12" Grid.Column="1" Grid.Row="0" Text="{Binding Nome}"/>
+                                        <!-- Temperatura -->
+                                        <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="12" Grid.Column="1" Grid.Row="1" Text="{Binding Temperatura}"/>
+                                    </Grid>
+                                </Grid>
+                            </ContentView.Content>
+                        </ContentView>
+                    </DataTemplate>
+                </flv:FlowListView.FlowColumnTemplate>
+            </flv:FlowListView>
+
+            <Button Grid.Column="1" Grid.Row="0" BackgroundColor="Red" TextColor="White" FontSize="18" Text="X" Command="{Binding FecharJanelaCommand}"/>
+
+            <!-- ActivityIndicator escondido -->
+            <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="3" IsVisible="{Binding ActivityIndicatorTool.IsVisivel}" BackgroundColor="{Binding ActivityIndicatorTool.BackgroundCorEmUso}">
+                <!--#region Definição de colunas e linhas. -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--#endregion -->
+                <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding ActivityIndicatorTool.IsRunning}" Color="{Binding ActivityIndicatorTool.ActivityIndicatorCor}"/>
+                <Label Grid.Column="0" Grid.Row="1" Text="{Binding ActivityIndicatorTool.MensagemAMostrar}" TextColor="White" HorizontalTextAlignment="Center" FontSize="35"/>
+            </Grid>
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>

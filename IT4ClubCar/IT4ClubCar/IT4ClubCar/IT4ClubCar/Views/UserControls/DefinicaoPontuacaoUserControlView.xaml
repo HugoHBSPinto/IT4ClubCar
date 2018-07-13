@@ -2,10 +2,16 @@
 <Grid xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IT4ClubCar.IT4ClubCar.Views.UserControls.DefinicaoPontuacaoUserControlView"
+             xmlns:customConverters="clr-namespace:IT4ClubCar.IT4ClubCar.Converters"
              xmlns:vml="clr-namespace:IT4ClubCar.IT4ClubCar.ViewModels.Base"
              vml:ViewModelLocator.DefinirViewModelAutomaticamente="True"
              BackgroundColor="#30CCCCCC"
              ColumnSpacing="0">
+
+    <Grid.Resources>
+        <!-- Custom Converters -->
+        <customConverters:JogadorParaVisibilidadeConverter x:Key="JogadorParaVisibilidade"/>
+    </Grid.Resources>
     
     <!--region Column and Row Definitions -->
 
@@ -20,9 +26,9 @@
     
     <!--endregion -->
     
-    <Label Text="{Binding Jogador.Nome}" Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="35" TextColor="#CCCCCC"/>
+    <Label Text="{Binding Jogador.Nome}" IsVisible="{Binding Jogador,Converter={StaticResource JogadorParaVisibilidade}}" Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="35" TextColor="#CCCCCC"/>
 
-    <Grid ColumnSpacing="0" Grid.Column="1" Grid.Row="0">
+    <Grid ColumnSpacing="0" Grid.Column="1" Grid.Row="0" IsVisible="{Binding Jogador,Converter={StaticResource JogadorParaVisibilidade}}">
         <!--region Column and Row Definitions -->
 
         <Grid.ColumnDefinitions>

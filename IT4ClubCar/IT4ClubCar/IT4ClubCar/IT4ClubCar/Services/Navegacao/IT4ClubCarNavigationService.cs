@@ -29,6 +29,13 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
 
 
 
+        public async Task IrParaVerTempo()
+        {
+            Application.Current.MainPage = new VerTempoView();
+        }
+
+
+
         public async Task IrParaMenuPrincipal()
         {
             //await Application.Current.MainPage.Navigation.PushModalAsync(new MenuPrincipalView());
@@ -40,6 +47,14 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
         public async Task IrParaJogoConfiguracao()
         {
             Application.Current.MainPage = new JogoConfiguracaoView();
+            //await Application.Current.MainPage.Navigation.PushModalAsync(new JogoConfiguracaoView());
+        }
+
+
+
+        public async Task IrParaLogIn()
+        {
+            await PopupNavigation.PushAsync(new LogInPopupView(), animate: false);
             //await Application.Current.MainPage.Navigation.PushModalAsync(new JogoConfiguracaoView());
         }
 

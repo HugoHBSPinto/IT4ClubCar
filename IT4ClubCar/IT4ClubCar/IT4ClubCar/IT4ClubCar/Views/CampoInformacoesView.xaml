@@ -16,7 +16,7 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <Grid ColumnSpacing="0">
+        <Grid ColumnSpacing="0" RowSpacing="0">
             <!--region Column and Row Definitions -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.1*"/>
@@ -99,7 +99,22 @@
                     </Image.GestureRecognizers>
                 </Image>
                 <!-- Button para Sair desta janela -->
-                <Button Grid.Column="0" Grid.Row="0" TextColor="White" FontSize="35" Text="X" BackgroundColor="Red" Command="{Binding IrParaMenuPrincipalCommand}"/>
+                <Button Grid.Column="0" Grid.Row="0" TextColor="White" FontSize="35" Text="X" BackgroundColor="Red" Command="{Binding FecharJanelaCommand}"/>
+            </Grid>
+
+            <!-- ActivityIndicator escondido -->
+            <Grid Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0" IsVisible="{Binding ActivityIndicatorTool.IsVisivel}" BackgroundColor="{Binding ActivityIndicatorTool.BackgroundCorEmUso}">
+                <!--#region Definição de colunas e linhas. -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--#endregion -->
+                <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding ActivityIndicatorTool.IsRunning}" Color="{Binding ActivityIndicatorTool.ActivityIndicatorCor}"/>
+                <Label Grid.Column="0" Grid.Row="1" Text="{Binding ActivityIndicatorTool.MensagemAMostrar}" HorizontalTextAlignment="Center" BackgroundColor="Transparent" TextColor="White" FontSize="35"/>
             </Grid>
 
         </Grid>

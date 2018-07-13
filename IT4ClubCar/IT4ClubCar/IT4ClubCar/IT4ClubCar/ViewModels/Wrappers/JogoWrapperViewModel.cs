@@ -4,10 +4,11 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Linq;
 using IT4ClubCar.IT4ClubCar.Models;
+using IT4ClubCar.IT4ClubCar.ViewModels.Base;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
 {
-    class JogoWrapperViewModel
+    class JogoWrapperViewModel : BaseWrapperViewModel
     {
         private JogoModel _jogoModel;
 
@@ -30,6 +31,40 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
         /// Obtém os Jogadores.
         /// </summary>
         public ObservableCollection<JogadorWrapperViewModel> Jogadores { get; private set; }
+
+        /// <summary>
+        /// Obtém e define o Buraco onde o jogador se encontra no momento.
+        /// </summary>
+        private BuracoWrapperViewModel _buracoAtual;
+        public BuracoWrapperViewModel BuracoAtual
+        {
+            get
+            {
+                return _buracoAtual;
+            }
+            set
+            {
+                _buracoAtual = value;
+                OnPropertyChanged("BuracoAtual");
+            }
+        }
+
+        /// <summary>
+        /// Obtém e define o Buraco onde o jogador pausou o jogo.
+        /// </summary>
+        private BuracoWrapperViewModel _buracoPausado;
+        public BuracoWrapperViewModel BuracoPausado
+        {
+            get
+            {
+                return _buracoPausado;
+            }
+            set
+            {
+                _buracoPausado = value;
+            }
+        }
+
         
         
         
@@ -40,6 +75,8 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
             ModoJogo = new ModoJogoWrapperViewModel(_jogoModel.ModoJogo);
             Metrico = new MetricoWrapperViewModel(_jogoModel.Metrico);
             Jogadores = new ObservableCollection<JogadorWrapperViewModel>(_jogoModel.Jogadores.Select(p => new JogadorWrapperViewModel(p)));
+            BuracoAtual = null;
+            BuracoPausado = null;
         }
 
 

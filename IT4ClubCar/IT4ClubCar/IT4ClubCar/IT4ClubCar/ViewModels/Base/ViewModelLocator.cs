@@ -86,6 +86,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
             App.Container.RegisterType<TerminarJogoPopupViewModel>();
             App.Container.RegisterType<JogadorTerminarJogoUserControlViewModel>();
             App.Container.RegisterType<CampoInformacoesViewModel>();
+            App.Container.RegisterType<VerTempoViewModel>();
 
 
 

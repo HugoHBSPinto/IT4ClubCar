@@ -15,11 +15,18 @@
 
     <pages:PopupPage.Resources>
         <!--region Styles -->
+        <Style TargetType="flv:FlowListView">
+            <Setter Property="SeparatorVisibility" Value="Default"/>
+            <Setter Property="SeparatorColor" Value="Transparent"/>
+            <Setter Property="HasUnevenRows" Value="False"/>
+            <Setter Property="FlowColumnCount" Value="9"/>
+        </Style>
+        
         <Style TargetType="Label" x:Key="EstiloPaiLabel">
             <Setter Property="HeightRequest" Value="50"/>
             <Setter Property="VerticalTextAlignment" Value="Center"/>
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontSize" Value="18"/>
         </Style>
 
         <Style x:Key="NomeScorecard" TargetType="Label" BasedOn="{StaticResource EstiloPaiLabel}">
@@ -112,7 +119,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!--endregion -->
-            <Label Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="45" Text="{Binding Publicidade.Titulo}"/>
+            <Label Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="45" Text=""/>
             <Image Grid.Column="1" Grid.Row="0" Source="IconFecharPopup">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding FecharPopupCommand}"/>
@@ -213,18 +220,26 @@
             <!--region Buraco -->
             <Label Grid.Column="0" Grid.Row="0" Text="Buracos" Style="{StaticResource NomeScorecard}"/>
 
-            <flv:FlowListView Grid.Column="1" Grid.Row="0" FlowColumnCount="9" FlowItemsSource="{Binding Jogo.Campo.Buracos, Converter={StaticResource ObterPrimeiraMetadeBuracos}}" SeparatorVisibility="Default" SeparatorColor="Transparent" HasUnevenRows="True" BackgroundColor="Red">
+            <flv:FlowListView Grid.Column="1" Grid.Row="0" FlowColumnCount="9" FlowItemsSource="{Binding Jogo.Campo.Buracos, Converter={StaticResource ObterPrimeiraMetadeBuracos}}">
                 <flv:FlowListView.FlowColumnTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding Numero}" Style="{StaticResource NumeroBuraco}"/>
+                        <ContentView>
+                            <ContentView.Content>
+                                <Label Text="{Binding Numero}" Style="{StaticResource NumeroBuraco}"/>
+                            </ContentView.Content>
+                        </ContentView>
                     </DataTemplate>
                 </flv:FlowListView.FlowColumnTemplate>
             </flv:FlowListView>
 
-            <flv:FlowListView Grid.Column="3" Grid.Row="0" FlowColumnCount="9" FlowItemsSource="{Binding Jogo.Campo.Buracos, Converter={StaticResource ObterSegundaMetadeBuracos}}" SeparatorVisibility="Default" SeparatorColor="Transparent" HasUnevenRows="True" BackgroundColor="Purple">
+            <flv:FlowListView Grid.Column="3" Grid.Row="0" FlowColumnCount="9" FlowItemsSource="{Binding Jogo.Campo.Buracos, Converter={StaticResource ObterSegundaMetadeBuracos}}">
                 <flv:FlowListView.FlowColumnTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding Numero}" Style="{StaticResource NumeroBuraco}"/>
+                        <ContentView>
+                            <ContentView.Content>
+                                <Label Text="{Binding Numero}" Style="{StaticResource NumeroBuraco}"/>
+                            </ContentView.Content>
+                        </ContentView>
                     </DataTemplate>
                 </flv:FlowListView.FlowColumnTemplate>
             </flv:FlowListView>
@@ -256,11 +271,15 @@
                                     
                                     <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource NomeScorecard}" Text="{Binding Nome}"/>
                                     <!-- Primeira Metade Distancias -->
-                                    
-                                    <flv:FlowListView Grid.Column="1" Grid.Row="0" FlowColumnCount="9" FlowItemsSource="{Binding TeeBuracosDistancia, Converter={StaticResource ObterPrimeiraMetadeTees}}" SeparatorVisibility="Default" SeparatorColor="Transparent" HasUnevenRows="True" BackgroundColor="Red" x:Name="PrimeiraMetadeTeeDistancias">
+
+                                    <flv:FlowListView Grid.Column="1" Grid.Row="0" FlowColumnCount="9" FlowItemsSource="{Binding TeeBuracosDistancia, Converter={StaticResource ObterPrimeiraMetadeTees}}" x:Name="PrimeiraMetadeTeeDistancias">
                                         <flv:FlowListView.FlowColumnTemplate>
                                             <DataTemplate>
-                                                <Label Text="{Binding Distancia}" Style="{StaticResource TeeDistancia}"/>
+                                                <ContentView>
+                                                    <ContentView.Content>
+                                                        <Label Text="{Binding Distancia}" Style="{StaticResource TeeDistancia}"/>
+                                                    </ContentView.Content>
+                                                </ContentView>
                                             </DataTemplate>
                                         </flv:FlowListView.FlowColumnTemplate>
                                     </flv:FlowListView>
@@ -269,10 +288,14 @@
                                     <Label Grid.Column="2" Grid.Row="0" Style="{StaticResource Separador}" BindingContext="{x:Reference PrimeiraMetadeTeeDistancias}" Text="{Binding FlowItemsSource,Converter={StaticResource ObterTeeDistanciaTotal},ConverterParameter='Distancia'}"/>
 
                                     <!-- Segunda Metade Distancias -->
-                                    <flv:FlowListView Grid.Column="3" Grid.Row="0" FlowColumnCount="9" FlowItemsSource="{Binding TeeBuracosDistancia, Converter={StaticResource ObterSegundaMetadeTees}}" SeparatorVisibility="Default" SeparatorColor="Transparent" HasUnevenRows="True" BackgroundColor="Red" x:Name="SegundaMetadeTeeDistancias">
+                                    <flv:FlowListView Grid.Column="3" Grid.Row="0" FlowColumnCount="9" FlowItemsSource="{Binding TeeBuracosDistancia, Converter={StaticResource ObterSegundaMetadeTees}}" x:Name="SegundaMetadeTeeDistancias">
                                         <flv:FlowListView.FlowColumnTemplate>
                                             <DataTemplate>
-                                                <Label Text="{Binding Distancia}" Style="{StaticResource TeeDistancia}"/>
+                                                <ContentView>
+                                                    <ContentView.Content>
+                                                        <Label Text="{Binding Distancia}" Style="{StaticResource TeeDistancia}"/>
+                                                    </ContentView.Content>
+                                                </ContentView>
                                             </DataTemplate>
                                         </flv:FlowListView.FlowColumnTemplate>
                                     </flv:FlowListView>
@@ -299,10 +322,14 @@
 
             <Label Grid.Column="0" Grid.Row="3" Text="Par" Style="{StaticResource NomeScorecard}"/>
 
-            <flv:FlowListView Grid.Column="1" Grid.Row="3" FlowColumnCount="9" FlowItemsSource="{Binding Jogo.Campo.Buracos, Converter={StaticResource ObterPrimeiraMetadeBuracos}}" SeparatorVisibility="Default" SeparatorColor="Transparent" HasUnevenRows="True" BackgroundColor="Red" x:Name="PrimeiraMetadePar">
+            <flv:FlowListView Grid.Column="1" Grid.Row="3" FlowColumnCount="9" FlowItemsSource="{Binding Jogo.Campo.Buracos, Converter={StaticResource ObterPrimeiraMetadeBuracos}}" x:Name="PrimeiraMetadePar">
                 <flv:FlowListView.FlowColumnTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding Par}" Style="{StaticResource Par}"/>
+                        <ContentView>
+                            <ContentView.Content>
+                                <Label Text="{Binding Par}" Style="{StaticResource Par}"/>
+                            </ContentView.Content>
+                        </ContentView>
                     </DataTemplate>
                 </flv:FlowListView.FlowColumnTemplate>
             </flv:FlowListView>
@@ -310,10 +337,14 @@
             <!-- Out -->
             <Label Grid.Column="2" Grid.Row="3" Style="{StaticResource Separador}" BindingContext="{x:Reference PrimeiraMetadePar}" Text="{Binding FlowItemsSource,Converter={StaticResource ObterParTotal},ConverterParameter='Par'}"/>
 
-            <flv:FlowListView Grid.Column="3" Grid.Row="3" FlowColumnCount="9" FlowItemsSource="{Binding Jogo.Campo.Buracos, Converter={StaticResource ObterSegundaMetadeBuracos}}" SeparatorVisibility="Default" SeparatorColor="Transparent" HasUnevenRows="True" BackgroundColor="Purple" x:Name="SegundaMetadePar">
+            <flv:FlowListView Grid.Column="3" Grid.Row="3" FlowColumnCount="9" FlowItemsSource="{Binding Jogo.Campo.Buracos, Converter={StaticResource ObterSegundaMetadeBuracos}}" x:Name="SegundaMetadePar">
                 <flv:FlowListView.FlowColumnTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding Par}" Style="{StaticResource Par}"/>
+                        <ContentView>
+                            <ContentView.Content>
+                                <Label Text="{Binding Par}" Style="{StaticResource Par}"/>
+                            </ContentView.Content>
+                        </ContentView>
                     </DataTemplate>
                 </flv:FlowListView.FlowColumnTemplate>
             </flv:FlowListView>
@@ -355,10 +386,14 @@
                                     <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource NomeScorecard}" Text="{Binding Nome}"/>
                                     
                                     <!-- Primeira Metade Pontuacao -->
-                                    <flv:FlowListView Grid.Column="1" Grid.Row="0" FlowColumnCount="9" FlowItemsSource="{Binding Pontuacoes, Converter={StaticResource ObterPrimeiraMetadePontos}}" SeparatorVisibility="Default" SeparatorColor="Transparent" HasUnevenRows="True" BackgroundColor="Red" x:Name="PrimeiraMetadePontos">
+                                    <flv:FlowListView Grid.Column="1" Grid.Row="0" FlowColumnCount="9" FlowItemsSource="{Binding Pontuacoes, Converter={StaticResource ObterPrimeiraMetadePontos}}" x:Name="PrimeiraMetadePontos">
                                         <flv:FlowListView.FlowColumnTemplate>
                                             <DataTemplate>
-                                                <Label Text="{Binding Pontos}" Style="{StaticResource Pontos}"/>
+                                                <ContentView>
+                                                    <ContentView.Content>
+                                                        <Label Text="{Binding Pontos}" Style="{StaticResource Pontos}"/>
+                                                    </ContentView.Content>
+                                                </ContentView>
                                             </DataTemplate>
                                         </flv:FlowListView.FlowColumnTemplate>
                                     </flv:FlowListView>
@@ -367,10 +402,14 @@
                                     <Label Grid.Column="2" Grid.Row="0" Style="{StaticResource Separador}" BindingContext="{x:Reference PrimeiraMetadePontos}" Text="{Binding FlowItemsSource,Converter={StaticResource ObterPontuacaoTotal},ConverterParameter='Pontos'}"/>
 
                                     <!-- Segunda Metade Pontuacao -->
-                                    <flv:FlowListView Grid.Column="3" Grid.Row="0" FlowColumnCount="9" FlowItemsSource="{Binding Pontuacoes, Converter={StaticResource ObterSegundaMetadePontos}}" SeparatorVisibility="Default" SeparatorColor="Transparent" HasUnevenRows="True" BackgroundColor="Red" x:Name="SegundaMetadePontos">
+                                    <flv:FlowListView Grid.Column="3" Grid.Row="0" FlowColumnCount="9" FlowItemsSource="{Binding Pontuacoes, Converter={StaticResource ObterSegundaMetadePontos}}" x:Name="SegundaMetadePontos">
                                         <flv:FlowListView.FlowColumnTemplate>
                                             <DataTemplate>
-                                                <Label Text="{Binding Pontos}" Style="{StaticResource Pontos}"/>
+                                                <ContentView>
+                                                    <ContentView.Content>
+                                                        <Label Text="{Binding Pontos}" Style="{StaticResource Pontos}"/>
+                                                    </ContentView.Content>
+                                                </ContentView>
                                             </DataTemplate>
                                         </flv:FlowListView.FlowColumnTemplate>
                                     </flv:FlowListView>
@@ -401,10 +440,10 @@
 
         </Grid>
 
-        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Text="Send Print!" IsVisible="{Binding JogadorAEnviarPrint, Converter={StaticResource JogadorParaVisibilidadeConverter}}" Command="{Binding TirarPrintCommand}"/>
+        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" BackgroundColor="#4286f4" TextColor="White" FontSize="20" Text="Send Print" IsVisible="{Binding JogadorAEnviarPrint, Converter={StaticResource JogadorParaVisibilidadeConverter}}" Command="{Binding TirarPrintCommand}"/>
 
         <!-- ActivityIndicator escondido -->
-        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="3" IsVisible="{Binding IsActivityIndicatorVisivel}" BackgroundColor="{Binding CorDeFundo}">
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="3" IsVisible="{Binding ActivityIndicatorTool.IsVisivel}" BackgroundColor="{Binding ActivityIndicatorTool.BackgroundCorEmUso}">
             <!--#region Definição de colunas e linhas. -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -414,8 +453,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!--#endregion -->
-            <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding IsActivityIndicatorACorrer}" Color="Red"/>
-            <Label Grid.Column="0" Grid.Row="1" Text="Sending an email..." FontSize="28" TextColor="White" HorizontalTextAlignment="Center"/>
+            <ActivityIndicator Grid.Column="0" Grid.Row="0" IsRunning="{Binding ActivityIndicatorTool.IsRunning}" Color="{Binding ActivityIndicatorTool.ActivityIndicatorCor}"/>
+            <Label Grid.Column="0" Grid.Row="1" Text="{Binding ActivityIndicatorTool.MensagemAMostrar}" FontSize="28" TextColor="White" HorizontalTextAlignment="Center"/>
         </Grid>
 
     </Grid>

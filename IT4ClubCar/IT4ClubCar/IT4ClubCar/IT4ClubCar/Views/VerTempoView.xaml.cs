@@ -16,5 +16,13 @@ namespace IT4ClubCar.IT4ClubCar.Views
 		{
 			InitializeComponent ();
 		}
-	}
+
+        protected override void OnDisappearing()
+        {
+            BindingContext = null;
+            base.OnDisappearing();
+            GC.Collect();
+        }
+
+    }
 }

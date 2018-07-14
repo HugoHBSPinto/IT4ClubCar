@@ -24,6 +24,7 @@ using IT4ClubCar.IT4ClubCar.Services.EmailService;
 using IT4ClubCar.IT4ClubCar.Services.ScreenshotService;
 using IT4ClubCar.IT4ClubCar.Services.Geometria;
 using IT4ClubCar.IT4ClubCar.Services.Weather;
+using IT4ClubCar.IT4ClubCar.Services.Jogador;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
 {
@@ -87,6 +88,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
             App.Container.RegisterType<JogadorTerminarJogoUserControlViewModel>();
             App.Container.RegisterType<CampoInformacoesViewModel>();
             App.Container.RegisterType<VerTempoViewModel>();
+            App.Container.RegisterType<LogInPopupViewModel>();
 
 
 
@@ -110,6 +112,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
             App.Container.RegisterType<IEmailService, EmailService>();
             App.Container.RegisterType<IGeometriaService, GeometriaService>();
             App.Container.RegisterType<IWeatherService, WeatherService>();
+            App.Container.RegisterType<IJogadorService, JogadorService>();
         }
 
 

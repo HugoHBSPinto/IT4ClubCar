@@ -46,8 +46,15 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.UserControls
         private async Task EditarJogador()
         {
             //await base.NavigationService.IrParaEditarJogador();
-            //MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.JogadorAEditar, Jogador);
-            await base.NavigationService.IrParaLogIn();
+
+            //Se o jogador estiver bloqueado abre-se a janela para o utilizador decidir se quer fazer login ou jogar como guest.
+            if (Jogador.IsBloqueado)
+                await base.NavigationService.IrParaLogIn();
+            //Se não estiver bloqueado abre-se logo a janela EditarJogador para o utilizador definir os dados já existentes.
+            else
+                await base.NavigationService.IrParaEditarJogador();
+
+            MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.JogadorAEditar, Jogador);
         }
 
 

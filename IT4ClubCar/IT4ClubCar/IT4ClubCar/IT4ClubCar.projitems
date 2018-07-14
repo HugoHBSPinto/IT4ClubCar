@@ -58,6 +58,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Geometria\IGeometriaService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Handicap\HandicapService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Handicap\IHandicapService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Jogador\IJogadorService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\Jogador\JogadorService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\ScreenshotService\IScreenshotService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\TelemovelService\ITelemovelService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\Services\TelemovelService\TelemovelService.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\CampoInformacoesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\JogoViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Popups\EditarJogadorPopupViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Popups\LogInPopupViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Popups\MenuJogoPopupViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Popups\PedirBuggyBarPopupViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IT4ClubCar\ViewModels\Popups\PontuacoesPopupViewModel.cs" />

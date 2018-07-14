@@ -56,7 +56,7 @@ namespace IT4ClubCar.IT4ClubCar.Models
         
         
         
-        public JogadorModel(string nome, string email, GeneroModel genero, ImageSource foto, HandicapModel handicap, TeeModel tee)
+        public JogadorModel(string nome, string email, GeneroModel genero,HandicapModel handicap, TeeModel tee, ImageSource foto = null)
         {
             Nome = nome;
             Email = email;
@@ -66,8 +66,6 @@ namespace IT4ClubCar.IT4ClubCar.Models
             Tee = tee;
             Pontuacoes = new List<PontuacaoModel>();
         }
-
-
 
     }
 }

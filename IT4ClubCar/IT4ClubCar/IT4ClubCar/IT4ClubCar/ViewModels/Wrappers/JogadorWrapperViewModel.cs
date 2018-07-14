@@ -22,7 +22,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
         {
             get
             {
-                if (Bloqueado)
+                if (IsBloqueado)
                     return "Indefinido";
 
                 return _jogadorModel.Nome;
@@ -63,7 +63,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
         {
             get
             {
-                if (Bloqueado)
+                if (IsBloqueado)
                     return ImageSource.FromFile("Player.png");
 
                 return _foto;
@@ -93,7 +93,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
         /// <summary>
         /// Obtém o Bloqueado.
         /// </summary>
-        public bool Bloqueado
+        public bool IsBloqueado
         {
             get
             {
@@ -152,7 +152,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
 
         public void ResetJogador()
         {
-            if (!Bloqueado)
+            if (!IsBloqueado)
             {
                 Nome = String.Empty;
                 Email = String.Empty;

@@ -24,7 +24,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.DataAccess
         /// <returns>String que pode ser convertida em json</returns>
         public async Task<string> ObterDadosJson(string dadosRequisitados,CancellationToken token = new CancellationToken())
         {
-            return await base.GetStringJson("http://192.168.9.94/it4clubcar/it4clubcarWebService.php?pedido=", dadosRequisitados, token);
+            return await base.GetStringJson("http://192.168.1.4/it4clubcar/it4clubcarWebService.php?pedido=", dadosRequisitados, token);
         }
     }
 }

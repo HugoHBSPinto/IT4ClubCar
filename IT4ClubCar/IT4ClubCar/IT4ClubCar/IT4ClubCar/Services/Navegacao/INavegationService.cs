@@ -16,6 +16,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
         Task IrParaVerTempo();
         Task IrParaJogoConfiguracao();
         Task IrParaLogIn();
+        Task SairDeLogIn();
         Task IrParaEditarJogador();
         Task SairDeEditarJogador();
         Task IrParaJogo();

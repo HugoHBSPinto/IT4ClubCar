@@ -41,9 +41,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
             DialogService = dialogService;
             MensagensUsadas = new List<MediadorMensagensService.ViewModelMensagens>();
         }
-        
-        
-        
+
         /// <summary>
         /// Elimina o viewmodel da memória.
         /// </summary>

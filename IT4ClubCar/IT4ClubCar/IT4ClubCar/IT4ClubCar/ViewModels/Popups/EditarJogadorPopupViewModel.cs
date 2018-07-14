@@ -337,7 +337,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             _jogador = jogadorAEditar;
 
             //Verifica-se se o jogador está bloqueado. Se está, quer dizer que o utilizador acabou de desbloqueá-lo.
-            if(_jogador.Bloqueado)
+            if(_jogador.IsBloqueado)
             {
                 //O utilizador acabou de desbloquear este jogador. Todas as informações serão as default.
                 Nome.Valor = "Player";
@@ -400,9 +400,9 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                 return;
 
             //Se o jogador antes estava bloqueado, é necessário criar um model para o mesmo.
-            if(_jogador.Bloqueado)
+            if(_jogador.IsBloqueado)
             {
-                JogadorModel jogadorModel = new JogadorModel(Nome.Valor,Email.Valor,Genero.ObterModel(),Foto,Handicap.ObterModel(),Tee.ObterModel());
+                JogadorModel jogadorModel = new JogadorModel(Nome.Valor,Email.Valor,Genero.ObterModel(),Handicap.ObterModel(),Tee.ObterModel(),Foto);
                 _jogador.DefinirModel(jogadorModel);
 
                 //Avisar que utilizador foi criado.

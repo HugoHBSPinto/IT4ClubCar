@@ -189,7 +189,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             //Enviar Email.
             try
             {
-                await _emailService.EnviarEmail(emailDestino: JogadorAEnviarPrint.Email, assunto: "IT4ClubCar Game Results", mensagemConteudo: "Like you asked :)", attachments: attachments);
+                await _emailService.EnviarEmail(emailDestino: JogadorAEnviarPrint.Email, assunto: "IT4ClubCar Game Results", mensagemConteudo: "Print of the Scorecard of the Game Played", attachments: attachments);
                 await base.NavigationService.SairDeScorecard();
             }
             catch(SaslException e)

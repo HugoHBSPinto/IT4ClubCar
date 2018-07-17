@@ -17,6 +17,8 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
         Task IrParaJogoConfiguracao();
         Task IrParaLogIn();
         Task SairDeLogIn();
+        Task IrParaCriarConta();
+        Task SairDeCriarConta();
         Task IrParaEditarJogador();
         Task SairDeEditarJogador();
         Task IrParaJogo();

@@ -24,13 +24,27 @@ namespace IT4ClubCar.IT4ClubCar.Services.Genero
 
 
 
+        public async Task<GeneroWrapperViewModel> ObterGeneroDefault()
+        {
+            string dataJson = await _webService.ObterDadosJson("GetGeneroDefault");
+
+            JObject genero = JObject.Parse(dataJson);
+
+            int id = int.Parse(genero["Id"].ToString());
+            string nome = genero["Nome"].ToString();
+
+            return new GeneroWrapperViewModel(new GeneroModel(id,nome));
+        }
+
+
+
         /// <summary>
         /// Obtém o id do genero definido como default na BD.
         /// </summary>
         /// <returns>int que representa o id do genero default.</returns>
-        public async Task<int> ObterGeneroDefault()
+        public async Task<int> ObterIdGeneroDefault()
         {
-            string dataJson = await _webService.ObterDadosJson("GetGeneroDefault");
+            string dataJson = await _webService.ObterDadosJson("GetIdGeneroDefault");
 
             JObject genero = JObject.Parse(dataJson);
 
@@ -62,8 +76,6 @@ namespace IT4ClubCar.IT4ClubCar.Services.Genero
 
             return new ObservableCollection<GeneroWrapperViewModel>(generosModel.Select(p => new GeneroWrapperViewModel(p)));
         }
-
-
-
+        
     }
 }

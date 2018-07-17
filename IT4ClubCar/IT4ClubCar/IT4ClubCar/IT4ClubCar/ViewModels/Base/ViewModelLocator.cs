@@ -89,6 +89,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Base
             App.Container.RegisterType<CampoInformacoesViewModel>();
             App.Container.RegisterType<VerTempoViewModel>();
             App.Container.RegisterType<LogInPopupViewModel>();
+            App.Container.RegisterType<CriarContaPopupViewModel>();
 
 
 

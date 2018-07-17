@@ -96,6 +96,17 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                 return _fazerLogInCommand;
             }
         }
+
+        private ICommand _irParaCriarContaCommand;
+        public ICommand IrParaCriarContaCommand
+        {
+            get
+            {
+                if (_irParaCriarContaCommand == null)
+                    _irParaCriarContaCommand = new Command(async p => await IrParaCriarConta(), p => { return true; });
+                return _irParaCriarContaCommand;
+            }
+        }
         #endregion
 
         #region Services
@@ -169,7 +180,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                 if (DadosInvalidos)
                     DadosInvalidos = false;
                 //Obter dados do jogador associado ao email.
-                JogadorWrapperViewModel jogadorAssociado = await _jogadorService.ObterJogador(Email.Valor);
+                JogadorWrapperViewModel jogadorAssociado = await _jogadorService.ObterJogadorAsync(Email.Valor);
                 _jogador.DefinirModel(jogadorAssociado.ObterModel());
                 //Abrir popup para editar dados do jogador.
                 await base.NavigationService.SairDeLogIn();
@@ -199,7 +210,16 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         /// </summary>
         private async Task<bool> ValidarDadosAcesso()
         {
-            return await _jogadorService.VerificarSeJogadorExiste(Email.Valor, Senha.Valor);
+            return await _jogadorService.VerificarSeJogadorExisteAsync(Email.Valor, Senha.Valor);
+        }
+
+
+
+        private async Task IrParaCriarConta()
+        {
+            await base.NavigationService.SairDeLogIn();
+            await base.NavigationService.IrParaCriarConta();
+            MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.JogadorAEditar, _jogador);
         }
 
     }

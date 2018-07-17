@@ -177,6 +177,9 @@
       <Version>3.1.0.583944</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="IT4ClubCar\ViewModels\Popups\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\IT4ClubCar\IT4ClubCar.projitems" Label="Shared" />
 </Project>

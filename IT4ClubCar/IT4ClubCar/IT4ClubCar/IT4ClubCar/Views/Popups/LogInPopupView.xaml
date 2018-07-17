@@ -86,7 +86,7 @@
             <!-- Botão para Log In -->
             <Button Grid.Column="0" Grid.Row="2" Text="Log In" Command="{Binding FazerLogInCommand}"/>
             <!-- Botão para Criar Conta -->
-            <Button Grid.Column="0" Grid.Row="3" Text="Create Account"/>
+            <Button Grid.Column="0" Grid.Row="3" Text="Create Account" Command="{Binding IrParaCriarContaCommand}"/>
         </Grid>
 
     </Grid>

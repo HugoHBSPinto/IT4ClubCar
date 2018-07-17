@@ -23,6 +23,11 @@ namespace IT4ClubCar.IT4ClubCar.Models
         public string Email { get; set; }
 
         /// <summary>
+        /// Obtém a senha.
+        /// </summary>
+        public string Senha { get; set; }
+
+        /// <summary>
         /// Obtém e define o Genero.
         /// </summary>
         public GeneroModel Genero { get; set; }
@@ -30,7 +35,7 @@ namespace IT4ClubCar.IT4ClubCar.Models
         /// <summary>
         /// Obtém e define a Foto.
         /// </summary>
-        public ImageSource Foto { get; set; }
+        public string FotoBase64 { get; set; }
 
         /// <summary>
         /// Obtém e define o Handicap.
@@ -56,12 +61,14 @@ namespace IT4ClubCar.IT4ClubCar.Models
         
         
         
-        public JogadorModel(string nome, string email, GeneroModel genero,HandicapModel handicap, TeeModel tee, ImageSource foto = null)
+        public JogadorModel(string nome, string email, GeneroModel genero,HandicapModel handicap, TeeModel tee, string senha = "",string foto = "",int id = -1)
         {
+            Id = id;
             Nome = nome;
             Email = email;
+            Senha = senha;
             Genero = genero;
-            Foto = foto;
+            FotoBase64 = foto;
             Handicap = handicap;
             Tee = tee;
             Pontuacoes = new List<PontuacaoModel>();

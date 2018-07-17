@@ -8,7 +8,13 @@ namespace IT4ClubCar.IT4ClubCar.Services.Jogador
 {
     interface IJogadorService
     {
-        Task<bool> VerificarSeJogadorExiste(string email,string senha);
-        Task<JogadorWrapperViewModel> ObterJogador(string email);
+        Task<bool> VerificarSeJogadorExisteAsync(string email,string senha);
+        Task<JogadorWrapperViewModel> ObterJogadorAsync(string email);
+        Task AtualizarDadosJogadorAsync(JogadorWrapperViewModel jogador);
+        Task<string> ObterFotoPessoaDefaultAsync();
+        Task<bool> VerificarSeEmailEstaEmUso(string emailAVerificar);
+        Task<bool> VerificarSeNomeEstaEmUso(string nomeAVerificar);
+        Task<int> ObterJogadorUltimoId();
+        Task InserirNovoJogador(JogadorWrapperViewModel jogadorAInserir);
     }
 }

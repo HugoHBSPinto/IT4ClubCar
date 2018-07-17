@@ -16,6 +16,17 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
         private JogadorModel _jogadorModel;
 
         /// <summary>
+        /// Obtém o Id.
+        /// </summary>
+        public int Id
+        {
+            get
+            {
+                return _jogadorModel.Id;
+            }
+        }
+
+        /// <summary>
         /// Obtém e define o Nome.
         /// </summary>
         public string Nome
@@ -51,14 +62,40 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
         }
 
         /// <summary>
+        /// Obtém a Senha.
+        /// </summary>
+        public string Senha
+        {
+            get
+            {
+                return _jogadorModel.Senha;
+            }
+        }
+
+        /// <summary>
         /// Obtém e define o Genero.
         /// </summary>
         public GeneroWrapperViewModel Genero { get; set; }
 
         /// <summary>
+        /// Obtém e define a FotoBase64.
+        /// </summary>
+        public string FotoBase64
+        {
+            get
+            {
+                return _jogadorModel.FotoBase64;
+            }
+            set
+            {
+                _jogadorModel.FotoBase64 = value;
+                OnPropertyChanged("Foto");
+            }
+        }
+
+        /// <summary>
         /// Obtém a foto.
         /// </summary>
-        private ImageSource _foto;
         public ImageSource Foto
         {
             get
@@ -66,12 +103,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
                 if (IsBloqueado)
                     return ImageSource.FromFile("Player.png");
 
-                return _foto;
-            }
-            set
-            {
-                _foto = value;
-                OnPropertyChanged("Foto");
+                return BytesHandlerHelper.ConverterBase64EmImageSource(FotoBase64);
             }
         }
 
@@ -102,7 +134,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
         }
 
         /// <summary>
-        /// Obtém e define AEditarPontuacao.
+        /// Obtém e define EmUso.
         /// </summary>
         public bool EmUso { get; set; }
 
@@ -115,6 +147,19 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
         /// Obtém e define NomeEmUso.
         /// </summary>
         public bool NomeEmUso { get; set; }
+
+        /// <summary>
+        /// Obtém o JogadorInscrito.
+        /// </summary>
+        /// <remarks>Se devolver true quer dizer que é um jogador inscrito. Se for false quer dizer 
+        /// que é Guest.</remarks>
+        public bool IsJogadorInscrito
+        {
+            get
+            {
+                return !Id.Equals(-1);
+            }
+        }
 
 
 
@@ -141,7 +186,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
             _jogadorModel = jogadorModel;
             Nome = jogadorModel.Nome;
             Email = jogadorModel.Email;
-            Foto = jogadorModel.Foto;
+            FotoBase64 = jogadorModel.FotoBase64;
             Genero = new GeneroWrapperViewModel(_jogadorModel.Genero);
             Tee = new TeeWrapperViewModel(_jogadorModel.Tee);
             Handicap = new HandicapWrapperViewModel(_jogadorModel.Handicap);
@@ -156,7 +201,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Wrappers
             {
                 Nome = String.Empty;
                 Email = String.Empty;
-                Foto = null;
+                FotoBase64 = null;
                 Genero = null;
                 Tee = null;
                 Handicap = null;

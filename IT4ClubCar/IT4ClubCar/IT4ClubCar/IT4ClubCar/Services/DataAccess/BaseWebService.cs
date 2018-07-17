@@ -51,5 +51,32 @@ namespace IT4ClubCar.IT4ClubCar.Services.DataAccess
 
             return data;
         }
+
+
+
+        /// <summary>
+        ///Atualiza os dados de um registo através de um endereço.
+        /// </summary>
+        /// <param name="url">URL que permite inserir dados.</param>
+        /// <param name="dadosRequisitados">Dados a serem inseridos.</param>
+        /// <param name="token">Token a ser associado com este pedido.</param>
+        public async Task InserirDados(string url, string dadosAInserir, CancellationToken token)
+        {
+            string pedido = url + dadosAInserir;
+
+            try
+            {
+                using (HttpResponseMessage resposta = await _cliente.GetAsync(requestUri: pedido, cancellationToken: token))
+                {
+                    //if (resposta.IsSuccessStatusCode)
+                    //    data = await resposta.Content.ReadAsStringAsync();
+                }
+            }
+            catch (TaskCanceledException e)
+            {
+                throw;
+            }
+        }
+
     }
 }

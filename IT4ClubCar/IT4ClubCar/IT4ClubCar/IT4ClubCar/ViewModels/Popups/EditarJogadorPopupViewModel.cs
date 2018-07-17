@@ -21,16 +21,18 @@ using IT4ClubCar.IT4ClubCar.Services.Camera;
 using System.IO;
 using IT4ClubCar.IT4ClubCar.Services.ScreenshotService;
 using IT4ClubCar.IT4ClubCar.Validacoes;
+using IT4ClubCar.IT4ClubCar.Services.Jogador;
 
 namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 {
     class EditarJogadorPopupViewModel : BaseViewModel
     {
-        #region Serviços
+        #region Services
         private ITeeService _teeService;
         private IHandicapService _handicapService;
         private IGeneroService _generoService;
         private ICameraService _cameraService;
+        private IJogadorService _jogadorService;
         #endregion
 
         #region Dados Disponiveis
@@ -138,17 +140,25 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             }
         }
 
-        private ImageSource _foto;
+        private string _fotoBase64;
+        public string FotoBase64
+        {
+            get
+            {
+                return _fotoBase64;
+            }
+            set
+            {
+                _fotoBase64 = value;
+                OnPropertyChanged("Foto");
+            }
+        }
+
         public ImageSource Foto
         {
             get
             {
-                return _foto;
-            }
-            set
-            {
-                _foto = value;
-                OnPropertyChanged("Foto");
+                return BytesHandlerHelper.ConverterBase64EmImageSource(FotoBase64);
             }
         }
 
@@ -282,13 +292,15 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
                                            ITeeService teeService,
                                            IHandicapService handicapService,
                                            IGeneroService generoService,
-                                           ICameraService cameraService) 
+                                           ICameraService cameraService,
+                                           IJogadorService jogadorService) 
                                            : base(navigationService,dialogService)
         {
             _teeService = teeService;
             _handicapService = handicapService;
             _generoService = generoService;
             _cameraService = cameraService;
+            _jogadorService = jogadorService;
 
             InicializarComunicacaoMediador();
 
@@ -336,20 +348,23 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         {
             _jogador = jogadorAEditar;
 
+            //Avisar que utilizador foi criado.
+            MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.JogadorAdicionado, _jogador);
+
             //Verifica-se se o jogador está bloqueado. Se está, quer dizer que o utilizador acabou de desbloqueá-lo.
-            if(_jogador.IsBloqueado)
+            if (_jogador.IsBloqueado)
             {
                 //O utilizador acabou de desbloquear este jogador. Todas as informações serão as default.
                 Nome.Valor = "Player";
 
                 Email.Valor = "dont-want@aejd.pt";
-                
-                Foto = ImageSource.FromFile("Player.Png");
 
-                int idGeneroDefault = await _generoService.ObterGeneroDefault();
+                FotoBase64 = await _jogadorService.ObterFotoPessoaDefaultAsync();
+
+                int idGeneroDefault = await _generoService.ObterIdGeneroDefault();
                 Genero = GenerosExistentes.Where(p => p.Id.Equals(idGeneroDefault)).FirstOrDefault();
 
-                int idTeeDefault = await _teeService.ObterTeeDefault();
+                int idTeeDefault = await _teeService.ObterIdTeeDefault();
                 Tee = TeesExistentes.Where(p => p.Id.Equals(idTeeDefault)).FirstOrDefault();
 
                 Handicap = await _handicapService.ObterHandicapDefault();
@@ -362,7 +377,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
 
                 Email.Valor = _jogador.Email;
 
-                Foto = _jogador.Foto;
+                FotoBase64 = _jogador.FotoBase64;
 
                 Genero = GenerosExistentes.Where(p => p.Id.Equals(_jogador.Genero.Id)).FirstOrDefault();
 
@@ -378,10 +393,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
         {
             MediaFile ficheiroImagem = await _cameraService.TirarFoto();
 
-            string fotoBase64 = BytesHandlerHelper.ConverterMediaFileEmBase64(ficheiroImagem);
-
-            if(!fotoBase64.Equals(String.Empty))
-                Foto = BytesHandlerHelper.ConverterBase64EmImageSource(fotoBase64);
+            _fotoBase64 = BytesHandlerHelper.ConverterMediaFileEmBase64(ficheiroImagem);
         }
 
 
@@ -399,26 +411,27 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             if (!ValidarDados())
                 return;
 
-            //Se o jogador antes estava bloqueado, é necessário criar um model para o mesmo.
+            //Se o jogador antes estava bloqueado, é necessário criar um model para o mesmo. Este if só ocorre quando o
+            //utilizador joga como guest.
             if(_jogador.IsBloqueado)
             {
-                JogadorModel jogadorModel = new JogadorModel(Nome.Valor,Email.Valor,Genero.ObterModel(),Handicap.ObterModel(),Tee.ObterModel(),Foto);
+                JogadorModel jogadorModel = new JogadorModel(Nome.Valor,Email.Valor,Genero.ObterModel(),Handicap.ObterModel(),Tee.ObterModel(),foto : _fotoBase64);
                 _jogador.DefinirModel(jogadorModel);
-
-                //Avisar que utilizador foi criado.
-                MediadorMensagensService.Instancia.Avisar(MediadorMensagensService.ViewModelMensagens.JogadorAdicionado, _jogador);
             }
             else
             {
                 //O modelo já está criado. Basta atualizar os valores do mesmo.
                 _jogador.Nome = Nome.Valor;
                 _jogador.Email = Email.Valor;
-                _jogador.Foto = Foto;
-                _jogador.Foto = Foto;
+                _jogador.FotoBase64 = _fotoBase64;
                 _jogador.Genero = Genero;
                 _jogador.Tee = Tee;
                 _jogador.Handicap = Handicap;
             }
+
+            //Verificar se este é um jogador inscrito. Se for atualizar também os dados na BD.
+            if (_jogador.IsJogadorInscrito)
+                await _jogadorService.AtualizarDadosJogadorAsync(_jogador);
 
             //Fechar PopUp.
             await base.NavigationService.SairDeEditarJogador();
@@ -482,7 +495,7 @@ namespace IT4ClubCar.IT4ClubCar.ViewModels.Popups
             _jogador = null;
             Nome = null;
             Email = null;
-            Foto = null;
+            _fotoBase64 = null;
             Genero = null;
             Tee = null;
             Handicap = null;

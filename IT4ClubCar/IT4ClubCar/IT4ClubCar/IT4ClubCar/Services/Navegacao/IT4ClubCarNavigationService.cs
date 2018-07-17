@@ -66,6 +66,20 @@ namespace IT4ClubCar.IT4ClubCar.Services.Navegacao
 
 
 
+        public async Task IrParaCriarConta()
+        {
+            await PopupNavigation.PushAsync(new CriarContaPopupView(), animate: false);
+        }
+
+
+
+        public async Task SairDeCriarConta()
+        {
+            await PopupNavigation.PopAsync();
+        }
+
+
+
         public async Task IrParaEditarJogador()
         {
             await PopupNavigation.PushAsync(new EditarJogadorPopupView(), animate: false);

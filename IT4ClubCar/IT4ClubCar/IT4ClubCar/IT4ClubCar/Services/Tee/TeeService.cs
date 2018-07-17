@@ -25,12 +25,30 @@ namespace IT4ClubCar.IT4ClubCar.Services.Tee
 
 
         /// <summary>
-        /// Obtém o id do Tee definido como Starting Tee na BD.
+        /// Obtém o Tee definido como default na BD.
         /// </summary>
-        /// <returns>int que representa o id do starting tee default</returns>
-        public async Task<int> ObterStartingTeeDefault()
+        /// <returns>TeeWrapperViewModel com os dados do Tee Default.</returns>
+        public async Task<TeeWrapperViewModel> ObterTeeDefault()
         {
-            string dataJson = await _webService.ObterDadosJson("GetStartingTeeDefault");
+            string dataJson = await _webService.ObterDadosJson("GetTeeDefault");
+
+            JObject tee = JObject.Parse(dataJson);
+
+            int id = int.Parse(tee["Id"].ToString());
+            string nome = tee["Nome"].ToString();
+
+            return new TeeWrapperViewModel(new TeeModel(id,nome));
+        }
+
+
+
+        /// <summary>
+        /// Obtém o id do Tee definido como default na BD.
+        /// </summary>
+        /// <returns>int que representa o id do tee default.</returns>
+        public async Task<int> ObterIdTeeDefault()
+        {
+            string dataJson = await _webService.ObterDadosJson("GetIdTeeDefault");
 
             JObject tee = JObject.Parse(dataJson);
 
@@ -42,12 +60,12 @@ namespace IT4ClubCar.IT4ClubCar.Services.Tee
 
 
         /// <summary>
-        /// Obtém o id do Tee definido como default na BD.
+        /// Obtém o id do Tee definido como Starting Tee na BD.
         /// </summary>
-        /// <returns>int que representa o id do tee default.</returns>
-        public async Task<int> ObterTeeDefault()
+        /// <returns>int que representa o id do starting tee default</returns>
+        public async Task<int> ObterStartingTeeDefault()
         {
-            string dataJson = await _webService.ObterDadosJson("GetTeeDefault");
+            string dataJson = await _webService.ObterDadosJson("GetStartingTeeDefault");
 
             JObject tee = JObject.Parse(dataJson);
 

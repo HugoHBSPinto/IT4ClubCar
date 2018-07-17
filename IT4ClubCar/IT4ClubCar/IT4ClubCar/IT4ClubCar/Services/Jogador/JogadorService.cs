@@ -74,7 +74,18 @@ namespace IT4ClubCar.IT4ClubCar.Services.Jogador
         /// <param name="jogador">Jogador cujos dados devem ser atualizados.</param>
         public async Task AtualizarDadosJogadorAsync(JogadorWrapperViewModel jogador)
         {
-            await _webService.InserirDadosAsync("AtualizarDadosJogador&Id="+jogador.Id+"&Nome="+jogador.Nome+"&Email="+jogador.Email+"&Foto="+jogador.FotoBase64+"&Handicap="+jogador.Handicap.Valor+"&IdGenero="+jogador.Genero.Id+"&IdTee="+jogador.Tee.Id);
+            var parametros = new List<KeyValuePair<string, string>>()
+            {
+                new KeyValuePair<string, string>("Id",jogador.Id.ToString()),
+                new KeyValuePair<string, string>("Nome",jogador.Nome),
+                new KeyValuePair<string, string>("Email",jogador.Email),
+                new KeyValuePair<string, string>("Foto",jogador.FotoBase64),
+                new KeyValuePair<string, string>("Handicap",jogador.Handicap.Valor.ToString()),
+                new KeyValuePair<string, string>("IdGenero",jogador.Genero.Id.ToString()),
+                new KeyValuePair<string, string>("IdTee",jogador.Tee.Id.ToString())
+            };
+
+            await _webService.AtualizarDadosAsync("AtualizarDadosJogador", parametros);
         }
 
 
@@ -145,7 +156,19 @@ namespace IT4ClubCar.IT4ClubCar.Services.Jogador
         /// <param name="jogadorAInserir">JogadorWrapperViewModel cujas informações devem ser inseridas na BD.</param>
         public async Task InserirNovoJogador(JogadorWrapperViewModel jogadorAInserir)
         {
-            await _webService.InserirDadosAsync("InserirNovoJogador&Id=" + jogadorAInserir.Id + "&Nome=" + jogadorAInserir.Nome + "&Email=" + jogadorAInserir.Email + "&Senha=" + jogadorAInserir.Senha + "&Foto="+jogadorAInserir.FotoBase64+"&Handicap=" + jogadorAInserir.Handicap.Valor + "&IdGenero=" + jogadorAInserir.Genero.Id + "&IdTee=" + jogadorAInserir.Tee.Id);
+            var parametros = new List<KeyValuePair<string, string>>()
+            {
+                new KeyValuePair<string, string>("Id",jogadorAInserir.Id.ToString()),
+                new KeyValuePair<string, string>("Nome",jogadorAInserir.Nome),
+                new KeyValuePair<string, string>("Email",jogadorAInserir.Email),
+                new KeyValuePair<string, string>("Senha",jogadorAInserir.Senha),
+                new KeyValuePair<string, string>("Foto",jogadorAInserir.FotoBase64),
+                new KeyValuePair<string, string>("Handicap",jogadorAInserir.Handicap.Valor.ToString()),
+                new KeyValuePair<string, string>("IdGenero",jogadorAInserir.Genero.Id.ToString()),
+                new KeyValuePair<string, string>("IdTee",jogadorAInserir.Tee.Id.ToString())
+            };
+            
+            await _webService.InserirDadosAsync("InserirNovoJogador",parametros);
         }
 
     }

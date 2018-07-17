@@ -22,7 +22,7 @@ namespace IT4ClubCar.IT4ClubCar.Services.DataAccess
         /// <returns>String que pode ser convertida em json</returns>
         public async Task<string> ObterDadosJson(string apiKey,string dadosRequisitados, CancellationToken token = new CancellationToken())
         {
-            return await base.GetStringJson("http://api.openweathermap.org/data/2.5/forecast?units=metric&q=", dadosRequisitados + "&APPID=" + apiKey, token);
+            return await base.GetStringJsonAsync("http://api.openweathermap.org/data/2.5/forecast?units=metric&q=", dadosRequisitados + "&APPID=" + apiKey, token);
         }
     }
 }
